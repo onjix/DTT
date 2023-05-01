@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#474545"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_table1"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#ff99cc00"
+        android:gravity="center"
+        android:text="TABLE 1"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_table2"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="#ff99cc00"
+        android:gravity="center"
+        android:text="TABLE 2"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_table1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <TextView
+        android:id="@+id/tv_reserve_main"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="300dp"
+        android:background="#9AB3B3B1"
+        android:hint="예약 정보"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_table2" />
+
+    <TextView
+        android:id="@+id/reserve_info_main"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#C4A6A6A6"
+        android:textColorHint="@android:color/white"
+        android:hint="예약 정보가 비어있습니다."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reserve_main" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#474545"
+    android:orientation="vertical"
+    tools:context=".Order1">
+
+    <TextView
+        android:id="@+id/tv_orderlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Table 1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/order_list_view"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="1">
+
+            </ListView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="300dp"
+                    android:textStyle="bold"
+                    android:text="등록" />
+
+                <Button
+                    android:id="@+id/btn_pay"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="30dp"
+                    android:textStyle="bold"
+                    android:text="결제" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_product1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품1\n￦10,000" />
+
+                <Button
+                    android:id="@+id/btn_product2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품2\n￦10,000" />
+                <Button
+                    android:id="@+id/btn_product3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품3\n￦10,000" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_product4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품4\n￦10,000" />
+
+                <Button
+                    android:id="@+id/btn_product5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품5\n￦10,000" />
+                <Button
+                    android:id="@+id/btn_product6"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품6\n￦10,000" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_product7"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품7\n￦10,000" />
+
+                <Button
+                    android:id="@+id/btn_product8"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품8\n￦10,000" />
+                <Button
+                    android:id="@+id/btn_product9"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품9\n￦10,000" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_product10"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품10\n￦10,000" />
+
+                <Button
+                    android:id="@+id/btn_product11"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품11\n￦10,000" />
+                <Button
+                    android:id="@+id/btn_product12"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="상품12\n￦10,000" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_reserve_order"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:background="#9AB3B3B1"
+        android:hint="예약 정보" />
+
+    <TextView
+        android:id="@+id/reserve_info_order"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#C4A6A6A6"
+        android:hint="예약 정보가 비어있습니다." />
+
+
+</LinearLayout>
