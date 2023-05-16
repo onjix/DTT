@@ -12,7 +12,7 @@
         android:id="@+id/tv_orderlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Table 1" />
+        android:text="Table 2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,38 +24,73 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+
             android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/order_list_view"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1">
-
-            </ListView>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/et_pd1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product1 " />
 
-                <Button
-                    android:id="@+id/btn_confirm"
-                    android:layout_width="120dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="300dp"
-                    android:textStyle="bold"
-                    android:text="등록" />
-
-                <Button
-                    android:id="@+id/btn_pay"
-                    android:layout_width="120dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="30dp"
-                    android:textStyle="bold"
-                    android:text="결제" />
-
-            </LinearLayout>
+            <EditText
+                android:id="@+id/et_pd2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product2 " />
+            <EditText
+                android:id="@+id/et_pd3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product3 " />
+            <EditText
+                android:id="@+id/et_pd4"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product4 " />
+            <EditText
+                android:id="@+id/et_pd5"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product5 " />
+            <EditText
+                android:id="@+id/et_pd6"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product6 " />
+            <EditText
+                android:id="@+id/et_pd7"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product7 " />
+            <EditText
+                android:id="@+id/et_pd8"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product8 " />
+            <EditText
+                android:id="@+id/et_pd9"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:ems="10"
+                android:visibility="gone"
+                android:text="product9 " />
 
         </LinearLayout>
         <LinearLayout
@@ -151,39 +186,39 @@
                     android:textStyle="bold"
                     android:text="상품9\n￦10,000" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_product10"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="상품10\n￦10,000" />
-
-                <Button
-                    android:id="@+id/btn_product11"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="상품11\n￦10,000" />
-                <Button
-                    android:id="@+id/btn_product12"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="상품12\n￦10,000" />
-            </LinearLayout>
 
 
         </LinearLayout>
 
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/et_totalprice"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:ems="10"
+        android:text="총합 : 0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="300dp"
+            android:text="등록"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="30dp"
+            android:text="결제"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
