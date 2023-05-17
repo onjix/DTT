@@ -9,7 +9,12 @@ const App = () => {
             <h1 className="m-title">
               DTT
             </h1>
+        <Link to={"/login"} >
             <button className="login">로그인</button>
+        </Link>
+        <Link to={"/signup"} >
+            <button className="signup">회원가입</button>
+        </Link>
             <nav id="main-nav">
               <div className="pull">
                 <Link to="/showInterior">
