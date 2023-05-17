@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./App.css";
 
-<Link to="/ShowInterior">
-  <button className="btn">매장1</button>
-</Link>;
-
-const App = () => {
+const Mypage = () => {
   const Dropdown1 = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -57,8 +52,11 @@ const App = () => {
           </div>
         </div>
       </div>
+      <div>
+        <h2>마이페이지 할거야</h2>
+      </div>
     </>
   );
 };
 
-export default App;
+export default Mypage;
