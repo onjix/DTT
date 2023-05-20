@@ -7,6 +7,8 @@ import ShowInterior2 from "./ShowInterior2";
 import Reservation from "./Reservation";
 import Mypage from "./Mypage";
 import Main from "./Main";
+import Login from "./Login";
+import Signup from "./Signup";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -19,6 +21,8 @@ root.render(
       <Route path="Reservation" element={<Reservation />}></Route>
       <Route path="Mypage" element={<Mypage />}></Route>
       <Route path="Main" element={<Main />}></Route>
+      <Route path="Login" element={<Login />}></Route>
+      <Route path="Signup" element={<Signup />}></Route>
     </Routes>
   </BrowserRouter>
 );

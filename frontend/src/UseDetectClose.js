@@ -16,7 +16,7 @@ const useDetectClose = (initialState) => {
     };
 
     if (isOpen) {
-      window.addEventListener("click, onClick");
+      window.addEventListener("click", onClick);
     }
 
     return () => {

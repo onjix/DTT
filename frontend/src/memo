@@ -5,13 +5,16 @@ import "./Main.css";
 const Main = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsOpen(true);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
   };
+  // const handleMouseEnter = () => {
+  //   setIsOpen(true);
+  // };
 
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
+  // const handleMouseLeave = () => {
+  //   setIsOpen(false);
+  // };
 
   return (
     <>
@@ -19,47 +22,48 @@ const Main = () => {
         <h1 className="m-title">
           <a href="./Main">DTT</a>
         </h1>
-        <Link to="/Join">
-          <p>Join/Login</p>
+        <Link to={"/login"}>
+          <button className="login">로그인</button>
+        </Link>
+        <Link to={"/signup"}>
+          <button className="signup">회원가입</button>
         </Link>
         <hr className="line"></hr>
         <div className="header">
-          <div className="gnb1">
-            <div className="nav">
-              <div
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}>
-                <div className="btn1">
-                  <h2 className="item">매장선택</h2>
-                </div>
-                {isOpen && (
-                  <ul>
-                    <li>
-                      <Link
-                        to="/Join"
-                        style={{ textDecorationLine: "none", color: "black" }}>
-                        매장 1
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/Join"
-                        style={{ textDecorationLine: "none", color: "black" }}>
-                        매장 2
-                      </Link>
-                    </li>
-                  </ul>
-                )}
-              </div>
-
-              <h2 className="item">
-                <Link
-                  to="/Join"
-                  style={{ textDecorationLine: "none", color: "black" }}>
-                  마이페이지
-                </Link>
+          <div className="nav1" style={{ display: "inline-block" }}>
+            <div className="btn">
+              <h2 className="item" onClick={toggleDropdown}>
+                매장선택
               </h2>
             </div>
+            {isOpen && (
+              <ul>
+                <li>
+                  <Link
+                    to="/ShowInterior1"
+                    style={{ textDecorationLine: "none", color: "black" }}>
+                    매장 1
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/ShowInterior2"
+                    style={{ textDecorationLine: "none", color: "black" }}>
+                    매장 2
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </div>
+
+          <div className="nav2" style={{ display: "inline-block" }}>
+            <h2 className="item">
+              <Link
+                to="/Mypage"
+                style={{ textDecorationLine: "none", color: "black" }}>
+                마이페이지
+              </Link>
+            </h2>
           </div>
         </div>
       </div>
