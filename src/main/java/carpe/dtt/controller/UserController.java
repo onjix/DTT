@@ -1,7 +1,9 @@
 package carpe.dtt.controller;
 
+import carpe.dtt.domain.LoginRequest;
 import carpe.dtt.entity.User;
 import carpe.dtt.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,18 +25,20 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-   /* @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        // ID를 사용하여 사용자 정보 조회
-        User user = userService.existsByUsername(id);
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        String id = request.getId();
+        String password = request.getPassword();
 
-        if (user == null) {
-            return ResponseEntity.notFound().build();
+        // 로그인 확인
+        boolean loginSuccessful = userService.login(id, password);
+
+        if (loginSuccessful) {
+            return ResponseEntity.ok("로그인 성공");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
         }
+    }
 
-        return ResponseEntity.ok(user);
-    }*/
-
-    // 기타 사용자 관련 API (수정, 삭제 등) 추가 가능
 
 }
