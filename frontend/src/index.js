@@ -6,6 +6,7 @@ import ShowInterior1 from "./ShowInterior1";
 import ShowInterior2 from "./ShowInterior2";
 import Reservation from "./Reservation";
 import Mypage from "./Mypage";
+import Main from "./Main";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -17,6 +18,7 @@ root.render(
       <Route path="ShowInterior2" element={<ShowInterior2 />}></Route>
       <Route path="Reservation" element={<Reservation />}></Route>
       <Route path="Mypage" element={<Mypage />}></Route>
+      <Route path="Main" element={<Main />}></Route>
     </Routes>
   </BrowserRouter>
 );
