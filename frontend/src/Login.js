@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
+import './Login.css';
 
 const Login = () => {
     const [id, setId] = useState('');
@@ -38,6 +39,8 @@ const Login = () => {
             } else {
                 // 회원 가입 실패 처리
                 console.log('실패');
+                alert("로그인에 실패했습니다.");
+                window.location.reload();
             }
         } catch (error) {
             console.log('오류 발생', error);
@@ -45,7 +48,8 @@ const Login = () => {
     };
 
     return (
-        <><h2>로그인</h2>
+        <><div class="form-container">
+            <h2>로그인</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -59,8 +63,9 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit" >로그인</button>
-            </form></>
+                <button type="submit">로그인</button>
+            </form>
+        </div></>
     );
 };
 

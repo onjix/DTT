@@ -43,8 +43,10 @@ const ReservationList = () => {
 };
 
 const Reservation = () => {
+  const dateNow = new Date();
+  const todayDate = dateNow.toISOString().slice(0, 10);
   const [name, setName] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(todayDate);
   const [time, setTime] = useState("");
   const [numOfGuests, setNumOfGuests] = useState("");
 
@@ -93,7 +95,9 @@ const Reservation = () => {
         <input
           type="date"
           value={date}
-          onChange={(e) => setDate(e.target.value)}
+          onChange={(e) =>
+            setDate(e.target.value >= todayDate ? e.target.value : todayDate)
+          }
         />
         <input
           type="time"
