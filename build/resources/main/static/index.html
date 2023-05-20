@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DTT</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script>
+        function changeY(){ //
+            const a=1;
+            console.log(a);
+            const url=`http://localhost:8080/table/changeY/1`;
+            fetch(url, {
+                method: "POST",
+                headers : {
+
+                },
+            })
+                .then((response) => {
+                    if(response.ok){
+                        response.json();
+                    }
+                    else{
+                        throw new Error(`${response.status} 에러가 발생했다`);
+                    }
+                })
+                .then((data) => {
+                    alert("status 값 바뀜");
+                    console.log(data);
+                    location.reload();
+                })
+                .catch(error => {
+                    alert("id값 없음");
+                    console.log(error.message);
+                    location.reload();
+                });
+        }
+    </script>
+    <script>
+        function changeN(){ //
+            const url=`http://localhost:8080/table/changeN/1`;
+            fetch(url, {
+                method: "POST",
+                headers : {
+
+                },
+            })
+                .then((response) => {
+                    if(response.ok){
+                        response.json();
+                    }
+                    else{
+                        throw new Error(`${response.status} 에러가 발생했다`);
+                    }
+                })
+                .then((data) => {
+                    alert("status 값 바뀜");
+                    console.log(data);
+                    location.reload();
+                })
+                .catch(error => {
+                    alert("id값 없음");
+                    console.log(error.message);
+                    location.reload();
+                });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>POS Table1 상태 변경</h2>
+    <button onclick="changeY()">주문(테이블 사용 O)</button>
+    <button onclick ="changeN()">결제(테이블 사용 X)</button>
+
+</div>
+</body>
+</html>
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Table Payment</title>
+</head>
+<body>
+<h1>Table Status</h1>
+<p>Table Number: <span th:text="${table.number}"></span></p>
+<p>Status: <span th:text="${table.status}"></span></p>
+
+<form method="POST" th:action="@{/table/changeY/1}">
+    <input type="submit" value="changeDataUseY">
+</form>
+</body>
+</html>-->
