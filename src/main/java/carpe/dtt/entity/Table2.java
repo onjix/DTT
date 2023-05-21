@@ -8,12 +8,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name="Table_status")
+@Entity(name="Table2_status")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Table {
+public class Table2 {
     @Id
     @Column
     private Long id;

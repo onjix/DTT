@@ -2,34 +2,62 @@ import React from "react";
 import styled, { css } from "styled-components";
 import useDetectClose from "./UseDetectClose";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import "./Main.css";
 
-const DropdownMenu = () => {
+const Main = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   // const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
+  const [cookies, setCookie] = useCookies(["user"]);
+  const user = cookies.user;
+  const movePage = useNavigate();
 
   const logoutClickHandler = () => {
     console.log("logout");
+    setCookie("user", "", "/");
   };
-
-  const movePage = useNavigate();
 
   const move = () => {
     movePage("/MyPage");
   };
   return (
     <>
-      <div className="page-all">
-        <h1 className="m-title">
-          <a href="./Main">DTT</a>
-        </h1>
-        <Link to={"/login"}>
-          <button className="login">로그인</button>
-        </Link>
-        <Link to={"/signup"}>
-          <button className="signup">회원가입</button>
-        </Link>
-        <hr className="line"></hr>
+      <div className="Main">
+        <header>
+          <h1 className="Title1">
+            <a href="./Main" className="Title2">
+              DTT
+            </a>
+          </h1>
+          {/* <p className="JL1">
+            <a href="./Signup" className="JL2">
+              Join
+            </a>
+            <span> </span>
+            <a href="./Login" className="JL2">
+              Login
+            </a>
+          </p> */}
+          {!user ? (
+            <p className="JL1">
+              <a href="./Signup" className="JL2">
+                Join
+              </a>
+              <span> </span>
+              <a href="./Login" className="JL2">
+                Login
+              </a>
+            </p>
+          ) : (
+            <p className="JL1">
+              <span>{user}님 환영합니다</span>
+              <span> </span>
+              <span onClick={logoutClickHandler} className="JL2">
+                Logout
+              </span>
+            </p>
+          )}
+        </header>
         <div className="header">
           <div className="nav1" style={{ display: "inline-block" }}>
             <Wrapper>
@@ -51,7 +79,6 @@ const DropdownMenu = () => {
                   </Ul>
                 </Menu>
               </DropdownContainer>
-
               <DropdownContainer>
                 <DropdownButton onClick={move}>마이페이지</DropdownButton>
               </DropdownContainer>
@@ -63,17 +90,17 @@ const DropdownMenu = () => {
   );
 };
 
-export default DropdownMenu;
+export default Main;
 
 const Wrapper = styled.div`
-  margin: 100px auto;
+  margin: 10px auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
   font-size: 19px;
   background: gray;
-  width: 400px;
+  width: 1000px;
   height: 50px;
   font-weight: bold;
 `;

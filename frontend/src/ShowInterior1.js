@@ -11,7 +11,8 @@ import sc1 from "../src/images/movingH.glb";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Main from "./Main";
-const State = () => {
+import "./ShowInterior1.css";
+const State1 = () => {
   const tableAvail = useLoader(GLTFLoader, tableState1);
   const tableInuse = useLoader(GLTFLoader, tableState2);
   const sc = useLoader(GLTFLoader, sc1);
@@ -19,7 +20,7 @@ const State = () => {
 
   useEffect(() => {
     axios({
-      url: "/table/1/status",
+      url: "/table1/1/status",
       method: "GET",
     }).then((res) => {
       setTestStr(res.data);
@@ -31,8 +32,8 @@ const State = () => {
       <>
         <primitive
           object={tableAvail.scene}
-          scale={1.5}
-          position={[-4, 4.5, 3]}
+          scale={2}
+          position={[-8, 8.5, 3]}
           children-0-castShadow
         />
       </>
@@ -42,15 +43,15 @@ const State = () => {
       <>
         <primitive
           object={tableInuse.scene}
-          scale={1.5}
-          position={[-4, 4.5, 3]}
+          scale={2}
+          position={[-8, 8.5, 3]}
           children-0-castShadow
         />
 
         <primitive
           object={sc.scene}
-          scale={1}
-          position={[-4, 4.5, 3]}
+          scale={2}
+          position={[-8, 6.5, 3]}
           children-0-castShadow
         />
       </>
@@ -58,6 +59,52 @@ const State = () => {
   }
 };
 
+const State2 = () => {
+  const tableAvail = useLoader(GLTFLoader, tableState1);
+  const tableInuse = useLoader(GLTFLoader, tableState2);
+  const sc = useLoader(GLTFLoader, sc1);
+  const [testStr, setTestStr] = useState("");
+
+  useEffect(() => {
+    axios({
+      url: "/table2/1/status",
+      method: "GET",
+    }).then((res) => {
+      setTestStr(res.data);
+    });
+  }, []);
+  var state = testStr === 1 ? false : true;
+  if (state) {
+    return (
+      <>
+        <primitive
+          object={tableAvail.scene}
+          scale={2}
+          position={[-8, 8.5, 3]}
+          children-0-castShadow
+        />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <primitive
+          object={tableInuse.scene}
+          scale={2}
+          position={[-8, 8.5, 3]}
+          children-0-castShadow
+        />
+
+        <primitive
+          object={sc.scene}
+          scale={2}
+          position={[-8, 6.5, 3]}
+          children-0-castShadow
+        />
+      </>
+    );
+  }
+};
 const ShowInterior1 = () => {
   const store = useLoader(GLTFLoader, object1);
   const table1 = useLoader(GLTFLoader, object2);
@@ -72,35 +119,36 @@ const ShowInterior1 = () => {
       <Main />
       <Canvas
         style={{
-          width: "800px",
-          height: "800px",
-          position: "relative",
+          width: "650px",
+          height: "650px",
+          position: "center",
+          margin: "0 auto",
         }}
         camera={{ position: [40, 40, 40] }}
         shadows>
         <primitive
           object={store.scene}
-          scale={1}
+          scale={2}
           position={[0, 0, 0]}
           children-0-castShadow
         />
         <primitive
           object={table1.scene}
-          scale={2.4}
-          position={[-4, 1, 3]}
+          scale={4.4}
+          position={[-8, 2, 3]}
           children-0-castShadow
           onClick={reservationPage}
         />
-        {State()}
+        {State1()}
 
         <primitive
           object={table2.scene}
-          scale={2.4}
-          position={[6, 1, 3]}
+          scale={4.4}
+          position={[10, 2, 3]}
           children-0-castShadow
           onClick={reservationPage}
         />
-
+        {State2()}
         <directionalLight intensity={1} />
         <ambientLight intensity={1.2} />
         <spotLight intensity={0.1} angle={0.1} penumbra={1} castShadow />

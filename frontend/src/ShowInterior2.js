@@ -19,7 +19,7 @@ const State = () => {
 
   useEffect(() => {
     axios({
-      url: "/table/1/status",
+      url: "/table2/1/status",
       method: "GET",
     }).then((res) => {
       setTestStr(res.data);
@@ -31,8 +31,8 @@ const State = () => {
       <>
         <primitive
           object={tableAvail.scene}
-          scale={1.5}
-          position={[-4, 4.5, 3]}
+          scale={2}
+          position={[-8, 8.5, 3]}
           children-0-castShadow
         />
       </>
@@ -42,15 +42,15 @@ const State = () => {
       <>
         <primitive
           object={tableInuse.scene}
-          scale={1.5}
-          position={[-4, 4.5, 3]}
+          scale={2}
+          position={[-8, 8.5, 3]}
           children-0-castShadow
         />
 
         <primitive
           object={sc.scene}
-          scale={1}
-          position={[-4, 4.5, 3]}
+          scale={2}
+          position={[-8, 6.5, 3]}
           children-0-castShadow
         />
       </>
@@ -72,22 +72,23 @@ const ShowInterior2 = () => {
       <Main />
       <Canvas
         style={{
-          width: "800px",
-          height: "800px",
-          position: "relative",
+          width: "650px",
+          height: "650px",
+          position: "center",
+          margin: "0 auto",
         }}
         camera={{ position: [40, 40, 40] }}
         shadows>
         <primitive
           object={store.scene}
-          scale={1}
+          scale={2}
           position={[0, 0, 0]}
           children-0-castShadow
         />
         <primitive
           object={table1.scene}
-          scale={2.4}
-          position={[-4, 1, 3]}
+          scale={4.4}
+          position={[-8, 2, 3]}
           children-0-castShadow
           onClick={reservationPage}
         />
@@ -95,8 +96,8 @@ const ShowInterior2 = () => {
 
         <primitive
           object={table2.scene}
-          scale={2.4}
-          position={[6, 1, 3]}
+          scale={4.4}
+          position={[10, 2, 3]}
           children-0-castShadow
           onClick={reservationPage}
         />

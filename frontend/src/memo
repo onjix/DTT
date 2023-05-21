@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
+import styled, { css } from "styled-components";
+import useDetectClose from "./UseDetectClose";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./Main.css";
 
-const Main = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const DropdownMenu = () => {
+  const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
+  // const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const logoutClickHandler = () => {
+    console.log("logout");
   };
-  // const handleMouseEnter = () => {
-  //   setIsOpen(true);
-  // };
 
-  // const handleMouseLeave = () => {
-  //   setIsOpen(false);
-  // };
+  const movePage = useNavigate();
 
+  const move = () => {
+    movePage("/MyPage");
+  };
   return (
     <>
-      <div className="page-all">
+      <PageAll>
         <h1 className="m-title">
           <a href="./Main">DTT</a>
         </h1>
@@ -31,44 +32,133 @@ const Main = () => {
         <hr className="line"></hr>
         <div className="header">
           <div className="nav1" style={{ display: "inline-block" }}>
-            <div className="btn">
-              <h2 className="item" onClick={toggleDropdown}>
-                매장선택
-              </h2>
-            </div>
-            {isOpen && (
-              <ul>
-                <li>
-                  <Link
-                    to="/ShowInterior1"
-                    style={{ textDecorationLine: "none", color: "black" }}>
-                    매장 1
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/ShowInterior2"
-                    style={{ textDecorationLine: "none", color: "black" }}>
-                    매장 2
-                  </Link>
-                </li>
-              </ul>
-            )}
-          </div>
+            <Wrapper>
+              <DropdownContainer>
+                <DropdownButton onClick={myPageHandler} ref={myPageRef}>
+                  매장선택
+                </DropdownButton>
+                <Menu isDropped={myPageIsOpen}>
+                  <Ul>
+                    <Li>
+                      <LinkWrapper href="/ShowInterior1">매장1</LinkWrapper>
+                    </Li>
+                    <Li>
+                      <LinkWrapper href="/ShowInterior2">매장2</LinkWrapper>
+                    </Li>
+                    {/* <Li>
+              <LinkWrapper href="">매장3</LinkWrapper>
+            </Li> */}
+                  </Ul>
+                </Menu>
+              </DropdownContainer>
 
-          <div className="nav2" style={{ display: "inline-block" }}>
-            <h2 className="item">
-              <Link
-                to="/Mypage"
-                style={{ textDecorationLine: "none", color: "black" }}>
-                마이페이지
-              </Link>
-            </h2>
+              <DropdownContainer>
+                <DropdownButton onClick={move}>마이페이지</DropdownButton>
+              </DropdownContainer>
+            </Wrapper>
           </div>
         </div>
-      </div>
+      </PageAll>
     </>
   );
 };
 
-export default Main;
+export default DropdownMenu;
+
+const PageAll = styled.div`
+  height: 100vh;
+`;
+const Wrapper = styled.div`
+  margin: 100px auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 19px;
+  background: gray;
+  width: 400px;
+  height: 50px;
+  font-weight: bold;
+`;
+
+const DropdownContainer = styled.div`
+  position: relative;
+  text-align: center;
+`;
+
+const DropdownButton = styled.div`
+  cursor: pointer;
+`;
+
+const Menu = styled.div`
+  background: gray;
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  width: 100px;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -20px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  z-index: 9;
+
+  &:after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 12px solid transparent;
+    border-top-width: 0;
+    border-bottom-color: gray;
+  }
+
+  ${({ isDropped }) =>
+    isDropped &&
+    css`
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+      left: 50%;
+    `};
+`;
+
+const Ul = styled.ul`
+  & > li {
+    margin-bottom: 10px;
+  }
+
+  & > li:first-of-type {
+    margin-top: 10px;
+  }
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Li = styled.li``;
+
+const LinkWrapper = styled.a`
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+`;
+
+const Logout = styled.div`
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 19px;
+`;

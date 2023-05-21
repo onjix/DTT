@@ -6,7 +6,7 @@ const Mypage = () => {
     <>
       <Main />
       <div>
-        <h2>마이페이지 할거야</h2>
+        <h2 style={{ textAlign: "center" }}>마이페이지입니다</h2>
       </div>
     </>
   );

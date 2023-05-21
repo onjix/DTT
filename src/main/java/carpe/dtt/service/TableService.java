@@ -1,11 +1,9 @@
 package carpe.dtt.service;
 
-import carpe.dtt.entity.Table;
+import carpe.dtt.entity.Table1;
 import carpe.dtt.repository.TableRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 
@@ -18,9 +16,9 @@ public class TableService {
     }
     @Transactional
     public Integer getStatusById(Long id) {
-        Optional<Table> optionalTable = tableRepository.findById(id);
+        Optional<Table1> optionalTable = tableRepository.findById(id);
         if (optionalTable.isPresent()) {
-            Table table = optionalTable.get();
+            Table1 table = optionalTable.get();
             return table.getStatus();
         } else {
             throw new RuntimeException("Table not found with id " + id);
@@ -29,7 +27,7 @@ public class TableService {
 
     @Transactional
     public void changeDataUseY(Long id) {
-        Table table= tableRepository.findById(id)
+        Table1 table= tableRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
         // 데이터 수정 작업 수행
         table.setStatus(1);
@@ -37,7 +35,7 @@ public class TableService {
     }
     @Transactional
     public void changeDataUseN(Long id) {
-        Table table= tableRepository.findById(id)
+        Table1 table= tableRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
         // 데이터 수정 작업 수행
         table.setStatus(0);

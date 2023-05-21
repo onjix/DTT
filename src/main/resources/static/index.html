@@ -8,7 +8,7 @@
         function changeY(){ //
             const a=1;
             console.log(a);
-            const url=`http://localhost:8080/table/changeY/1`;
+            const url=`http://localhost:8080/table1/changeY/1`;
             fetch(url, {
                 method: "POST",
                 headers : {
@@ -37,7 +37,67 @@
     </script>
     <script>
         function changeN(){ //
-            const url=`http://localhost:8080/table/changeN/1`;
+            const url=`http://localhost:8080/table1/changeN/1`;
+            fetch(url, {
+                method: "POST",
+                headers : {
+
+                },
+            })
+                .then((response) => {
+                    if(response.ok){
+                        response.json();
+                    }
+                    else{
+                        throw new Error(`${response.status} 에러가 발생했다`);
+                    }
+                })
+                .then((data) => {
+                    alert("status 값 바뀜");
+                    console.log(data);
+                    location.reload();
+                })
+                .catch(error => {
+                    alert("id값 없음");
+                    console.log(error.message);
+                    location.reload();
+                });
+        }
+    </script>
+    <script>
+        function changeYY(){ //
+            const a=1;
+            console.log(a);
+            const url=`http://localhost:8080/table2/changeYY/1`;
+            fetch(url, {
+                method: "POST",
+                headers : {
+
+                },
+            })
+                .then((response) => {
+                    if(response.ok){
+                        response.json();
+                    }
+                    else{
+                        throw new Error(`${response.status} 에러가 발생했다`);
+                    }
+                })
+                .then((data) => {
+                    alert("status 값 바뀜");
+                    console.log(data);
+                    location.reload();
+                })
+                .catch(error => {
+                    alert("id값 없음");
+                    console.log(error.message);
+                    location.reload();
+                });
+        }
+    </script>
+    <script>
+        function changeNN(){ //
+            const url=`http://localhost:8080/table2/changeNN/1`;
             fetch(url, {
                 method: "POST",
                 headers : {
@@ -66,11 +126,16 @@
     </script>
 </head>
 <body>
-<div class="container">
+<div class="container1">
     <h2>POS Table1 상태 변경</h2>
     <button onclick="changeY()">주문(테이블 사용 O)</button>
     <button onclick ="changeN()">결제(테이블 사용 X)</button>
 
+</div>
+<div class="container2">
+    <h2>POS Table2 상태 변경</h2>
+    <button onclick="changeYY()">주문(테이블 사용 O)</button>
+    <button onclick ="changeNN()">결제(테이블 사용 X)</button>
 </div>
 </body>
 </html>
