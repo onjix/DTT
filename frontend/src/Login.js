@@ -39,7 +39,7 @@ const Login = ({}) => {
         const name = await response.text();
         setName(name);
         setCookie("user", name, { path: "/" });
-        console.log("로그인 성공. 이름:", name);
+        console.log("로그인 성공");
         moveHome();
       } else {
         console.log("실패");

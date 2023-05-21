@@ -16,11 +16,16 @@ const Main = () => {
   const logoutClickHandler = () => {
     console.log("logout");
     setCookie("user", "", "/");
+    moveMain();
   };
 
-  const move = () => {
+  const moveMy = () => {
     movePage("/MyPage");
   };
+  const moveMain = () => {
+    movePage("/Main");
+  };
+
   return (
     <>
       <div className="Main">
@@ -91,7 +96,7 @@ const Main = () => {
                   </Menu>
                 </DropdownContainer>
                 <DropdownContainer>
-                  <DropdownButton onClick={move}>마이페이지</DropdownButton>
+                  <DropdownButton onClick={moveMy}>마이페이지</DropdownButton>
                 </DropdownContainer>
               </Wrapper>
             )}
@@ -153,7 +158,6 @@ const Menu = styled.div`
     border-top-width: 0;
     border-bottom-color: gray;
   }
-
   ${({ isDropped }) =>
     isDropped &&
     css`
