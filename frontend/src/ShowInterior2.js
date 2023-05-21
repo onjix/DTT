@@ -5,32 +5,36 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import object1 from "../src/images/newBuilding.glb";
 import object2 from "../src/images/table1.glb";
 import object3 from "../src/images/table2.glb";
-import tableState1 from "../src/images/available.glb";
-import tableState2 from "../src/images/inuse.glb";
-import sc1 from "../src/images/movingH.glb";
+import tableState1_1 from "../src/images/available1.glb";
+import tableState1_2 from "../src/images/inuse1.glb";
+import tableState2_1 from "../src/images/available2.glb";
+import tableState2_2 from "../src/images/inuse2.glb";
+import sc1 from "../src/images/movingH1.glb";
+import sc2 from "../src/images/movingH2.glb";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Main from "./Main";
-const State = () => {
-  const tableAvail = useLoader(GLTFLoader, tableState1);
-  const tableInuse = useLoader(GLTFLoader, tableState2);
-  const sc = useLoader(GLTFLoader, sc1);
-  const [testStr, setTestStr] = useState("");
+import "./ShowInterior1.css";
+const State1 = () => {
+  const tableAvail1 = useLoader(GLTFLoader, tableState1_1);
+  const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
+  const sc11 = useLoader(GLTFLoader, sc1);
+  const [testStr1, setTestStr1] = useState("");
 
   useEffect(() => {
     axios({
-      url: "/table2/1/status",
+      url: "/table/1/status",
       method: "GET",
     }).then((res) => {
-      setTestStr(res.data);
+      setTestStr1(res.data);
     });
   }, []);
-  var state = testStr === 1 ? false : true;
+  var state = testStr1 === 1 ? false : true;
   if (state) {
     return (
       <>
         <primitive
-          object={tableAvail.scene}
+          object={tableAvail1.scene}
           scale={2}
           position={[-8, 8.5, 3]}
           children-0-castShadow
@@ -41,16 +45,63 @@ const State = () => {
     return (
       <>
         <primitive
-          object={tableInuse.scene}
+          object={tableInuse1.scene}
           scale={2}
           position={[-8, 8.5, 3]}
           children-0-castShadow
         />
 
         <primitive
-          object={sc.scene}
+          object={sc11.scene}
           scale={2}
           position={[-8, 6.5, 3]}
+          children-0-castShadow
+        />
+      </>
+    );
+  }
+};
+
+const State2 = () => {
+  const tableAvail2 = useLoader(GLTFLoader, tableState2_1);
+  const tableInuse2 = useLoader(GLTFLoader, tableState2_2);
+  const sc22 = useLoader(GLTFLoader, sc2);
+  const [testStr2, setTestStr2] = useState("");
+
+  useEffect(() => {
+    axios({
+      url: "/table/2/status",
+      method: "GET",
+    }).then((res) => {
+      setTestStr2(res.data);
+    });
+  }, []);
+  var state = testStr2 === 1 ? false : true;
+  if (state) {
+    return (
+      <>
+        <primitive
+          object={tableAvail2.scene}
+          scale={2}
+          position={[10, 8.5, 3]}
+          children-0-castShadow
+        />
+      </>
+    );
+  } else {
+    return (
+      <>
+        <primitive
+          object={tableInuse2.scene}
+          scale={2}
+          position={[10, 8.5, 3]}
+          children-0-castShadow
+        />
+
+        <primitive
+          object={sc22.scene}
+          scale={2}
+          position={[10, 6.5, 3]}
           children-0-castShadow
         />
       </>
@@ -92,7 +143,7 @@ const ShowInterior2 = () => {
           children-0-castShadow
           onClick={reservationPage}
         />
-        {State()}
+        {State1()}
 
         <primitive
           object={table2.scene}
@@ -101,7 +152,7 @@ const ShowInterior2 = () => {
           children-0-castShadow
           onClick={reservationPage}
         />
-
+        {State2()}
         <directionalLight intensity={1} />
         <ambientLight intensity={1.2} />
         <spotLight intensity={0.1} angle={0.1} penumbra={1} castShadow />

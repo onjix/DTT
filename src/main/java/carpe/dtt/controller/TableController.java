@@ -5,11 +5,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/table1")
-public class Table1Controller {
+@RequestMapping("/table")
+public class TableController {
     private final TableService tableService;
 
-    public Table1Controller(TableService tableService) {
+    public TableController(TableService tableService) {
         this.tableService = tableService;
     }
 
