@@ -3,14 +3,12 @@ package carpe.dtt.controller;
 import carpe.dtt.entity.Reservation;
 import carpe.dtt.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@SessionAttributes("id")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -23,6 +21,7 @@ public class ReservationController {
     @PostMapping("/api/reservations")
     public void saveReservation(@RequestBody Reservation reservation) {
         // 예약 정보를 서비스로 전달하여 저장
+        System.out.println(reservation.getTime());
         reservationService.saveReservation(reservation);
     }
 

@@ -1,12 +1,18 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styled, { css } from "styled-components";
 import useDetectClose from "./UseDetectClose";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Login from './Login';
+import {useCookies} from "react-cookie";
 
-const DropdownMenu = () => {
+
+const Main = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   // const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
+  const [name,setName]=useState('');
+  const [cookies]=useCookies(["user"]);
+  const users = cookies.user;
 
   const logoutClickHandler = () => {
     console.log("logout");
@@ -29,7 +35,8 @@ const DropdownMenu = () => {
         <Link to={"/signup"}>
           <button className="signup">회원가입</button>
         </Link>
-        <hr className="line"></hr>
+        <p>{users}</p>
+
         <div className="header">
           <div className="nav1" style={{ display: "inline-block" }}>
             <Wrapper>
@@ -63,7 +70,7 @@ const DropdownMenu = () => {
   );
 };
 
-export default DropdownMenu;
+export default Main;
 
 const Wrapper = styled.div`
   margin: 100px auto;

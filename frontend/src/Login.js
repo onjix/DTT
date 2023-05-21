@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import './Login.css';
+import Main from './Main';
+import {useCookies} from "react-cookie";
 
-const Login = () => {
+const Login = ({onLoginSuccess}) => {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
+    const [name,setName] =useState('');
+    const [cookies,setCookie]=useCookies(["user"]);
     const movePage = useNavigate();
+
 
     const moveHome = () => {
         movePage("/");
@@ -33,11 +38,12 @@ const Login = () => {
             });
 
             if (response.ok) {
-                // 회원 가입 성공 처리
-                console.log('성공');
-                {moveHome()}
+                const name = await response.text();
+                setName(name);
+                setCookie("user",name,{path:"/"});
+                console.log('로그인 성공. 이름:', name);
+                moveHome()
             } else {
-                // 회원 가입 실패 처리
                 console.log('실패');
                 alert("로그인에 실패했습니다.");
                 window.location.reload();
@@ -48,7 +54,8 @@ const Login = () => {
     };
 
     return (
-        <><div class="form-container">
+        <>
+            <div class="form-container">
             <h2>로그인</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -65,7 +72,8 @@ const Login = () => {
                 />
                 <button type="submit">로그인</button>
             </form>
-        </div></>
+        </div>
+        </>
     );
 };
 

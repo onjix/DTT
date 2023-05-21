@@ -20,6 +20,7 @@ public class TableController {
         return ResponseEntity.ok(status);
     }
     @PostMapping("/changeY/{id}")
+
     public Integer changeDataUseY(@PathVariable Long id) {
         tableService.changeDataUseY(id);
         return tableService.getStatusById(id);
