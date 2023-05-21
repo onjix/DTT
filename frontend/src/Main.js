@@ -30,15 +30,6 @@ const Main = () => {
               DTT
             </a>
           </h1>
-          {/* <p className="JL1">
-            <a href="./Signup" className="JL2">
-              Join
-            </a>
-            <span> </span>
-            <a href="./Login" className="JL2">
-              Login
-            </a>
-          </p> */}
           {!users ? (
             <p className="JL1">
               <a href="./Signup" className="JL2">
@@ -61,29 +52,49 @@ const Main = () => {
         </header>
         <div className="header">
           <div className="nav1" style={{ display: "inline-block" }}>
-            <Wrapper>
-              <DropdownContainer>
-                <DropdownButton onClick={myPageHandler} ref={myPageRef}>
-                  매장선택
-                </DropdownButton>
-                <Menu isDropped={myPageIsOpen}>
-                  <Ul>
-                    <Li>
-                      <LinkWrapper href="/ShowInterior1">매장1</LinkWrapper>
-                    </Li>
-                    <Li>
-                      <LinkWrapper href="/ShowInterior2">매장2</LinkWrapper>
-                    </Li>
-                    {/* <Li>
-              <LinkWrapper href="">매장3</LinkWrapper>
-            </Li> */}
-                  </Ul>
-                </Menu>
-              </DropdownContainer>
-              <DropdownContainer>
-                <DropdownButton onClick={move}>마이페이지</DropdownButton>
-              </DropdownContainer>
-            </Wrapper>
+            {!users ? (
+              <Wrapper>
+                <DropdownContainer>
+                  <DropdownButton onClick={myPageHandler} ref={myPageRef}>
+                    매장선택
+                  </DropdownButton>
+                  <Menu isDropped={myPageIsOpen}>
+                    <Ul>
+                      <Li>
+                        <LinkWrapper href="">매장1</LinkWrapper>
+                      </Li>
+                      <Li>
+                        <LinkWrapper href="">매장2</LinkWrapper>
+                      </Li>
+                    </Ul>
+                  </Menu>
+                </DropdownContainer>
+                <DropdownContainer>
+                  <DropdownButton>마이페이지</DropdownButton>
+                </DropdownContainer>
+              </Wrapper>
+            ) : (
+              <Wrapper>
+                <DropdownContainer>
+                  <DropdownButton onClick={myPageHandler} ref={myPageRef}>
+                    매장선택
+                  </DropdownButton>
+                  <Menu isDropped={myPageIsOpen}>
+                    <Ul>
+                      <Li>
+                        <LinkWrapper href="/ShowInterior1">매장1</LinkWrapper>
+                      </Li>
+                      <Li>
+                        <LinkWrapper href="/ShowInterior2">매장2</LinkWrapper>
+                      </Li>
+                    </Ul>
+                  </Menu>
+                </DropdownContainer>
+                <DropdownContainer>
+                  <DropdownButton onClick={move}>마이페이지</DropdownButton>
+                </DropdownContainer>
+              </Wrapper>
+            )}
           </div>
         </div>
       </div>
