@@ -34,6 +34,14 @@ public class UserService {
             return false; // 로그인 실패
         }
     }
-
+    @Transactional
+    public String getUserNameByLoginId(String loginId) {
+        User user = userRepository.findById(loginId).orElse(new User());;
+        if (user != null) {
+            return user.getName();
+        } else {
+            throw new IllegalArgumentException("Invalid login ID");
+        }
+    }
 
 }

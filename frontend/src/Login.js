@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import "./Login.css";
+import { useCookies } from "react-cookie";
 
-const Login = () => {
+const Login = ({}) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  const movePage = useNavigate();
+  const [name, setName] = useState("");
   const [cookies, setCookie] = useCookies(["user"]);
-  const name = "son";
+  const movePage = useNavigate();
+
   const moveHome = () => {
     movePage("/");
   };
@@ -23,6 +24,7 @@ const Login = () => {
       id: id,
       password: password,
     };
+
     try {
       // 서버로 회원 가입 요청 전송
       const response = await fetch("/users/login", {
@@ -34,13 +36,12 @@ const Login = () => {
       });
 
       if (response.ok) {
-        // 회원 가입 성공 처리
-        console.log("성공");
-        // 쿠키에 사용자 정보 저장
+        const name = await response.text();
+        setName(name);
         setCookie("user", name, { path: "/" });
+        console.log("로그인 성공. 이름:", name);
         moveHome();
       } else {
-        // 회원 가입 실패 처리
         console.log("실패");
         alert("로그인에 실패했습니다.");
         window.location.reload();
@@ -53,7 +54,7 @@ const Login = () => {
   return (
     <>
       <div className="parent-container">
-        <div className="form-container">
+        <div class="form-container">
           <h2>로그인</h2>
           <form onSubmit={handleSubmit}>
             <input

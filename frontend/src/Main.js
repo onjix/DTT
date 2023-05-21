@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import useDetectClose from "./UseDetectClose";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,9 @@ import "./Main.css";
 const Main = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   // const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
+  const [name, setName] = useState("");
   const [cookies, setCookie] = useCookies(["user"]);
-  const user = cookies.user;
+  const users = cookies.user;
   const movePage = useNavigate();
 
   const logoutClickHandler = () => {
@@ -38,7 +39,7 @@ const Main = () => {
               Login
             </a>
           </p> */}
-          {!user ? (
+          {!users ? (
             <p className="JL1">
               <a href="./Signup" className="JL2">
                 Join
@@ -50,7 +51,7 @@ const Main = () => {
             </p>
           ) : (
             <p className="JL1">
-              <span>{user}님 환영합니다</span>
+              <span>{users}님 환영합니다</span>
               <span> </span>
               <span onClick={logoutClickHandler} className="JL2">
                 Logout

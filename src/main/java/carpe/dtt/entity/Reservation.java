@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -23,7 +24,7 @@ public class Reservation {
     @Column
     private LocalDate reservationDate;
     @Column
-    private LocalTime reservationTime;
+    private LocalTime time;
     @Column
     private int numOfGuests;
 

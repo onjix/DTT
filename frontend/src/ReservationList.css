@@ -1,0 +1,33 @@
+.reservation-list-container {
+    margin-top: 20px;
+}
+
+.reservation-list-heading {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.reservation-list {
+    list-style: none;
+    padding: 0;
+}
+
+.reservation-item {
+    margin-bottom: 10px;
+}
+
+.reservation-info {
+    font-size: 16px;
+}
+
+.reservation-date {
+    margin-right: 10px;
+}
+
+.reservation-time {
+    margin-right: 10px;
+}
+
+.reservation-guests {
+    color: #888;
+}

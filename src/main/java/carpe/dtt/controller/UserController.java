@@ -25,11 +25,10 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
         String id = request.getId();
         String password = request.getPassword();
-
         // 로그인 확인
         boolean loginSuccessful = userService.login(id, password);
 
@@ -38,7 +37,17 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
         }
+    }*/
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        String loginId = request.getId();
+
+        try {
+            String userName = userService.getUserNameByLoginId(loginId);
+            System.out.println(userName);
+            return ResponseEntity.ok(userName);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid login ID");
+        }
     }
-
-
 }
