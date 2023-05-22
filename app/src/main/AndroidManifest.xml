@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Dtt_r3"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".Order2"
@@ -25,17 +26,21 @@
             android:screenOrientation="landscape"/>
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:exported="true"
+            android:screenOrientation="landscape">
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+
+        </activity>
+
         <activity
             android:name=".login"
             android:screenOrientation="landscape"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
