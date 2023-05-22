@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Main from "./Main";
+import { useNavigate } from "react-router-dom";
 import "./ReservationList.css";
 import "./Reservation.css";
 const ReservationList = () => {
@@ -56,6 +57,10 @@ const Reservation = () => {
   const [date, setDate] = useState(todayDate);
   const [time, setTime] = useState("");
   const [numOfGuests, setNumOfGuests] = useState("");
+  const movePage = useNavigate();
+  const moveRe = () => {
+    window.location.reload();
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -112,47 +117,54 @@ const Reservation = () => {
   return (
     <>
       <Main />
-      <div className="reservation-form-container">
-        <h2 className="reservation-form-heading">Table 1 예약하기</h2>
-        <form className="reservation-form" onSubmit={handleFormSubmit}>
-          <input
-            className="reservation-input"
-            type="text"
-            placeholder="이름"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            className="reservation-input"
-            type="date"
-            value={date}
-            min={todayDate}
-            onChange={(e) =>
-              setDate(e.target.value >= todayDate ? e.target.value : todayDate)
-            }
-          />
-          <select
-            className="reservation-input"
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}>
-            <option value="">시간 선택</option>
-            {generateHourOptions()}
-          </select>
+      <div className="reservation-container">
+        <div className="reservation-form-container">
+          <h2 className="reservation-form-heading">Table 1 예약하기</h2>
+          <form className="reservation-form" onSubmit={handleFormSubmit}>
+            <input
+              className="reservation-input"
+              type="text"
+              placeholder="이름"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              className="reservation-input"
+              type="date"
+              value={date}
+              min={todayDate}
+              onChange={(e) =>
+                setDate(
+                  e.target.value >= todayDate ? e.target.value : todayDate
+                )
+              }
+            />
+            <select
+              className="reservation-input"
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}>
+              <option value="">시간 선택</option>
+              {generateHourOptions()}
+            </select>
 
-          <input
-            className="reservation-input"
-            type="number"
-            placeholder="예약 인원"
-            value={numOfGuests}
-            onChange={(e) => setNumOfGuests(e.target.value)}
-          />
-          <button className="reservation-submit" type="submit">
-            예약 하기
-          </button>
-        </form>
+            <input
+              className="reservation-input"
+              type="number"
+              placeholder="예약 인원"
+              value={numOfGuests}
+              onChange={(e) => setNumOfGuests(e.target.value)}
+            />
+            <button
+              className="reservation-submit"
+              type="submit"
+              onClick={moveRe}>
+              예약 하기
+            </button>
+          </form>
+        </div>
+        {ReservationList()}
       </div>
-      {ReservationList()}
     </>
   );
 };
