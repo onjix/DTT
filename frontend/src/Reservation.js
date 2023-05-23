@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Main from "./Main";
-import { useNavigate } from "react-router-dom";
 import "./ReservationList.css";
 import "./Reservation.css";
 const ReservationList = () => {
@@ -57,7 +56,6 @@ const Reservation = () => {
   const [date, setDate] = useState(todayDate);
   const [time, setTime] = useState("");
   const [numOfGuests, setNumOfGuests] = useState("");
-  const movePage = useNavigate();
   const moveRe = () => {
     window.location.reload();
   };
