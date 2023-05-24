@@ -16,16 +16,13 @@ import { useNavigate } from "react-router-dom";
 import Main from "./Main";
 import "./ShowInterior1.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { setTestStr1 } from './actions';
 const State1 = () => {
   const tableAvail1 = useLoader(GLTFLoader, tableState1_1);
   const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
   const sc11 = useLoader(GLTFLoader, sc1);
-/*
   const [testStr1, setTestStr1] = useState('');
-*/
 
-    /*function useInterval(callback, delay) {
+    function useInterval(callback, delay) {
         const savedCallback = useRef();
 
         useEffect(() => {
@@ -55,23 +52,8 @@ const State1 = () => {
         }
     };
 
-    useInterval(fetchData, 5000);*/
-    const testStr1 = useSelector((state) => state.testStr1);
-    const dispatch = useDispatch();
+    useInterval(fetchData, 5000);
 
-    const fetchData = async () => {
-        try {
-            const response = await axios.get('/table/1/status');
-            dispatch(setTestStr1(response.data));
-        } catch (error) {
-            console.log('에러:', error);
-        }
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, [testStr1]);
-    console.log(testStr1);
 
     var state = testStr1 === 1 ? false : true;
   if (state) {
