@@ -1,33 +1,27 @@
-.reservation-list-container {
-    margin-top: 20px;
+.reservation-list-container{
+    margine-top:20px;
+}
+.info{
+    display: flex;
+    justify-content: center;
+
+}
+.reservation-table {
+    border-collapse: collapse;
+    width: 100%;
 }
 
-.reservation-list-heading {
-    font-size: 24px;
-    font-weight: bold;
+.reservation-table th,
+.reservation-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
-.reservation-list {
-    list-style: none;
-    padding: 0;
+.reservation-table th {
+    background-color: #f2f2f2;
 }
+.date-select{
+    width: 120px;
+    height:50px;
 
-.reservation-item {
-    margin-bottom: 10px;
-}
-
-.reservation-info {
-    font-size: 16px;
-}
-
-.reservation-date {
-    margin-right: 10px;
-}
-
-.reservation-time {
-    margin-right: 10px;
-}
-
-.reservation-guests {
-    color: #888;
 }

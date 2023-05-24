@@ -19,20 +19,39 @@ const State1 = () => {
   const tableAvail1 = useLoader(GLTFLoader, tableState1_1);
   const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
   const sc11 = useLoader(GLTFLoader, sc1);
-  const [testStr1, setTestStr1] = useState("");
+  const [testStr1, setTestStr1] = useState('');
 
-  useEffect(() => {
+/*  useEffect(() => {
     axios({
       url: "/table/1/status",
       method: "GET",
     }).then((res) => {
       setTestStr1(res.data);
+      console.log(testStr1);
     });
-  }, []);
-  var state = testStr1 === 1 ? false : true;
+  }, []);*/
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/table/1/status');
+                setTestStr1(response.data);
+            } catch (error) {
+                console.log('에러:', error);
+            }
+        };
+
+        /*const interval = setInterval(fetchData, 5000); // 5초마다 데이터를 가져옴
+
+        return () => {
+            clearInterval(interval); // 컴포넌트가 언마운트될 때 인터벌 정리
+        };*/
+    }, []);
+
+    var state = testStr1 === 1 ? false : true;
   if (state) {
     return (
       <>
+
         <primitive
           object={tableAvail1.scene}
           scale={2}
