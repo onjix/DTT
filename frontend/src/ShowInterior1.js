@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -21,31 +21,36 @@ const State1 = () => {
   const sc11 = useLoader(GLTFLoader, sc1);
   const [testStr1, setTestStr1] = useState('');
 
-/*  useEffect(() => {
-    axios({
-      url: "/table/1/status",
-      method: "GET",
-    }).then((res) => {
-      setTestStr1(res.data);
-      console.log(testStr1);
-    });
-  }, []);*/
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/table/1/status');
-                setTestStr1(response.data);
-            } catch (error) {
-                console.log('에러:', error);
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+
+        useEffect(() => {
+            savedCallback.current = callback;
+        }, [callback]);
+
+        useEffect(() => {
+            function tick() {
+                savedCallback.current();
             }
-        };
 
-        /*const interval = setInterval(fetchData, 5000); // 5초마다 데이터를 가져옴
+            if (delay !== null) {
+                const intervalId = setInterval(tick, delay);
+                return () => {
+                    clearInterval(intervalId);
+                };
+            }
+        }, [delay]);
+    }
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('/table/1/status');
+            setTestStr1(response.data);
+        } catch (error) {
+            console.log('에러:', error);
+        }
+    };
 
-        return () => {
-            clearInterval(interval); // 컴포넌트가 언마운트될 때 인터벌 정리
-        };*/
-    }, []);
+    useInterval(fetchData, 5000);
 
     var state = testStr1 === 1 ? false : true;
   if (state) {
