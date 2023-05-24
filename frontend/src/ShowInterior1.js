@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -15,51 +15,48 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Main from "./Main";
 import "./ShowInterior1.css";
-import { useDispatch, useSelector } from 'react-redux';
 const State1 = () => {
   const tableAvail1 = useLoader(GLTFLoader, tableState1_1);
   const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
   const sc11 = useLoader(GLTFLoader, sc1);
-  const [testStr1, setTestStr1] = useState('');
+  const [testStr1, setTestStr1] = useState("");
 
-    function useInterval(callback, delay) {
-        const savedCallback = useRef();
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
 
-        useEffect(() => {
-            savedCallback.current = callback;
-        }, [callback]);
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
 
-        useEffect(() => {
-            function tick() {
-                savedCallback.current();
-            }
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
 
-            if (delay !== null) {
-                const intervalId = setInterval(tick, delay);
-                return () => {
-                    clearInterval(intervalId);
-                };
-            }
-        }, [delay]);
+      if (delay !== null) {
+        const intervalId = setInterval(tick, delay);
+        return () => {
+          clearInterval(intervalId);
+        };
+      }
+    }, [delay]);
+  }
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/table/1/status");
+      setTestStr1(response.data);
+    } catch (error) {
+      console.log("에러:", error);
     }
+  };
 
-    const fetchData = async () => {
-        try {
-            const response = await axios.get('/table/1/status');
-            setTestStr1(response.data);
-        } catch (error) {
-            console.log('에러:', error);
-        }
-    };
+  useInterval(fetchData, 5000);
 
-    useInterval(fetchData, 5000);
-
-
-    var state = testStr1 === 1 ? false : true;
+  var state = testStr1 === 1 ? false : true;
   if (state) {
     return (
       <>
-
         <primitive
           object={tableAvail1.scene}
           scale={2}
@@ -71,8 +68,7 @@ const State1 = () => {
   } else {
     return (
       <>
-
-          <primitive
+        <primitive
           object={tableInuse1.scene}
           scale={2}
           position={[-8, 8.5, 3]}

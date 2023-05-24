@@ -1,0 +1,21 @@
+.reservation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .reservation-table {
+    width: 500px;
+    text-align: center;
+  }
+  
+  .reservation-table th,
+  .reservation-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .reservation-table th {
+    background-color: #f2f2f2;
+  }

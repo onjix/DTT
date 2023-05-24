@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Main from "./Main";
 import { useCookies } from "react-cookie";
+import "./Mypage.css";
 
 const Mypage = () => {
   const [reservations, setReservations] = useState([]);
@@ -42,20 +43,30 @@ const ReservationList = () => {
 
   return (
     <>
-      {reservations.map((reservation) =>
-        reservation.name === users ? (
-          <p key={reservation.id}>
-            <span className="reservation-date">
-              {reservation.reservationDate}
-            </span>
-            <span className="reservation-time">{reservation.time}</span>
-            <span className="reservation-guests">
-              {reservation.numOfGuests}인 예약
-            </span>
-          </p>
-        ) : null
-      )}
-      {reservations.length === 0 && <p>No reservations</p>}
+      <div className="reservation-container">
+        {reservations.length > 0 ? (
+          <table className="reservation-table">
+            <thead>
+              <tr>
+                <th>날짜</th>
+                <th>시간</th>
+                <th>예약 인원</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reservations.map((reservation) => (
+                <tr key={reservation.id}>
+                  <td>{reservation.date}</td>
+                  <td>{reservation.time}</td>
+                  <td>{reservation.numOfGuests}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>예약 정보가 없습니다.</p>
+        )}
+      </div>
     </>
   );
 };
