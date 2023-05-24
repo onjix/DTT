@@ -13,13 +13,13 @@ public class TableController {
         this.tableService = tableService;
     }
 
+
     @GetMapping("/{id}/status")
     public ResponseEntity<Integer> getStatusById(@PathVariable Long id) {
         Integer status = tableService.getStatusById(id);
         return ResponseEntity.ok(status);
     }
     @PostMapping("/changeY/{id}")
-
     public Integer changeDataUseY(@PathVariable Long id) {
         tableService.changeDataUseY(id);
         return tableService.getStatusById(id);

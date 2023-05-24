@@ -5,6 +5,10 @@ import carpe.dtt.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ReservationService {
 
@@ -29,4 +33,20 @@ public class ReservationService {
         // 모든 예약 정보 조회
         return reservationRepository.findAll();
     }
+
+    public List<Reservation> getReservationsByDate(LocalDate date) {
+        System.out.println(date);
+        List<Reservation> reservations=reservationRepository.findByDate(date);
+        for (Reservation reservation : reservations) {
+            System.out.println("ID: " + reservation.getId());
+            System.out.println("Name: " + reservation.getName());
+            System.out.println("Date: " + reservation.getDate());
+            System.out.println("Time: " + reservation.getTime());
+            System.out.println("Number of Guests: " + reservation.getNumOfGuests());
+            System.out.println("--------------------------");
+        }
+        return reservationRepository.findByDate(date);
+    }
+
+
 }

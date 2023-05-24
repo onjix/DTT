@@ -22,7 +22,7 @@ public class Reservation {
     @Column
     private String name;
     @Column
-    private LocalDate reservationDate;
+    private LocalDate date;
     @Column
     private LocalTime time;
     @Column

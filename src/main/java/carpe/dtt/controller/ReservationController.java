@@ -3,8 +3,11 @@ package carpe.dtt.controller;
 import carpe.dtt.entity.Reservation;
 import carpe.dtt.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,5 +32,10 @@ public class ReservationController {
     public Iterable<Reservation> getAllReservations() {
         // 모든 예약 정보 조회
         return reservationService.getAllReservations();
+    }
+    @GetMapping("/reservations/date")
+    public List<Reservation> getReservationsByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
+        return reservationService.getReservationsByDate(date);
+
     }
 }
