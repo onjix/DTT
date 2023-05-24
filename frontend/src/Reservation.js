@@ -3,6 +3,7 @@ import Main from "./Main";
 import "./ReservationList.css";
 import "./Reservation.css";
 import axios from "axios";
+import {useCookies} from "react-cookie";
 const ReservationList = () => {
     const [reservations, setReservations] = useState([]);
     const [selectedDate, setSelectedDate] = useState('');
@@ -95,91 +96,6 @@ const ReservationList = () => {
         </div>
     );
 };
-    /*<div className="reservation-list-container">
-      <h2 className="reservation-list-heading">Table1 예약 현황</h2>
-      {reservations.length > 0 ? (
-        <ul className="reservation-list">
-          {reservations.map((reservation) => (
-            <li className="reservation-item" key={reservation.id}>
-              <p className="reservation-info">
-                <span className="reservation-date">
-                  {reservation.reservationDate}
-                </span>
-                <span className="reservation-time">{reservation.time}</span>
-                <span className="reservation-guests">
-                  {reservation.numOfGuests}인 예약
-                </span>
-              </p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="no-reservations">No reservations found.</p>
-      )}
-    </div>*/
-   /*const [selectedDate, setSelectedDate] = useState('');
-   const [reservationInfo, setReservationInfo] = useState('');
-
-   useEffect(() => {
-     fetchReservationInfo(selectedDate);
-   }, [selectedDate]);
-
-   const fetchReservationInfo = (date) => {
-     if (date) {
-       axios
-           .get('/reservations/date', {
-             params: { date },
-           })
-           .then((response) => {
-             setReservationInfo(response.data);
-             console.log(reservationInfo);
-           })
-           .catch((error) => {
-             console.log(error);
-           });
-     } else {
-       setReservationInfo([]);
-     }
-   };
-
-   const handleDateChange = (e) => {
-     const selectedDate = e.target.value;
-     setSelectedDate(selectedDate);
-   };
-
-   const renderDateOptions = () => {
-     const today = new Date();
-     const weekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // 현재 날짜로부터 일주일 뒤의 날짜
-
-     const dateOptions = [];
-     let currentDate = new Date(today.getTime());
-     while (currentDate <= weekLater) {
-       const date = currentDate.toISOString().split('T')[0];
-       dateOptions.push(
-           <option key={date} value={date}>
-             {date}
-           </option>
-       );
-       currentDate.setDate(currentDate.getDate() + 1);
-     }
-
-     return dateOptions;
-   };
-
-   return (
-       <div className="reservation-container">
-         <h2>날짜 선택</h2>
-         <select className="date-select" value={selectedDate} onChange={handleDateChange}>
-           <option value="">날짜를 선택해주세요</option>
-           {renderDateOptions()}
-         </select>
-         <div className="reservation-info">
-           <h3>예약 정보</h3>
-           <p>{reservationInfo.name}</p>
-         </div>
-       </div>
-   );
- };*/
 
 const Reservation = () => {
   const dateNow = new Date();
@@ -188,7 +104,11 @@ const Reservation = () => {
   const [date, setDate] = useState(todayDate);
   const [time, setTime] = useState("");
   const [numOfGuests, setNumOfGuests] = useState("");
-  const moveRe = () => {
+  const [cookies, setCookie] = useCookies(["user"]);
+  const users = cookies.user;
+
+
+    const moveRe = () => {
     window.location.reload();
   };
 
@@ -196,7 +116,7 @@ const Reservation = () => {
     e.preventDefault();
 
     const reservationData = {
-      name: name,
+      name: users,
       date: date,
       time: time,
       numOfGuests: numOfGuests,
@@ -217,12 +137,24 @@ const Reservation = () => {
       } else {
         // 예약 정보 저장 실패 처리
         console.error("예약 정보 저장에 실패하였습니다.");
-        console.log(time);
       }
     } catch (error) {
       console.error("예약 정보 저장 중 오류가 발생하였습니다.", error);
     }
   };
+    /*useEffect(() => {
+        // 쿠키에서 이름을 가져와서 name 상태를 설정합니다.
+        const cookieName = getCookie('name');
+        setName(cookieName);
+    }, []);
+    const getCookie = (name) => {
+        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return cookieValue ? cookieValue.pop() : '';
+    };
+*/
+    const handleInputChange = (e) => {
+        // 입력을 막기 위해 아무 작업도 하지 않습니다.
+    };
   function generateHourOptions() {
     const options = [];
     const startTime = 9; // 시작 시간 (9시)
@@ -243,7 +175,6 @@ const Reservation = () => {
 
     return options;
   }
-
   return (
     <>
       <Main />
@@ -251,13 +182,14 @@ const Reservation = () => {
         <div className="reservation-form-container">
           <h2 className="reservation-form-heading">Table 1 예약하기</h2>
           <form className="reservation-form" onSubmit={handleFormSubmit}>
-            <input
-              className="reservation-input"
-              type="text"
-              placeholder="이름"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+              <input
+                  className="reservation-input"
+                  type="text"
+                  placeholder={users}
+                  value={users}
+                  onChange={handleInputChange}
+                  disabled
+              />
             <input
               className="reservation-input"
               type="date"
