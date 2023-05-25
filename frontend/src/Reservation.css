@@ -1,24 +1,21 @@
 .reservation-container {
     display: flex;
     justify-content: center;
-    height: 50vh;
-  }
-  .reservation-form-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-left: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    max-width: 1000px;
+  }
+  
+  .reservation-form-container {
+    text-align: center;
+    margin: 0 auto;
   }
   
   .reservation-list-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-right: 300px;
+    text-align: center;
+    margin: 0 auto;
   }
 
 .reservation-form-heading {
@@ -55,4 +52,28 @@
 
 .reservation-submit:hover {
     background-color: #45a049;
+}
+.info{
+    display:flex;
+    justify-content: center;
+
+}
+.reservation-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.reservation-table th,
+.reservation-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.reservation-table th {
+    background-color: #f2f2f2;
+}
+.date-select{
+    width: 120px;
+    height:50px;
+
 }

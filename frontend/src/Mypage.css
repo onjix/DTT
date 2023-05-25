@@ -1,21 +1,21 @@
-.reservation-container {
+.mypage-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
   
-  .reservation-table {
+  .mypage-table {
     width: 500px;
     text-align: center;
   }
   
-  .reservation-table th,
-  .reservation-table td {
+  .mypage-table th,
+  .mypage-table td {
     border: 1px solid #ddd;
     padding: 8px;
   }
   
-  .reservation-table th {
+  .mypage-table th {
     background-color: #f2f2f2;
   }

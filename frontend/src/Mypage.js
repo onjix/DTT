@@ -20,12 +20,9 @@ const Mypage = () => {
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
-  const [cookies, setCookie] = useCookies(["user"]);
-  const users = cookies.user;
   useEffect(() => {
     fetchReservations();
   }, []);
-
   const fetchReservations = async () => {
     try {
       const response = await fetch("/api/reservations");
@@ -40,12 +37,11 @@ const ReservationList = () => {
       console.error("Error while fetching reservations:", error);
     }
   };
-
   return (
     <>
-      <div className="reservation-container">
+      <div className="mypage-container">
         {reservations.length > 0 ? (
-          <table className="reservation-table">
+          <table className="mypage-table">
             <thead>
               <tr>
                 <th>날짜</th>
