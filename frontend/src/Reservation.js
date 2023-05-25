@@ -6,7 +6,7 @@ const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [cookies] = useCookies(["user"]);
-  const user = cookies.user;
+  const user = cookies.user
 
   useEffect(() => {
     fetchReservations();

@@ -1,23 +1,89 @@
-.Main {
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-  max-width: 1000px;
-  
+* {
+  text-decoration: none;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
-.Title1 {
-  font-size: 50px;
+.Main-container {
+  position: relative;
+}
+
+.inner {
+  --innerWidth: 1920px;
+    width: 100%;
+    max-width: var(--innerWidth);
+    margin: 0 auto;
+    padding: 0 var(--pad-inner);
+}
+.Header-container {
+  --text-header: 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--header-height);
+    font-size: var(--text-header);
+}
+.Header-logo {
+  margin-top: 20px;
+  margin-left:40px;
+  color: var(--color-link);
+  font-size: 100px;
+  /* font-family: Impact, Charcoal, sans-serif;*/
+  /* font-family: Georgia serif; */
+  font-family: 'MabinogiClassicR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/MabinogiClassicR.woff2') format('woff2');
+  color:#333333;
+}
+@font-face {
+  font-family: 'MabinogiClassicR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/MabinogiClassicR.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+.Icon-box {
+  margin: auto;
+  margin-right: 20px;
+}
+.Icon-container{
+  display: inline;  
+}
+.Icon1 {
+  margin-top: 80px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.Icon2 {
+  margin-top: 80px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.Header-right{
+    display: flex;
+    gap: 12px;
+    height: var(--sf-height);
+    margin-left: auto;
+    margin-right:40px;
+}
+.Header-right-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+strong {
   font-weight: bold;
-  
 }
-.Title2 {
-  text-decoration-line: none;
-  color:blueviolet
+.Log-in {
+  cursor: pointer;
 }
-.JL1 {
-  text-align: right;
+.Sign-up {
+  cursor: pointer;
 }
-.JL2 {
-  text-decoration-line: none;
-  color: rgb(130, 10, 222);
+.Log-out {
+  cursor: pointer;
 }

@@ -1,82 +1,123 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import useDetectClose from "./UseDetectClose";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import "./Main.css";
 
-const DropdownMenu = () => {
+const Main = () => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   // const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
+  const [name, setName] = useState("");
+  const [cookies, setCookie] = useCookies(["user"]);
+  const users = cookies.user;
+  const movePage = useNavigate();
 
   const logoutClickHandler = () => {
     console.log("logout");
+    setCookie("user", "", "/");
+    moveMain();
   };
 
-  const movePage = useNavigate();
-
-  const move = () => {
+  const moveMy = () => {
     movePage("/MyPage");
   };
+  const moveMain = () => {
+    movePage("/Main");
+  };
+
   return (
     <>
-      <PageAll>
-        <h1 className="m-title">
-          <a href="./Main">DTT</a>
-        </h1>
-        <Link to={"/login"}>
-          <button className="login">로그인</button>
-        </Link>
-        <Link to={"/signup"}>
-          <button className="signup">회원가입</button>
-        </Link>
-        <hr className="line"></hr>
+      <div className="Main">
+        <header>
+          <h1 className="Title1">
+            <a href="./Main" className="Title2">
+              DTT
+            </a>
+          </h1>
+          {!users ? (
+            <p className="JL1">
+              <a href="./Signup" className="JL2">
+                Join
+              </a>
+              <span> </span>
+              <a href="./Login" className="JL2">
+                Login
+              </a>
+            </p>
+          ) : (
+            <p className="JL1">
+              <span>{users}님 환영합니다</span>
+              <span> </span>
+              <span onClick={logoutClickHandler} className="JL2">
+                Logout
+              </span>
+            </p>
+          )}
+        </header>
         <div className="header">
           <div className="nav1" style={{ display: "inline-block" }}>
-            <Wrapper>
-              <DropdownContainer>
-                <DropdownButton onClick={myPageHandler} ref={myPageRef}>
-                  매장선택
-                </DropdownButton>
-                <Menu isDropped={myPageIsOpen}>
-                  <Ul>
-                    <Li>
-                      <LinkWrapper href="/ShowInterior1">매장1</LinkWrapper>
-                    </Li>
-                    <Li>
-                      <LinkWrapper href="/ShowInterior2">매장2</LinkWrapper>
-                    </Li>
-                    {/* <Li>
-              <LinkWrapper href="">매장3</LinkWrapper>
-            </Li> */}
-                  </Ul>
-                </Menu>
-              </DropdownContainer>
-
-              <DropdownContainer>
-                <DropdownButton onClick={move}>마이페이지</DropdownButton>
-              </DropdownContainer>
-            </Wrapper>
+            {!users ? (
+              <Wrapper>
+                <DropdownContainer>
+                  <DropdownButton onClick={myPageHandler} ref={myPageRef}>
+                    매장선택
+                  </DropdownButton>
+                  <Menu isDropped={myPageIsOpen}>
+                    <Ul>
+                      <Li>
+                        <LinkWrapper href="">매장1</LinkWrapper>
+                      </Li>
+                      <Li>
+                        <LinkWrapper href="">매장2</LinkWrapper>
+                      </Li>
+                    </Ul>
+                  </Menu>
+                </DropdownContainer>
+                <DropdownContainer>
+                  <DropdownButton>마이페이지</DropdownButton>
+                </DropdownContainer>
+              </Wrapper>
+            ) : (
+              <Wrapper>
+                <DropdownContainer>
+                  <DropdownButton onClick={myPageHandler} ref={myPageRef}>
+                    매장선택
+                  </DropdownButton>
+                  <Menu isDropped={myPageIsOpen}>
+                    <Ul>
+                      <Li>
+                        <LinkWrapper href="/ShowInterior1">매장1</LinkWrapper>
+                      </Li>
+                      <Li>
+                        <LinkWrapper href="/ShowInterior2">매장2</LinkWrapper>
+                      </Li>
+                    </Ul>
+                  </Menu>
+                </DropdownContainer>
+                <DropdownContainer>
+                  <DropdownButton onClick={moveMy}>마이페이지</DropdownButton>
+                </DropdownContainer>
+              </Wrapper>
+            )}
           </div>
         </div>
-      </PageAll>
+      </div>
     </>
   );
 };
 
-export default DropdownMenu;
+export default Main;
 
-const PageAll = styled.div`
-  height: 100vh;
-`;
 const Wrapper = styled.div`
-  margin: 100px auto;
+  margin: 10px auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
   font-size: 19px;
   background: gray;
-  width: 400px;
+  width: 1000px;
   height: 50px;
   font-weight: bold;
 `;
@@ -117,7 +158,6 @@ const Menu = styled.div`
     border-top-width: 0;
     border-bottom-color: gray;
   }
-
   ${({ isDropped }) =>
     isDropped &&
     css`
@@ -162,3 +202,28 @@ const Logout = styled.div`
   color: white;
   font-size: 19px;
 `;
+
+
+.Main {
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  max-width: 1000px;
+  
+}
+.Title1 {
+  font-size: 50px;
+  font-weight: bold;
+  
+}
+.Title2 {
+  text-decoration-line: none;
+  color:blueviolet
+}
+.JL1 {
+  text-align: right;
+}
+.JL2 {
+  text-decoration-line: none;
+  color: rgb(130, 10, 222);
+}

@@ -36,6 +36,5 @@ public class ReservationController {
     @GetMapping("/reservations/date")
     public List<Reservation> getReservationsByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
         return reservationService.getReservationsByDate(date);
-
     }
 }
