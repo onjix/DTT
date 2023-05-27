@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ReservationRepository extends CrudRepository<Reservation,Long> {
     List<Reservation> findByDate(LocalDate date);
+//    List<Reservation> findByDateBefore(LocalDate date);
 }

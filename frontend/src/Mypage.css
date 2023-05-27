@@ -1,8 +1,35 @@
+.MMain-container {
+  width: 1080px;
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  padding-left: 300px;
+  padding-right: 300px;
+} 
+.MContent-container{
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: #4a148c;
+  background: linear-gradient(#9475BC, #4a148c);
+  padding: 5px;
+  box-shadow: 0 0 5px #000000;
+}
+.MInner-container{
+  width: 750px;
+  height: 550px;
+  margin: auto;
+  margin-top: 25px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #cccccc;
+  border-radius: 15px;
+}
+.M-container{
+  padding-top: 100px;
+}
 .mypage-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
   }
   
   .mypage-table {

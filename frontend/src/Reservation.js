@@ -6,7 +6,7 @@ const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [cookies] = useCookies(["user"]);
-  const user = cookies.user
+  const user = cookies.user;
 
   useEffect(() => {
     fetchReservations();
@@ -177,54 +177,60 @@ const Reservation = () => {
   return (
     <>
       <Main />
-      <div className="reservation-container">
-        <div className="reservation-form-container">
-          <h2 className="reservation-form-heading">Table 1 예약하기</h2>
-          <form className="reservation-form" onSubmit={handleFormSubmit}>
-            <input
-              className="reservation-input"
-              type="text"
-              placeholder={users}
-              value={users}
-              onChange={handleInputChange}
-              disabled
-            />
-            <input
-              className="reservation-input"
-              type="date"
-              value={date}
-              min={todayDate}
-              onChange={(e) =>
-                setDate(
-                  e.target.value >= todayDate ? e.target.value : todayDate
-                )
-              }
-            />
-            <select
-              className="reservation-input"
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}>
-              <option value="">시간 선택</option>
-              {generateHourOptions()}
-            </select>
+      <div className="RMain-container">
+        <div className="RContent-container">
+          <div className="RInner-container">
+            <div className="reservation-container">
+              <div className="reservation-form-container">
+                <h2 className="reservation-form-heading">Table 1 예약하기</h2>
+                <form className="reservation-form" onSubmit={handleFormSubmit}>
+                  <input
+                    className="reservation-input"
+                    type="text"
+                    placeholder={users}
+                    value={users}
+                    onChange={handleInputChange}
+                    disabled
+                  />
+                  <input
+                    className="reservation-input"
+                    type="date"
+                    value={date}
+                    min={todayDate}
+                    onChange={(e) =>
+                      setDate(
+                        e.target.value >= todayDate ? e.target.value : todayDate
+                      )
+                    }
+                  />
+                  <select
+                    className="reservation-input"
+                    type="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}>
+                    <option value="">시간 선택</option>
+                    {generateHourOptions()}
+                  </select>
 
-            <input
-              className="reservation-input"
-              type="number"
-              placeholder="예약 인원"
-              value={numOfGuests}
-              onChange={(e) => setNumOfGuests(e.target.value)}
-            />
-            <button
-              className="reservation-submit"
-              type="submit"
-              onClick={moveRe}>
-              예약 하기
-            </button>
-          </form>
+                  <input
+                    className="reservation-input"
+                    type="number"
+                    placeholder="예약 인원"
+                    value={numOfGuests}
+                    onChange={(e) => setNumOfGuests(e.target.value)}
+                  />
+                  <button
+                    className="reservation-submit"
+                    type="submit"
+                    onClick={moveRe}>
+                    예약 하기
+                  </button>
+                </form>
+              </div>
+              {ReservationList()}
+            </div>
+          </div>
         </div>
-        {ReservationList()}
       </div>
     </>
   );

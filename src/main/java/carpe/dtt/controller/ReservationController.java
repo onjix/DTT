@@ -1,6 +1,7 @@
 package carpe.dtt.controller;
 
 import carpe.dtt.entity.Reservation;
+import carpe.dtt.repository.ReservationRepository;
 import carpe.dtt.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,9 +23,12 @@ public class ReservationController {
     }
 
     @PostMapping("/api/reservations")
-    public void saveReservation(@RequestBody Reservation    reservation) {
+    public void saveReservation(@RequestBody Reservation reservation) {
         // 예약 정보를 서비스로 전달하여 저장
         System.out.println(reservation.getTime());
+
+//        LocalDate currentDate = LocalDate.now();
+//        reservationService.deleteReservationsByDateBefore(currentDate);
         reservationService.saveReservation(reservation);
     }
 

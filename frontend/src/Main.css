@@ -1,16 +1,37 @@
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MabinogiClassicR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/MabinogiClassicR.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 * {
   text-decoration: none;
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+  font-family: 'GmarketSansMedium';
 }
 .Main-container {
+  width: 1080px;
   position: relative;
-}
+  margin: 0 auto;
+  padding-bottom: 50px;
+  padding-left: 300px;
+  padding-right: 300px;
+} 
 
-.inner {
-  --innerWidth: 1920px;
-    width: 100%;
+.LineTexture{
+  width: 1080px;
+  margin: auto;
+}
+.Header-inner {
+    width: 1080px;
     max-width: var(--innerWidth);
     margin: 0 auto;
     padding: 0 var(--pad-inner);
@@ -21,47 +42,81 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: var(--header-height);
+    height: 200px;
     font-size: var(--text-header);
 }
-.Header-logo {
+.Header-logo{
+  margin-left: 40px;
+  width: 250px;
+  height: 200px;
+  cursor: pointer;
+}
+.Header-title {
   margin-top: 20px;
-  margin-left:40px;
-  color: var(--color-link);
   font-size: 100px;
-  /* font-family: Impact, Charcoal, sans-serif;*/
-  /* font-family: Georgia serif; */
-  font-family: 'MabinogiClassicR';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/MabinogiClassicR.woff2') format('woff2');
-  color:#333333;
+  cursor: pointer;
+  /* color: 	#7a1ff1; */
+  animation-delay: 1500ms;
+  font-weight: bold;
 }
-@font-face {
-  font-family: 'MabinogiClassicR';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/MabinogiClassicR.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+.Header-title span{
+  font-size: 120px;
+  background: linear-gradient(to right, #29014f, #903aff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
 }
-.Icon-box {
-  margin: auto;
-  margin-right: 20px;
+@keyframes fadeIn {
+  0% {
+  opacity: 0;
+  transform: translateY(50%);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+.Header-title span:nth-of-type(1) {
+  animation-delay: 150ms;
+}
+
+.Header-title span:nth-of-type(2) {
+  animation-delay: 300ms;
+}
+
+.Header-title span:nth-of-type(3) {
+  animation-delay: 450ms;
+}
+.Header-title.show {
+  animation-name: fadeIn;
+}
+/* .Icon-box {
+  display: flex;
 }
 .Icon-container{
-  display: inline;  
+  display: inline;
+  margin: auto;
 }
 .Icon1 {
-  margin-top: 80px;
-  width: 30px;
-  height: 30px;
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
-  margin-right: 10px;
+  margin-left: 250px;
 }
 .Icon2 {
-  margin-top: 80px;
-  width: 30px;
-  height: 30px;
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
-  margin-left: 10px;
-}
+  margin-right: 250px;
+} */
 .Header-right{
     display: flex;
     gap: 12px;
@@ -84,6 +139,59 @@ strong {
 .Sign-up {
   cursor: pointer;
 }
+.User-message{
+  font-size: 20px;
+}
 .Log-out {
+  font-size: 20px;
   cursor: pointer;
+}
+.LineTexture{
+  height: 10px;
+  border: 0;
+  box-shadow: 0 10px 10px -10px #2f0059d8 inset;
+  /* height:2px; 
+  background: #333333; */
+  
+}
+.Nav {
+  margin-bottom:20px;
+}
+
+.Wrapper {
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: black;
+  font-size: 23px;
+  width: 1000px;
+  height: 50px;
+  font-weight: bold;
+}
+
+.DropdownContainer {
+  position: relative;
+  text-align: center;
+}
+
+.DropdownButton {
+  cursor: pointer;
+}
+
+.LinkWrapper {
+  font-size: 17px;
+  text-decoration: none;
+  color: #4A148C;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.Logout {
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 19px;
 }

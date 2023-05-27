@@ -10,9 +10,15 @@ const Mypage = () => {
   return (
     <>
       <Main />
-      <div style={{ textAlign: "center" }}>
-        <h2>{users}님의 예약현황입니다.</h2>
-        {ReservationList()}
+      <div className="MMain-container">
+        <div className="MContent-container">
+          <div className="MInner-container">
+            <div style={{ textAlign: "center" }} className="M-container">
+              <h2>{users}님의 예약현황입니다.</h2>
+              {ReservationList()}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

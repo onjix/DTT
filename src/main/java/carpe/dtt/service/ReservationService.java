@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
+
+//    public void deleteReservationsByDateBefore(LocalDate date) {
+//        List<Reservation> reservationsToDelete = reservationRepository.findByDateBefore(date);
+//        reservationRepository.deleteAll(reservationsToDelete);
+//    }
 
     @Autowired
     public ReservationService(ReservationRepository reservationRepository) {
