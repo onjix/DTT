@@ -22,13 +22,18 @@ const Main = () => {
   const isShowInterior2 = location.pathname === "/ShowInterior2";
   const isShowMypage = location.pathname === "/MyPage";
   const isShowReservation = location.pathname === "/Reservation";
+  const isSimpleInfo = location.pathname === "/SimpleInfo";
 
   const logoutClickHandler = () => {
     console.log("logout");
     setCookie("user", "", "/");
     moveMain();
   };
-
+  const moveSimpleInfo = () => {
+    setTimeout(() => {
+      movePage("/SimpleInfo");
+    }, 0);
+  };
   const moveMypage = () => {
     setTimeout(() => {
       movePage("/MyPage");
@@ -102,6 +107,11 @@ const Main = () => {
             {!users ? (
               <div className="Wrapper">
                 <div className="DropdownContainer">
+                  <div className="DropdownButton" onClick={moveSimpleInfo}>
+                    테이블 이용상황
+                  </div>
+                </div>
+                <div className="DropdownContainer">
                   <div
                     className="DropdownButton"
                     onClick={myPageHandler}
@@ -129,6 +139,11 @@ const Main = () => {
               </div>
             ) : (
               <div className="Wrapper">
+                <div className="DropdownContainer">
+                  <div className="DropdownButton" onClick={moveSimpleInfo}>
+                    테이블 이용상황
+                  </div>
+                </div>
                 <div className="DropdownContainer">
                   <div
                     className="DropdownButton"
@@ -167,7 +182,8 @@ const Main = () => {
         {!isShowInterior1 &&
           !isShowInterior2 &&
           !isShowMypage &&
-          !isShowReservation && <MainImage />}
+          !isShowReservation &&
+          !isSimpleInfo && <MainImage />}
 
         {/* <div className="Icon-box">
           <div className="Icon-container">
