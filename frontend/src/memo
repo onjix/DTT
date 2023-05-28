@@ -18,18 +18,20 @@
   font-family: 'GmarketSansMedium';
 }
 .Main-container {
+  width: 1080px;
   position: relative;
-  max-width: 1080px;
   margin: 0 auto;
-  background-color: #F8F8F8;
-  padding-bottom: 300px;
+  padding-bottom: 50px;
   padding-left: 300px;
   padding-right: 300px;
-}
+} 
 
-.inner {
-  --innerWidth: 1920px;
-    width: 100%;
+.LineTexture{
+  width: 1080px;
+  margin: auto;
+}
+.Header-inner {
+    width: 1080px;
     max-width: var(--innerWidth);
     margin: 0 auto;
     padding: 0 var(--pad-inner);
@@ -40,11 +42,12 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: var(--header-height);
+    height: 200px;
     font-size: var(--text-header);
 }
 .Header-logo{
-  width: 200px;
+  margin-left: 40px;
+  width: 250px;
   height: 200px;
   cursor: pointer;
 }
@@ -52,11 +55,17 @@
   margin-top: 20px;
   font-size: 100px;
   cursor: pointer;
-  color: 	#7a1ff1;
+  /* color: 	#7a1ff1; */
   animation-delay: 1500ms;
   font-weight: bold;
 }
 .Header-title span{
+  font-size: 120px;
+  background: linear-gradient(to right, #29014f, #903aff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
   display: inline-block;
   opacity: 0;
   animation-name: fadeIn;
@@ -87,7 +96,7 @@
 .Header-title.show {
   animation-name: fadeIn;
 }
-.Icon-box {
+/* .Icon-box {
   display: flex;
 }
 .Icon-container{
@@ -107,7 +116,7 @@
   height: 100px;
   cursor: pointer;
   margin-right: 250px;
-}
+} */
 .Header-right{
     display: flex;
     gap: 12px;
@@ -137,11 +146,15 @@ strong {
   font-size: 20px;
   cursor: pointer;
 }
-.lineTexture{
-  height:2px; 
-  background: #333333;
+.LineTexture{
+  height: 10px;
+  border: 0;
+  box-shadow: 0 10px 10px -10px #2f0059d8 inset;
+  /* height:2px; 
+  background: #333333; */
+  
 }
-.nav {
+.Nav {
   margin-bottom:20px;
 }
 
@@ -151,12 +164,11 @@ strong {
   justify-content: space-around;
   align-items: center;
   color: black;
-  font-size: 19px;
+  font-size: 23px;
   width: 1000px;
   height: 50px;
   font-weight: bold;
 }
-
 
 .DropdownContainer {
   position: relative;
@@ -168,7 +180,7 @@ strong {
 }
 
 .LinkWrapper {
-  font-size: 16px;
+  font-size: 17px;
   text-decoration: none;
   color: #4A148C;
   cursor: pointer;

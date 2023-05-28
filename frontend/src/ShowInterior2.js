@@ -121,47 +121,45 @@ const ShowInterior2 = () => {
   return (
     <>
       <Main />
-      <div className="whole-container">
-        <div className="SContent-container">
-          <div className="SInner-container">
-            <Canvas
-              style={{
-                width: "650px",
-                height: "650px",
-                position: "center",
-                margin: "0 auto",
-              }}
-              camera={{ position: [40, 40, 40] }}
-              shadows>
-              <primitive
-                object={store.scene}
-                scale={2}
-                position={[0, 0, 0]}
-                children-0-castShadow
-              />
-              <primitive
-                object={table1.scene}
-                scale={4.4}
-                position={[-8, 2, 3]}
-                children-0-castShadow
-                onClick={reservationPage}
-              />
-              {State1()}
+      <div className="SContent-container">
+        <div className="SInner-container">
+          <Canvas
+            style={{
+              width: "650px",
+              height: "650px",
+              position: "center",
+              margin: "0 auto",
+            }}
+            camera={{ position: [40, 40, 40] }}
+            shadows>
+            <primitive
+              object={store.scene}
+              scale={2}
+              position={[0, 0, 0]}
+              children-0-castShadow
+            />
+            <primitive
+              object={table1.scene}
+              scale={4.4}
+              position={[-8, 2, 3]}
+              children-0-castShadow
+              onClick={reservationPage}
+            />
+            {State1()}
 
-              <primitive
-                object={table2.scene}
-                scale={4.4}
-                position={[10, 2, 3]}
-                children-0-castShadow
-                onClick={reservationPage}
-              />
-              {State2()}
-              <directionalLight intensity={1} />
-              <ambientLight intensity={1.2} />
-              <spotLight intensity={0.1} angle={0.1} penumbra={1} castShadow />
-              <OrbitControls target={[0, 1, 0]} />
-            </Canvas>
-          </div>
+            <primitive
+              object={table2.scene}
+              scale={4.4}
+              position={[10, 2, 3]}
+              children-0-castShadow
+              onClick={reservationPage}
+            />
+            {State2()}
+            <directionalLight intensity={1} />
+            <ambientLight intensity={1.2} />
+            <spotLight intensity={0.1} angle={0.1} penumbra={1} castShadow />
+            <OrbitControls target={[0, 1, 0]} />
+          </Canvas>
         </div>
       </div>
     </>

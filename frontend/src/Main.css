@@ -4,12 +4,14 @@
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'MabinogiClassicR';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/MabinogiClassicR.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
+
 * {
   text-decoration: none;
   box-sizing: inherit;
@@ -17,50 +19,49 @@
   padding: 0;
   font-family: 'GmarketSansMedium';
 }
+
 .Main-container {
-  width: 1080px;
+  max-width: 1080px;
   position: relative;
   margin: 0 auto;
-  padding-bottom: 50px;
-  padding-left: 300px;
-  padding-right: 300px;
-} 
+  padding: 0 20px;
+}
 
-.LineTexture{
-  width: 1080px;
+.LineTexture {
+  width: 100%;
+  max-width: 1080px;
   margin: auto;
 }
+
 .Header-inner {
-    width: 1080px;
-    max-width: var(--innerWidth);
-    margin: 0 auto;
-    padding: 0 var(--pad-inner);
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
+
 .Header-container {
-  --text-header: 20px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 200px;
-    font-size: var(--text-header);
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 200px;
+  font-size: 20px;
 }
-.Header-logo{
+
+.Header-logo {
   margin-left: 40px;
   width: 250px;
   height: 200px;
   cursor: pointer;
 }
+
 .Header-title {
   margin-top: 20px;
-  font-size: 100px;
   cursor: pointer;
-  /* color: 	#7a1ff1; */
-  animation-delay: 1500ms;
   font-weight: bold;
+  animation-delay: 1500ms;
 }
 .Header-title span{
-  font-size: 120px;
+  font-size: 100px;
   background: linear-gradient(to right, #29014f, #903aff);
   background-clip: text;
   -webkit-background-clip: text;
@@ -96,66 +97,50 @@
 .Header-title.show {
   animation-name: fadeIn;
 }
-/* .Icon-box {
+.Header-right {
   display: flex;
+  gap: 12px;
+  height: var(--sf-height);
+  margin-left: auto;
+  margin-right: 40px;
 }
-.Icon-container{
-  display: inline;
-  margin: auto;
-}
-.Icon1 {
-  margin-top: 20px;
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  margin-left: 250px;
-}
-.Icon2 {
-  margin-top: 20px;
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  margin-right: 250px;
-} */
-.Header-right{
-    display: flex;
-    gap: 12px;
-    height: var(--sf-height);
-    margin-left: auto;
-    margin-right:40px;
-}
+
 .Header-right-inner {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
+
 strong {
   font-weight: bold;
 }
+
 .Log-in {
   cursor: pointer;
 }
+
 .Sign-up {
   cursor: pointer;
 }
-.User-message{
+
+.User-message {
   font-size: 20px;
 }
+
 .Log-out {
   font-size: 20px;
   cursor: pointer;
 }
-.LineTexture{
+
+.LineTexture {
   height: 10px;
   border: 0;
   box-shadow: 0 10px 10px -10px #2f0059d8 inset;
-  /* height:2px; 
-  background: #333333; */
-  
 }
+
 .Nav {
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .Wrapper {
@@ -164,9 +149,7 @@ strong {
   justify-content: space-around;
   align-items: center;
   color: black;
-  font-size: 23px;
-  width: 1000px;
-  height: 50px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -182,7 +165,7 @@ strong {
 .LinkWrapper {
   font-size: 17px;
   text-decoration: none;
-  color: #4A148C;
+  color: #4a148c;
   cursor: pointer;
   font-weight: bold;
 }
@@ -195,3 +178,50 @@ strong {
   color: white;
   font-size: 19px;
 }
+
+/* Media Queries */
+
+@media screen and (max-width: 768px) {
+  .Main-container {
+    padding: 0 10px;
+  }
+}
+  .LineTexture {
+    max-width: 100%;
+  }
+
+  .Header-inner,
+  .Header-container {
+    padding: 0 10px;
+  }
+
+  .Header-logo {
+    width: 200px;
+    height: 160px;
+  }
+
+  .Header-title {
+    margin-top: 15px;
+    font-size: 40px;
+  }
+
+  .Wrapper {
+    font-size: 16px;
+  }
+
+  .LinkWrapper {
+    font-size: 17px;
+    text-decoration: none;
+    color: #4A148C;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .Logout {
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 19px;
+  }
