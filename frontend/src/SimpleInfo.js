@@ -59,7 +59,9 @@ const SimpleInfo = () => {
                   </div>
                   <div>
                     {testStr1 === 0 ? (
-                      <h3 className="Table-color1">테이블 비어있습니다.</h3>
+                      <div>
+                        <h3 className="Table-color1">테이블 비어있습니다.</h3>
+                      </div>
                     ) : (
                       <div>
                         <h3 className="Table-color2">테이블이 사용중입니다.</h3>
