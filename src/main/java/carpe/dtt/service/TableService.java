@@ -51,6 +51,7 @@ public class TableService {
     }*/
 
     @Transactional
+
     public void changeDataUseY(Long id) {
         Table table= tableRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));

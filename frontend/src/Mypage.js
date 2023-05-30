@@ -24,9 +24,12 @@ const Mypage = () => {
 
 const ReservationList = () => {
   const [reservations, setReservations] = useState([]);
+  const [cookies, setCookie] = useCookies(["user"]);
+  const users = cookies.user;
   useEffect(() => {
     fetchReservations();
   }, []);
+
   const fetchReservations = async () => {
     try {
       const response = await fetch("/api/reservations");
@@ -41,34 +44,33 @@ const ReservationList = () => {
       console.error("Error while fetching reservations:", error);
     }
   };
+
   return (
     <>
-      <div className="mypage-container">
-        {reservations.length > 0 ? (
-          <table className="mypage-table">
-            <thead>
-              <tr>
-                <th>날짜</th>
-                <th>시간</th>
-                <th>예약 인원</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reservations.map((reservation) => (
-                <tr key={reservation.id}>
+      {reservations.map((reservation) =>
+        reservation.name === users ? (
+          <div className="mypage-container">
+            <table className="mypage-table">
+              <thead>
+                <tr>
+                  <th>날짜</th>
+                  <th>시간</th>
+                  <th>예약 인원</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
                   <td>{reservation.date}</td>
                   <td>{reservation.time}</td>
                   <td>{reservation.numOfGuests}</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>예약 정보가 없습니다.</p>
-        )}
-      </div>
+              </tbody>
+            </table>
+          </div>
+        ) : null
+      )}
+      {reservations.length === 0 && <p>No reservations</p>}
     </>
   );
 };
-
 export default Mypage;
