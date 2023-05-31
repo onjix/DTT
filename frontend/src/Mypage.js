@@ -32,7 +32,7 @@ const ReservationList = () => {
 
   const fetchReservations = async () => {
     try {
-      const response = await fetch("/api/reservations");
+      const response = await fetch("/reservations/time");
       if (response.ok) {
         const data = await response.json();
         setReservations(data);

@@ -1,5 +1,6 @@
 package carpe.dtt.service;
 
+import carpe.dtt.entity.Reservation;
 import carpe.dtt.entity.Table;
 import carpe.dtt.event.EntityChangeEvent;
 import carpe.dtt.listener.DatabaseChangeListener;
@@ -8,6 +9,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,19 +43,7 @@ public class TableService {
             throw new RuntimeException("Table not found with id " + id);
         }
     }
-    /*@Transactional
-    public Integer getStatusById(Long id) {
-        Optional<Table> optionalTable = tableRepository.findById(id);
-        if (optionalTable.isPresent()) {
-            Table table = optionalTable.get();
-            return table.getStatus();
-        } else {
-            throw new RuntimeException("Table not found with id " + id);
-        }
-    }*/
-
     @Transactional
-
     public void changeDataUseY(Long id) {
         Table table= tableRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
@@ -67,4 +59,5 @@ public class TableService {
         table.setStatus(0);
         tableRepository.save(table);
     }
+
 }

@@ -25,7 +25,7 @@ public class UserService {
     @Transactional
     public boolean login(String id, String password) {
         User user = userRepository.findById(id).orElse(new User());
-// findById로 찾은 결과가 존재하면 해당 User 객체를 사용하고, 그렇지 않으면 새로운 User 객체를 생성합니다.
+        // findById로 찾은 결과가 존재하면 해당 User 객체를 사용하고, 그렇지 않으면 새로운 User 객체를 생성합니다.
         System.out.println(id);
 
         if (user != null && user.getPassword().equals(password)) {
