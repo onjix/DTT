@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import Main from "./Main";
 import "./ShowInterior.css";
 const State1 = () => {
+  const [reservations, setReservations] = useState([]);
   const tableAvail1 = useLoader(GLTFLoader, tableState1_1);
   const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
   const tableOccupied1 = useLoader(GLTFLoader, tableState1_3);
@@ -45,16 +46,32 @@ const State1 = () => {
     }, [delay]);
   }
 
-  const fetchData = async () => {
+  const fetchData1 = async () => {
     try {
-      const response = await axios.get("/table/1/status");
-      setstate1(response.data);
+      const response1 = await fetch("/table/1/status");
+      const data1 = await response1.json();
+      setstate1(data1);
+
+      const response2 = await axios.get("/reservations/time");
+      if (response2.status === 200) {
+        const data2 = response2.data;
+        setReservations(data2);
+
+        const today = new Date();
+        reservations.forEach((reservation) => {
+          if (reservation.date === today) {
+            setstate1(4);
+          }
+        });
+        console.log(reservations);
+      } else {
+        console.error("Failed to fetch reservations:", response2.status);
+      }
     } catch (error) {
       console.log("에러:", error);
     }
   };
-
-  useInterval(fetchData, 5000);
+  useInterval(fetchData1, 5000);
 
   if (state1 === 2) {
     return (
