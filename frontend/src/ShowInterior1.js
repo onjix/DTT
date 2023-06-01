@@ -78,7 +78,7 @@ const State1 = () => {
       <>
         <primitive
           object={tableOccupied1.scene}
-          scale={2}
+          scale={3.5}
           position={[-8, 8.5, 3]}
           children-0-castShadow
         />
@@ -95,7 +95,7 @@ const State1 = () => {
       <>
         <primitive
           object={tableInuse1.scene}
-          scale={2}
+          scale={3.5}
           position={[-8, 8.5, 3]}
           children-0-castShadow
         />
@@ -113,7 +113,7 @@ const State1 = () => {
       <>
         <primitive
           object={tableAvail1.scene}
-          scale={2}
+          scale={3.5}
           position={[-8, 8.5, 3]}
           children-0-castShadow
         />
@@ -138,6 +138,7 @@ const State2 = () => {
     });
   }, []);
   if (state2 === 2) {
+    return (
     <>
       <primitive
         object={tableOccupied2.scene}
@@ -152,13 +153,14 @@ const State2 = () => {
         position={[10, 6.5, 3]}
         children-0-castShadow
       />
-    </>;
+    </>
+    );
   } else if (state2 === 1) {
     return (
       <>
         <primitive
           object={tableInuse2.scene}
-          scale={2}
+          scale={3.5}
           position={[10, 8.5, 3]}
           children-0-castShadow
         />
@@ -176,7 +178,7 @@ const State2 = () => {
       <>
         <primitive
           object={tableAvail2.scene}
-          scale={2}
+          scale={3.5}
           position={[10, 8.5, 3]}
           children-0-castShadow
         />
