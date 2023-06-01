@@ -2,21 +2,22 @@ import React, { useState, useEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import object1 from "../src/images/newBuilding.glb";
-import object2 from "../src/images/table1.glb";
-import object3 from "../src/images/table2.glb";
-import tableState1_1 from "../src/images/available1.glb";
-import tableState1_2 from "../src/images/inuse1.glb";
-import tableState1_3 from "../src/images/occupied1.glb";
-import tableState2_1 from "../src/images/available2.glb";
-import tableState2_2 from "../src/images/inuse2.glb";
-import tableState2_3 from "../src/images/occupied2.glb";
-import sc1 from "../src/images/BASEmodel1.glb";
-import sc2 from "../src/images/BASEmodel2.glb";
+import object1 from "../images/Building/newBuilding.glb";
+import object2 from "../images/Building/table1.glb";
+import object3 from "../images/Building/table2.glb";
+import tableState1_1 from "../images/Signs/available1.glb";
+import tableState1_2 from "../images/Signs/inuse1.glb";
+import tableState1_3 from "../images/Signs/occupied1.glb";
+import tableState2_1 from "../images/Signs/available2.glb";
+import tableState2_2 from "../images/Signs/inuse2.glb";
+import tableState2_3 from "../images/Signs/occupied2.glb";
+import sc1 from "../images/Human/BASEmodel1.glb";
+import sc2 from "../images/Human/BASEmodel2.glb";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Main from "./Main";
 import "./ShowInterior.css";
+import App from "../App";
+
 const State1 = () => {
   const tableAvail1 = useLoader(GLTFLoader, tableState1_1);
   const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
@@ -179,7 +180,7 @@ const ShowInterior2 = () => {
 
   return (
     <>
-      <Main />
+      <App />
       <div className="SContent-container">
         <div className="SInner-container">
           <Canvas
@@ -189,7 +190,7 @@ const ShowInterior2 = () => {
               position: "center",
               margin: "0 auto",
             }}
-            camera={{ position: [40, 40, 40] }}
+            camera={{ position: [48, 48, 48] }}
             shadows>
             <primitive
               object={store.scene}

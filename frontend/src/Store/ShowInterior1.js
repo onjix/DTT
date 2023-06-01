@@ -2,28 +2,29 @@ import React, { useState, useEffect, useRef } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import object1 from "../src/images/newBuilding.glb";
-import object2 from "../src/images/table1.glb";
-import object3 from "../src/images/table2.glb";
-import tableState1_1 from "../src/images/available1.glb";
-import tableState1_2 from "../src/images/inuse1.glb";
-import tableState1_3 from "../src/images/occupied1.glb";
-import tableState2_1 from "../src/images/available2.glb";
-import tableState2_2 from "../src/images/inuse2.glb";
-import tableState2_3 from "../src/images/occupied2.glb";
-import sc1 from "../src/images/BASEmodel1.glb";
-import sc2 from "../src/images/BASEmodel2.glb";
+import object1 from "../images/Building/newBuilding.glb";
+import object2 from "../images/Building/table1.glb";
+import object3 from "../images/Building/table2.glb";
+import tableState1_1 from "../images/Signs/available1.glb";
+import tableState1_2 from "../images/Signs/inuse1.glb";
+import tableState1_3 from "../images/Signs/occupied1.glb";
+import tableState2_1 from "../images/Signs/available2.glb";
+import tableState2_2 from "../images/Signs/inuse2.glb";
+import tableState2_3 from "../images/Signs/occupied2.glb";
+import sc1 from "../images/Human/BASEmodel1.glb";
+import sc2 from "../images/Human/BASEmodel2.glb";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Main from "./Main";
 import "./ShowInterior.css";
+import App from "../App";
+
 const State1 = () => {
-  const [reservations, setReservations] = useState([]);
+  const [reservations1, setReservations1] = useState([]);
   const tableAvail1 = useLoader(GLTFLoader, tableState1_1);
   const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
   const tableOccupied1 = useLoader(GLTFLoader, tableState1_3);
   const sc11 = useLoader(GLTFLoader, sc1);
-  const [state1, setstate1] = useState("");
+  const [state1, setState1] = useState("");
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -50,20 +51,20 @@ const State1 = () => {
     try {
       const response1 = await fetch("/table/1/status");
       const data1 = await response1.json();
-      setstate1(data1);
+      setState1(data1);
 
       const response2 = await axios.get("/reservations/time");
       if (response2.status === 200) {
         const data2 = response2.data;
-        setReservations(data2);
+        setReservations1(data2);
 
         const today = new Date();
-        reservations.forEach((reservation) => {
+        reservations1.forEach((reservation) => {
           if (reservation.date === today) {
-            setstate1(4);
+            setState1(4);
           }
         });
-        console.log(reservations);
+        console.log(reservations1);
       } else {
         console.error("Failed to fetch reservations:", response2.status);
       }
@@ -123,37 +124,77 @@ const State1 = () => {
 };
 
 const State2 = () => {
+  const [reservations2, setReservations2] = useState([]);
   const tableAvail2 = useLoader(GLTFLoader, tableState2_1);
   const tableInuse2 = useLoader(GLTFLoader, tableState2_2);
   const tableOccupied2 = useLoader(GLTFLoader, tableState2_3);
   const sc22 = useLoader(GLTFLoader, sc2);
   const [state2, setState2] = useState("");
 
-  useEffect(() => {
-    axios({
-      url: "/table/2/status",
-      method: "GET",
-    }).then((res) => {
-      setState2(res.data);
-    });
-  }, []);
+  function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+
+      if (delay !== null) {
+        const intervalId = setInterval(tick, delay);
+        return () => {
+          clearInterval(intervalId);
+        };
+      }
+    }, [delay]);
+  }
+
+  const fetchData2 = async () => {
+    try {
+      const response1 = await fetch("/table/2/status");
+      const data1 = await response1.json();
+      setState2(data1);
+
+      const response2 = await axios.get("/reservations/time");
+      if (response2.status === 200) {
+        const data2 = response2.data;
+        setReservations2(data2);
+
+        const today = new Date();
+        reservations2.forEach((reservation) => {
+          if (reservation.date === today) {
+            setState2(4);
+          }
+        });
+        console.log(reservations2);
+      } else {
+        console.error("Failed to fetch reservations:", response2.status);
+      }
+    } catch (error) {
+      console.log("에러:", error);
+    }
+  };
+  useInterval(fetchData2, 5000);
   if (state2 === 2) {
     return (
-    <>
-      <primitive
-        object={tableOccupied2.scene}
-        scale={2}
-        position={[10, 8.5, 3]}
-        children-0-castShadow
-      />
+      <>
+        <primitive
+          object={tableOccupied2.scene}
+          scale={3.5}
+          position={[10, 8.5, 3]}
+          children-0-castShadow
+        />
 
-      <primitive
-        object={sc22.scene}
-        scale={2}
-        position={[10, 6.5, 3]}
-        children-0-castShadow
-      />
-    </>
+        <primitive
+          object={sc22.scene}
+          scale={2}
+          position={[10, 6.5, 3]}
+          children-0-castShadow
+        />
+      </>
     );
   } else if (state2 === 1) {
     return (
@@ -198,7 +239,7 @@ const ShowInterior1 = () => {
 
   return (
     <>
-      <Main />
+      <App />
       <div className="SContent-container">
         <div className="SInner-container">
           <Canvas
@@ -208,7 +249,7 @@ const ShowInterior1 = () => {
               position: "center",
               margin: "0 auto",
             }}
-            camera={{ position: [40, 40, 40] }}
+            camera={{ position: [48, 48, 48] }}
             shadows>
             <primitive
               object={store.scene}

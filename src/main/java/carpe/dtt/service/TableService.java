@@ -3,7 +3,6 @@ package carpe.dtt.service;
 import carpe.dtt.entity.Reservation;
 import carpe.dtt.entity.Table;
 import carpe.dtt.event.EntityChangeEvent;
-import carpe.dtt.listener.DatabaseChangeListener;
 import carpe.dtt.repository.TableRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
@@ -17,13 +16,11 @@ import java.util.Optional;
 @Service
 public class TableService {
     private final TableRepository tableRepository;
-    private final DatabaseChangeListener databaseChangeListener;
     private ApplicationEventPublisher eventPublisher;
 
 
-    public TableService(TableRepository tableRepository, DatabaseChangeListener databaseChangeListener, ApplicationEventPublisher eventPublisher) {
+    public TableService(TableRepository tableRepository, ApplicationEventPublisher eventPublisher) {
         this.tableRepository = tableRepository;
-        this.databaseChangeListener = databaseChangeListener;
         this.eventPublisher = eventPublisher;
     }
 

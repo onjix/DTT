@@ -1,28 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Main from "./Main";
 import { useCookies } from "react-cookie";
-import "./Mypage.css";
 
-const Mypage = () => {
-  const [reservations, setReservations] = useState([]);
-  const [cookies, setCookie] = useCookies(["user"]);
-  const users = cookies.user;
-  return (
-    <>
-      <Main />
-      <div className="MContent-container">
-        <div className="MInner-container">
-          <div style={{ textAlign: "center" }} className="M-container">
-            <h2>{users}님의 예약현황입니다.</h2>
-            {ReservationList()}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const ReservationList = () => {
+const MyPageList = () => {
   const [reservations, setReservations] = useState([]);
   const [cookies, setCookie] = useCookies(["user"]);
   const users = cookies.user;
@@ -73,4 +52,5 @@ const ReservationList = () => {
     </>
   );
 };
-export default Mypage;
+
+export default MyPageList;

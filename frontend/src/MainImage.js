@@ -1,4 +1,4 @@
-import mainImage from "../src/images/newBuildingcopy.glb";
+import mainImage from "../src/images/Store/viewStore.glb";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";

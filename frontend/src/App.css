@@ -1,0 +1,227 @@
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'MabinogiClassicR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/MabinogiClassicR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  * {
+    text-decoration: none;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    font-family: 'GmarketSansMedium';
+  }
+  
+  .Main-container {
+    max-width: 1080px;
+    position: relative;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .LineTexture {
+    width: 100%;
+    max-width: 1080px;
+    margin: auto;
+  }
+  
+  .Header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .Header-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 200px;
+    font-size: 20px;
+  }
+  
+  .Header-logo {
+    margin-left: 40px;
+    width: 250px;
+    height: 200px;
+    cursor: pointer;
+  }
+  
+  .Header-title {
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    animation-delay: 1500ms;
+  }
+  .Header-title span{
+    font-size: 100px;
+    background: linear-gradient(to right, #29014f, #903aff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline-block;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+  }
+  @keyframes fadeIn {
+    0% {
+    opacity: 0;
+    transform: translateY(50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+  }
+  .Header-title span:nth-of-type(1) {
+    animation-delay: 150ms;
+  }
+  
+  .Header-title span:nth-of-type(2) {
+    animation-delay: 300ms;
+  }
+  
+  .Header-title span:nth-of-type(3) {
+    animation-delay: 450ms;
+  }
+  .Header-title.show {
+    animation-name: fadeIn;
+  }
+  .Header-right {
+    display: flex;
+    gap: 12px;
+    height: var(--sf-height);
+    margin-left: auto;
+    margin-right: 40px;
+  }
+  
+  .Header-right-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  strong {
+    font-weight: bold;
+  }
+  
+  .Log-in {
+    cursor: pointer;
+  }
+  
+  .Sign-up {
+    cursor: pointer;
+  }
+  
+  .User-message {
+    font-size: 20px;
+  }
+  
+  .Log-out {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .LineTexture {
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #2f0059d8 inset;
+  }
+  
+  .Nav {
+    margin-bottom: 20px;
+  }
+  
+  .Wrapper {
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .DropdownContainer {
+    position: relative;
+    text-align: center;
+  }
+  
+  .DropdownButton {
+    cursor: pointer;
+  }
+  
+  .LinkWrapper {
+    font-size: 17px;
+    text-decoration: none;
+    color: #4a148c;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .Logout {
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-size: 19px;
+  }
+  
+  /* Media Queries */
+  
+  @media screen and (max-width: 768px) {
+    .Main-container {
+      padding: 0 10px;
+    }
+  }
+    .LineTexture {
+      max-width: 100%;
+    }
+  
+    .Header-inner,
+    .Header-container {
+      padding: 0 10px;
+    }
+  
+    .Header-logo {
+      width: 200px;
+      height: 160px;
+    }
+  
+    .Header-title {
+      margin-top: 15px;
+      font-size: 40px;
+    }
+  
+    .Wrapper {
+      font-size: 16px;
+    }
+  
+    .LinkWrapper {
+      font-size: 17px;
+      text-decoration: none;
+      color: #4A148C;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  
+    .Logout {
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      text-decoration: none;
+      color: white;
+      font-size: 19px;
+    }
