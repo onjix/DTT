@@ -58,4 +58,8 @@ public class ReservationService {
         return reservationsAfterDate;
     }
 
+    public List<Reservation> getReservationsByDateAndTableN(LocalDate date, int tableN) {
+        return reservationRepository.findByDateAndTableN(date, tableN);
+    }
+
 }

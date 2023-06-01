@@ -26,6 +26,7 @@ const Reservation = () => {
       date: date,
       time: time,
       numOfGuests: numOfGuests,
+      tableN: 1,
     };
 
     try {

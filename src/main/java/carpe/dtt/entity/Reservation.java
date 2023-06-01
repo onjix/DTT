@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity(name="Reservation1")
+@Entity(name="Reservation")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -26,5 +26,8 @@ public class Reservation {
     private LocalTime time;
     @Column
     private int numOfGuests;
+
+    @Column
+    private int tableN;
 
 }

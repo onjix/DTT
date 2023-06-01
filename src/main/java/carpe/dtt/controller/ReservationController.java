@@ -34,8 +34,10 @@ public class ReservationController {
         return reservationService.getAllReservations();
     }
     @GetMapping("/reservations/date")
-    public List<Reservation> getReservationsByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date) {
-        return reservationService.getReservationsByDate(date);
+    public List<Reservation> getReservationsByDateAndTableNumber(
+            @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+            @RequestParam("tableN") int tableN) {
+        return reservationService.getReservationsByDateAndTableN(date, tableN);
     }
     @GetMapping("reservations/time")
     public List<Reservation> getReservationsAfterDateTime() {

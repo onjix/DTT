@@ -18,7 +18,9 @@ const ReservationList = () => {
         return;
       }
 
-      const response = await fetch(`/reservations/date?date=${selectedDate}`);
+      const response = await fetch(
+        `/reservations/date?date=${selectedDate}&tableN=1`
+      );
       if (response.ok) {
         const data = await response.json();
         setReservations(data);
@@ -69,6 +71,7 @@ const ReservationList = () => {
           <table className="reservation-table">
             <thead>
               <tr>
+                <th>테이블 번호</th>
                 <th>날짜</th>
                 <th>시간</th>
                 <th>예약 인원</th>
@@ -78,6 +81,7 @@ const ReservationList = () => {
               {reservations.length > 0 ? (
                 reservations.map((reservation) => (
                   <tr key={reservation.id}>
+                    <td>Table{reservation.tableN}</td>
                     <td>{reservation.date}</td>
                     <td>{reservation.time}</td>
                     <td>{reservation.numOfGuests}</td>
