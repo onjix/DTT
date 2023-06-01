@@ -23,7 +23,7 @@ public class TableService {
         this.tableRepository = tableRepository;
         this.eventPublisher = eventPublisher;
     }
-q
+
 
     // 엔티티 변경 시 리스너 호출하는 메소드
 

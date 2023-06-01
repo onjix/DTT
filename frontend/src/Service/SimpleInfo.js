@@ -6,6 +6,50 @@ import App from "../App";
 const SimpleInfo = () => {
   const [testStr1, setTestStr1] = useState(0);
   const [testStr2, setTestStr2] = useState(0);
+  const statePrint1 = () => {
+    if (testStr1 === 2) {
+      return (
+        <div>
+          <h3 className="Table-color2">테이블 점유 중입니다.</h3>
+        </div>
+      );
+    } else if (testStr1 === 1) {
+      return (
+        <div>
+          <h3 className="Table-color1">테이블이 사용중입니다.</h3>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h3 className="Table-color0">테이블 비어있습니다.</h3>
+        </div>
+      );
+    }
+  };
+
+  const statePrint2 = () => {
+    if (testStr2 === 2) {
+      return (
+        <div>
+          <h3 className="Table-color2">테이블 점유 중입니다.</h3>
+        </div>
+      );
+    } else if (testStr2 === 1) {
+      return (
+        <div>
+          <h3 className="Table-color1">테이블이 사용중입니다.</h3>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h3 className="Table-color0">테이블 비어있습니다.</h3>
+        </div>
+      );
+    }
+  };
+
   function useInterval(callback, delay) {
     const savedCallback = useRef();
 
@@ -57,33 +101,32 @@ const SimpleInfo = () => {
                   <div>
                     <h2>1번 테이블</h2>
                   </div>
-                  <div>
-                    {testStr1 === 0 ? (
-                      <div>
-                        <h3 className="Table-color1">테이블 비어있습니다.</h3>
-                      </div>
-                    ) : (
-                      <div>
-                        <h3 className="Table-color2">테이블이 사용중입니다.</h3>
-                      </div>
-                    )}
-                  </div>
+                  <div>{statePrint1()}</div>
                 </div>
                 <div className="Table2-container">
                   <div>
                     <h2>2번 테이블</h2>
                   </div>
+                  <div>{statePrint2()}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="Shop2-container">
+            <div className="Shop2Inner-container">
+              <h2>매장 2의 테이블 현황</h2>
+              <div className="table-container">
+                <div className="Table2-container">
                   <div>
-                    {testStr2 === 0 ? (
-                      <div>
-                        <h3 className="Table-color1">테이블 비어있습니다.</h3>
-                      </div>
-                    ) : (
-                      <div>
-                        <h3 className="Table-color2">테이블이 사용중입니다.</h3>
-                      </div>
-                    )}
+                    <h2>1번 테이블</h2>
                   </div>
+                  <div>{statePrint1()}</div>
+                </div>
+                <div className="Table2-container">
+                  <div>
+                    <h2>2번 테이블</h2>
+                  </div>
+                  <div>{statePrint2()}</div>
                 </div>
               </div>
             </div>

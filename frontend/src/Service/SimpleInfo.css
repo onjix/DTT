@@ -29,7 +29,7 @@
   }
   
   .S-container {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     padding-top: 20px;
   }
   
@@ -42,8 +42,22 @@
     padding-top: 20px;
     padding-bottom: 20px;
     border: 2px solid #1d0038;
+    margin-bottom: 30px;
+  }
+  .Shop2-container {
+    margin: auto;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 2px solid #1d0038;
   }
   .Shop1Inner-container {
+    width: 500px;
+  }
+  .Shop2Inner-container {
     width: 500px;
   }
   .table-container {
@@ -61,9 +75,12 @@
     margin-right: 10px;
   }
   
-  .Table-color1 {
+  .Table-color0 {
     color: #068801;
   }
-  .Table-color2 {
+  .Table-color1 {
     color: #ad0303;
+  }
+  .Table-color2 {
+    color: #eca203;
   }
