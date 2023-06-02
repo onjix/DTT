@@ -4,6 +4,7 @@ import carpe.dtt.entity.Reservation;
 import carpe.dtt.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -45,5 +46,11 @@ public class ReservationController {
         LocalTime currentTime = LocalTime.now();
         List<Reservation> reservations = reservationService.getReservationsAfterDateTime(currentDate, currentTime);
         return reservations;
+    }
+
+    @PutMapping("/reservations/update")
+    public void updateTableStatus() {
+        reservationService.updateTableStatus(); // 예약 정보 업데이트 메서드 호출
+
     }
 }

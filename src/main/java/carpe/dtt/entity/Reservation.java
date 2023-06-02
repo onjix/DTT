@@ -26,7 +26,6 @@ public class Reservation {
     private LocalTime time;
     @Column
     private int numOfGuests;
-
     @Column
     private int tableN;
 

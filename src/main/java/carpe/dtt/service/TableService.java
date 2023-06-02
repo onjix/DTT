@@ -19,7 +19,7 @@ public class TableService {
     private ApplicationEventPublisher eventPublisher;
 
 
-    public TableService(TableRepository tableRepository, ApplicationEventPublisher eventPublisher) {
+    public TableService(TableRepository tableRepository , ApplicationEventPublisher eventPublisher) {
         this.tableRepository = tableRepository;
         this.eventPublisher = eventPublisher;
     }
@@ -55,6 +55,16 @@ public class TableService {
         // 데이터 수정 작업 수행
         table.setStatus(0);
         tableRepository.save(table);
+    }
+    public void updateTableStatus(Long tableId) {
+        Optional<Table> optionalTable = tableRepository.findById(tableId);
+        if (optionalTable.isPresent()) {
+            Table table = optionalTable.get();
+            table.setStatus(3);
+            tableRepository.save(table);
+        } else {
+            // 테이블이 존재하지 않는 경우에 대한 예외 처리
+        }
     }
 
 }

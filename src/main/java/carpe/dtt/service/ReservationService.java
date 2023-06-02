@@ -8,18 +8,19 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ReservationService {
 
     private final ReservationRepository reservationRepository;
+    private final TableService tableService;
 
 
     @Autowired
-    public ReservationService(ReservationRepository reservationRepository) {
+    public ReservationService(ReservationRepository reservationRepository, TableService tableService) {
         this.reservationRepository = reservationRepository;
+        this.tableService = tableService;
     }
 
     /**
@@ -29,9 +30,6 @@ public class ReservationService {
         // 예약 정보를 저장
         reservationRepository.save(reservation);
     }
-    /**
-     *
-     */
     public Iterable<Reservation> getAllReservations() {
         // 모든 예약 정보 조회
         return reservationRepository.findAll();
@@ -62,4 +60,23 @@ public class ReservationService {
         return reservationRepository.findByDateAndTableN(date, tableN);
     }
 
+    public void updateTableStatus() {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
+        List<Reservation> reservations =  reservationRepository.findByDate(currentDate);
+        for (Reservation reservation : reservations) {
+            LocalTime reservationTime = reservation.getTime();
+
+            // 예약 시간에서 30분을 뺀 시간 계산
+            LocalTime thirtyMinutesBeforeReservationTime = reservationTime.minusMinutes(30);
+            System.out.println(thirtyMinutesBeforeReservationTime);
+
+            // 현재 시간과 비교하여 30분 전인 경우에만 처리
+            if (currentTime.isAfter(thirtyMinutesBeforeReservationTime)) {
+                System.out.println("ID: " + reservation.getTableN() + ", Time: " + reservationTime);
+                tableService.updateTableStatus((long) reservation.getTableN()); // 예약 객체를 전달
+            }
+        }
+    }
 }
