@@ -20,7 +20,8 @@ const App = () => {
   const isShowInterior1 = location.pathname === "/ShowInterior1";
   const isShowInterior2 = location.pathname === "/ShowInterior2";
   const isShowMypage = location.pathname === "/MyPage";
-  const isShowReservation = location.pathname === "/Reservation";
+  const isShowReservation1 = location.pathname === "/Reservation1";
+  const isShowReservation2 = location.pathname === "/Reservation2";
   const isSimpleInfo = location.pathname === "/SimpleInfo";
 
   const logoutClickHandler = () => {
@@ -182,7 +183,8 @@ const App = () => {
         {!isShowInterior1 &&
           !isShowInterior2 &&
           !isShowMypage &&
-          !isShowReservation &&
+          !isShowReservation1 &&
+            !isShowReservation2&&
           !isSimpleInfo && <MainImage />}
         {/* <div className="Icon-box">
           <div className="Icon-container">

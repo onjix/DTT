@@ -32,6 +32,7 @@ const MyPageList = () => {
             <table className="mypage-table">
               <thead>
                 <tr>
+                  <th>테이블 번호</th>
                   <th>날짜</th>
                   <th>시간</th>
                   <th>예약 인원</th>
@@ -39,6 +40,7 @@ const MyPageList = () => {
               </thead>
               <tbody>
                 <tr>
+                  <td>{reservation.tableN}</td>
                   <td>{reservation.date}</td>
                   <td>{reservation.time}</td>
                   <td>{reservation.numOfGuests}</td>

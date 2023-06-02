@@ -233,8 +233,11 @@ const ShowInterior1 = () => {
   const table1 = useLoader(GLTFLoader, object2);
   const table2 = useLoader(GLTFLoader, object3);
   const movePage = useNavigate();
-  const reservationPage = () => {
-    movePage("/Reservation");
+  const reservationPage1 = () => {
+    movePage("/Reservation1");
+  };
+  const reservationPage2 = () => {
+    movePage("/Reservation2");
   };
 
   return (
@@ -262,7 +265,7 @@ const ShowInterior1 = () => {
               scale={4.4}
               position={[-8, 2, 3]}
               children-0-castShadow
-              onClick={reservationPage}
+              onClick={reservationPage1}
             />
             {State1()}
 
@@ -271,7 +274,7 @@ const ShowInterior1 = () => {
               scale={4.4}
               position={[10, 2, 3]}
               children-0-castShadow
-              onClick={reservationPage}
+              onClick={reservationPage2}
             />
             {State2()}
             <directionalLight intensity={1} />

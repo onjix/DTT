@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./Reservation.css";
 import { useCookies } from "react-cookie";
 import App from "../App";
-import ReservationList from "./ReservationList";
+import ReservationList1 from "./ReservationList1";
 
-const Reservation = () => {
+const Reservation1 = () => {
   const dateNow = new Date();
   const todayDate = dateNow.toISOString().slice(0, 10);
   const [name, setName] = useState("");
@@ -134,11 +134,11 @@ const Reservation = () => {
                 </button>
               </form>
             </div>
-            <ReservationList />
+            <ReservationList1 />
           </div>
         </div>
       </div>
     </>
   );
 };
-export default Reservation;
+export default Reservation1;
