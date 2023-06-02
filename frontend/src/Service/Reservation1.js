@@ -14,6 +14,7 @@ const Reservation1 = () => {
   const [cookies, setCookie] = useCookies(["user"]);
   const users = cookies.user;
 
+
   const moveRe = () => {
     window.location.reload();
   };
@@ -30,42 +31,55 @@ const Reservation1 = () => {
     };
 
     try {
-      const response = await fetch("/api/reservations", {
-        method: "POST",
+      // 이미 예약된 데이터가 있는지 확인하는 요청
+      const response = await fetch(`/api/reservations/check?date=${date}&time=${time}&tableN=1`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(reservationData),
       });
 
       if (response.ok) {
-        // 예약 정보 저장 성공 처리
-        console.log("예약 정보가 성공적으로 저장되었습니다.");
+        const data = await response.json();
+
+        if (data.length > 0) {
+          // 이미 예약된 데이터가 있으면 예약할 수 없음을 알림
+          alert("이미 예약된 시간입니다. 다시 시도해주십시오");
+          moveRe();
+        } else {
+          // 예약 정보 저장 요청
+          const saveResponse = await fetch("/api/reservations", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(reservationData),
+          });
+
+          if (saveResponse.ok) {
+            // 예약 정보 저장 성공 처리
+            alert("예약 정보가 성공적으로 저장되었습니다.");
+            moveRe();
+          } else {
+            // 예약 정보 저장 실패 처리
+            console.error("예약 정보 저장에 실패하였습니다.");
+          }
+        }
       } else {
-        // 예약 정보 저장 실패 처리
-        console.error("예약 정보 저장에 실패하였습니다.");
+        console.error("예약 정보 확인에 실패하였습니다.");
       }
     } catch (error) {
-      console.error("예약 정보 저장 중 오류가 발생하였습니다.", error);
+      console.error("예약 정보 처리 중 오류가 발생하였습니다.", error);
     }
   };
-  /*useEffect(() => {
-        // 쿠키에서 이름을 가져와서 name 상태를 설정합니다.
-        const cookieName = getCookie('name');
-        setName(cookieName);
-    }, []);
-    const getCookie = (name) => {
-        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-        return cookieValue ? cookieValue.pop() : '';
-    };
-*/
+
   const handleInputChange = (e) => {
     // 입력을 막기 위해 아무 작업도 하지 않습니다.
   };
   function generateHourOptions() {
     const options = [];
-    const startTime = 9; // 시작 시간 (9시)
-    const endTime = 18; // 종료 시간 (18시)
+    const startTime = 11; // 시작 시간 (9시)
+    const endTime = 20; // 종료 시간 (18시)
 
     for (let hour = startTime; hour <= endTime; hour++) {
       for (let minute = 0; minute <= 59; minute += 60) {
@@ -126,10 +140,7 @@ const Reservation1 = () => {
                   value={numOfGuests}
                   onChange={(e) => setNumOfGuests(e.target.value)}
                 />
-                <button
-                  className="reservation-submit"
-                  type="submit"
-                  onClick={moveRe}>
+                <button className="reservation-submit" type="submit">
                   예약 하기
                 </button>
               </form>

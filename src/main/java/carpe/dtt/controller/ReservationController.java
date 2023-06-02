@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ReservationController {
@@ -27,6 +29,20 @@ public class ReservationController {
         // 예약 정보를 서비스로 전달하여 저장
         System.out.println(reservation.getTime());
         reservationService.saveReservation(reservation);
+    }
+    /*@GetMapping("/api/reservations/check")
+    public List<Reservation> checkExistingReservations(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                                       @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
+                                                       @RequestParam int tableN) {
+        return reservationService.checkExistingReservations(date, time);
+    }*/
+    @GetMapping("/api/reservations/check")
+    public List<Reservation> checkReservationAvailability(
+            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
+            @RequestParam int tableN) {
+
+        return reservationService.checkExistingReservations(date, time, tableN);
     }
 
     @GetMapping("/api/reservations")

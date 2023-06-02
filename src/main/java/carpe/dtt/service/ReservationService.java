@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,6 +48,10 @@ public class ReservationService {
         }
         return reservationRepository.findByDate(date);
     }
+
+    /**
+     현재 날짜와 시간 이후의 예약 정보를 가져오는 로직
+     */
     public List<Reservation> getReservationsAfterDateTime(LocalDate currentDate, LocalTime currentTime) {
         List<Reservation> reservationsAfterDate = reservationRepository.findByDateAfter(currentDate);
         List<Reservation> reservationsAfterTime = reservationRepository.findByTimeAfter(currentTime);
@@ -56,10 +60,17 @@ public class ReservationService {
         return reservationsAfterDate;
     }
 
+    /**
+     * 현재 날짜와 table 넘버를 비교하여 table 넘버가 맞는 예약 정보만 가져오는 로직
+     */
+
     public List<Reservation> getReservationsByDateAndTableN(LocalDate date, int tableN) {
         return reservationRepository.findByDateAndTableN(date, tableN);
     }
 
+    /**
+     * 현재 날짜와 시간을 비교하고 예약된 데이터의 30분 전에 테이블의 상태를 바꾸는 로직
+     */
     public void updateTableStatus() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
@@ -70,13 +81,25 @@ public class ReservationService {
 
             // 예약 시간에서 30분을 뺀 시간 계산
             LocalTime thirtyMinutesBeforeReservationTime = reservationTime.minusMinutes(30);
-            System.out.println(thirtyMinutesBeforeReservationTime);
 
             // 현재 시간과 비교하여 30분 전인 경우에만 처리
             if (currentTime.isAfter(thirtyMinutesBeforeReservationTime)) {
-                System.out.println("ID: " + reservation.getTableN() + ", Time: " + reservationTime);
                 tableService.updateTableStatus((long) reservation.getTableN()); // 예약 객체를 전달
             }
         }
+    }
+
+    /**
+     * 현재 날짜와 시간을 비교하고 DB에 저장된 tableN까지 비교하여 맞는 예약 정보만 가져오는 로직
+     */
+    public List<Reservation> checkExistingReservations(LocalDate date, LocalTime time, int tableN) {
+        List<Reservation> reservations = reservationRepository.findByDateAndTime(date, time);
+        List<Reservation> filteredReservations = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            if (reservation.getTableN() == tableN) {
+                filteredReservations.add(reservation);
+            }
+        }
+        return filteredReservations;
     }
 }
