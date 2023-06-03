@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +25,13 @@ public class ReservationService {
     }
 
     /**
-     react에서 form을 이용해 예약하기를 눌러 예약 정보를 db에 저장하는 로직
+     * react에서 form을 이용해 예약하기를 눌러 예약 정보를 db에 저장하는 로직
      */
     public void saveReservation(Reservation reservation) {
         // 예약 정보를 저장
         reservationRepository.save(reservation);
     }
+
     public Iterable<Reservation> getAllReservations() {
         // 모든 예약 정보 조회
         return reservationRepository.findAll();
@@ -37,7 +39,7 @@ public class ReservationService {
 
     public List<Reservation> getReservationsByDate(LocalDate date) {
         System.out.println(date);
-        List<Reservation> reservations=reservationRepository.findByDate(date);
+        List<Reservation> reservations = reservationRepository.findByDate(date);
         for (Reservation reservation : reservations) {
             System.out.println("ID: " + reservation.getId());
             System.out.println("Name: " + reservation.getName());
@@ -50,7 +52,7 @@ public class ReservationService {
     }
 
     /**
-     현재 날짜와 시간 이후의 예약 정보를 가져오는 로직
+     * 현재 날짜와 시간 이후의 예약 정보를 가져오는 로직
      */
     public List<Reservation> getReservationsAfterDateTime(LocalDate currentDate, LocalTime currentTime) {
         List<Reservation> reservationsAfterDate = reservationRepository.findByDateAfter(currentDate);
@@ -75,7 +77,7 @@ public class ReservationService {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 
-        List<Reservation> reservations =  reservationRepository.findByDate(currentDate);
+        List<Reservation> reservations = reservationRepository.findByDate(currentDate);
         for (Reservation reservation : reservations) {
             LocalTime reservationTime = reservation.getTime();
 
@@ -101,5 +103,44 @@ public class ReservationService {
             }
         }
         return filteredReservations;
+    }
+
+    /**
+     * 날짜와 시간을 입력하고 입력한 날짜의 예약 률을 예측하는 로직
+     */
+    public int getBetweenData(LocalDate standard, LocalDate date,LocalTime time,int tableN) {
+        List<Reservation> reservations = reservationRepository.findByDateBetween(standard, date);
+        System.out.println(date);
+        System.out.println(time);
+        long diffDays = ChronoUnit.DAYS.between(standard, date);
+
+        System.out.println(diffDays);
+        int n = (int) (diffDays / 7);
+        System.out.println(n);
+        int count = 0;
+
+        for (int i = 1; i <= n; i++) {
+            LocalDate oneWeekAgo = date.minusWeeks(i);
+            System.out.println(i + " 주 전 날짜: " + oneWeekAgo);
+
+            for (Reservation reservation : reservations) {
+                if (reservation.getDate().isEqual(oneWeekAgo)
+                        && reservation.getTime().equals(time)&&
+                        reservation.getTableN()==(tableN)) {
+                    count++;
+                    System.out.println(count);
+                    System.out.println("같은 날짜에 있는 데이터: " + reservation);
+                }
+            }
+        }
+        System.out.println(count);
+        System.out.println(n);
+        double predictNum = (double) count / n;
+        double percentage = ((double) count / n) * 100.0;
+        int result = (int) percentage;
+        System.out.println(predictNum);
+        System.out.println(result);
+        return result;
+
     }
 }

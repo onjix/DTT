@@ -19,6 +19,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./ShowInterior.css";
 import App from "../App";
+import Predict from "../Service/Predict";
 
 const State1 = () => {
     const [reservations1, setReservations1] = useState([]);
@@ -77,17 +78,17 @@ const State1 = () => {
                     "Content-Type": "application/json",
                 },
             })
-                .then(response3 => {
+                .then((response3) => {
                     if (response3.ok) {
                         // 성공적으로 업데이트된 경우
-                        console.log('테이블 상태가 업데이트되었습니다.');
+                        console.log("테이블 상태가 업데이트되었습니다.");
                     } else {
                         // 업데이트 실패한 경우
-                        console.error('테이블 상태 업데이트에 실패했습니다.');
+                        console.error("테이블 상태 업데이트에 실패했습니다.");
                     }
                 })
-                .catch(error => {
-                    console.error('API 호출 중 오류가 발생했습니다.', error);
+                .catch((error) => {
+                    console.error("API 호출 중 오류가 발생했습니다.", error);
                 });
         } catch (error) {
             console.log("에러:", error);
@@ -288,45 +289,57 @@ const ShowInterior1 = () => {
     return (
         <>
             <App />
-            <div className="SContent-container">
-                <div className="SInner-container">
-                    <Canvas
-                        style={{
-                            width: "650px",
-                            height: "650px",
-                            position: "center",
-                            margin: "0 auto",
-                        }}
-                        camera={{ position: [48, 48, 48] }}
-                        shadows>
-                        <primitive
-                            object={store.scene}
-                            scale={2}
-                            position={[0, 0, 0]}
-                            children-0-castShadow
-                        />
-                        <primitive
-                            object={table1.scene}
-                            scale={4.4}
-                            position={[-8, 2, 3]}
-                            children-0-castShadow
-                            onClick={reservationPage1}
-                        />
-                        {State1()}
+            <div className="Total-container">
+                <div className="TotalInner-container">
+                    <div className="SContent-container">
+                        <div className="SInner-container">
+                            <Canvas
+                                style={{
+                                    width: "650px",
+                                    height: "650px",
+                                    position: "center",
+                                    margin: "0 auto",
+                                }}
+                                camera={{ position: [48, 48, 48] }}
+                                shadows>
+                                <primitive
+                                    object={store.scene}
+                                    scale={2}
+                                    position={[0, 0, 0]}
+                                    children-0-castShadow
+                                />
+                                <primitive
+                                    object={table1.scene}
+                                    scale={4.4}
+                                    position={[-8, 2, 3]}
+                                    children-0-castShadow
+                                    onClick={reservationPage1}
+                                />
+                                {State1()}
 
-                        <primitive
-                            object={table2.scene}
-                            scale={4.4}
-                            position={[10, 2, 3]}
-                            children-0-castShadow
-                            onClick={reservationPage2}
-                        />
-                        {State2()}
-                        <directionalLight intensity={1} />
-                        <ambientLight intensity={1.2} />
-                        <spotLight intensity={0.1} angle={0.1} penumbra={1} castShadow />
-                        <OrbitControls target={[0, 1, 0]} />
-                    </Canvas>
+                                <primitive
+                                    object={table2.scene}
+                                    scale={4.4}
+                                    position={[10, 2, 3]}
+                                    children-0-castShadow
+                                    onClick={reservationPage2}
+                                />
+                                {State2()}
+                                <directionalLight intensity={1} />
+                                <ambientLight intensity={1.2} />
+                                <spotLight
+                                    intensity={0.1}
+                                    angle={0.1}
+                                    penumbra={1}
+                                    castShadow
+                                />
+                                <OrbitControls target={[0, 1, 0]} />
+                            </Canvas>
+                        </div>
+                    </div>
+                    <div className="PredictInner-container">
+                        <Predict />
+                    </div>
                 </div>
             </div>
         </>

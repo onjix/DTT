@@ -1,4 +1,4 @@
-* {
+/* * {
   text-decoration: none;
   box-sizing: inherit;
   margin: 0;
@@ -22,4 +22,54 @@
   background-color: #ffffff;
   border-bottom: 1px solid #cccccc;
   border-radius: 15px;
+}
+.PredictLeft-container {
+
+}
+.PredictInner-container{
+}  */
+
+* {
+  text-decoration: none;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  font-family: 'GmarketSansMedium';
+}
+.Total-container{
+  width: 1200px;
+  height: 600px;
+  display: flex;
+  margin: auto;
+}
+.TotalInner-container{
+  margin: auto;
+  display: flex;
+}
+.SContent-container {
+  background-color: #4a148c;
+  background: linear-gradient(#9475BC, #4a148c);
+  padding: 5px;
+  box-shadow: 0 0 5px #000000;
+  margin-left: 200px;
+}
+
+.SInner-container {
+  width: 750px;
+  height: 550px;
+  margin: auto;
+  background-color: #ffffff;
+  border-bottom: 1px solid #cccccc;
+  border-radius: 15px;
+}
+
+.PredictInner-container {
+  width: 250px;
+  height: 120px;
+  margin-left: 20px;
+  background: linear-gradient(   #9475BC, #4a148c);
+  text-align: center;
+  color: black;
+
+  /* PredictInner-container에 대한 스타일 정의 */
 }

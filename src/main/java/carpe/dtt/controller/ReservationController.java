@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,5 +69,12 @@ public class ReservationController {
     public void updateTableStatus() {
         reservationService.updateTableStatus(); // 예약 정보 업데이트 메서드 호출
 
+    }
+    @GetMapping("/reservation/data")
+    public int getBetweenData( @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                               @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
+                               int tableN) {
+        LocalDate standard = LocalDate.parse("2023-05-24");
+        return reservationService.getBetweenData(standard, date, time,tableN);
     }
 }

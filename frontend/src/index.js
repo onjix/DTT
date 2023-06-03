@@ -10,6 +10,9 @@ import Mypage from "./Service/Mypage";
 import Login from "./Signup_Login/Login";
 import Signup from "./Signup_Login/Signup";
 import SimpleInfo from "./Service/SimpleInfo";
+import Predict from "./Service/Predict";
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -25,6 +28,7 @@ root.render(
       <Route path="Login" element={<Login />}></Route>
       <Route path="Signup" element={<Signup />}></Route>
       <Route path="SimpleInfo" element={<SimpleInfo />}></Route>
+      <Route path="Predict" element={<Predict />}></Route>
     </Routes>
   </BrowserRouter>
 );
