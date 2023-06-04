@@ -1,4 +1,4 @@
-import mainImage from "../src/images/Building/viewStore.glb";
+import mainImage from "../src/images/Building/Room1.glb";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -26,11 +26,11 @@ const MainImage = () => {
             position: "center",
             margin: "0 auto",
           }}
-          camera={{ position: [40, 40, 40] }}
+          camera={{ position: [65, 80, 70] }}
           shadows>
           <primitive
             object={mainMart.scene}
-            scale={2}
+            scale={10}
             position={[0, 0, 0]}
             children-0-castShadow
           />
