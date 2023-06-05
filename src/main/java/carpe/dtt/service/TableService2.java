@@ -1,26 +1,23 @@
 package carpe.dtt.service;
 
-import carpe.dtt.entity.Reservation;
 import carpe.dtt.entity.Table;
+import carpe.dtt.entity.Table2;
 import carpe.dtt.event.EntityChangeEvent;
-import carpe.dtt.repository.TableRepository;
+import carpe.dtt.repository.TableRepository2;
 import jakarta.transaction.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TableService {
-    private final TableRepository tableRepository;
+public class TableService2 {
+    private final TableRepository2 tableRepository2;
     private ApplicationEventPublisher eventPublisher;
 
 
-    public TableService(TableRepository tableRepository , ApplicationEventPublisher eventPublisher) {
-        this.tableRepository = tableRepository;
+    public TableService2(TableRepository2 tableRepository2, ApplicationEventPublisher eventPublisher) {
+        this.tableRepository2 = tableRepository2;
         this.eventPublisher = eventPublisher;
     }
 
@@ -29,40 +26,40 @@ public class TableService {
 
     @Transactional
     public Integer getStatusById(Long id) {
-        Optional<Table> optionalTable = tableRepository.findById(id);
+        Optional<Table2> optionalTable = tableRepository2.findById(id);
         if (optionalTable.isPresent()) {
-            Table table = optionalTable.get();
+            Table2 table2 = optionalTable.get();
             // 엔티티 변경 이벤트 발행
             eventPublisher.publishEvent(new EntityChangeEvent(this, id));
-            System.out.println(table.getStatus());
-            return table.getStatus();
+            System.out.println(table2.getStatus());
+            return table2.getStatus();
         } else {
             throw new RuntimeException("Table not found with id " + id);
         }
     }
     @Transactional
     public void changeDataUseY(Long id) {
-        Table table= tableRepository.findById(id)
+        Table2 table2= tableRepository2.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
         // 데이터 수정 작업 수행
-        table.setStatus(1);
-        tableRepository.save(table);
+        table2.setStatus(1);
+        tableRepository2.save(table2);
     }
     @Transactional
     public void changeDataUseN(Long id) {
-        Table table= tableRepository.findById(id)
+        Table2 table2= tableRepository2.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
         // 데이터 수정 작업 수행
-        table.setStatus(0);
-        tableRepository.save(table);
+        table2.setStatus(0);
+        tableRepository2.save(table2);
     }
 
     public void updateTableStatus(Long tableId) {
-        Optional<Table> optionalTable = tableRepository.findById(tableId);
+        Optional<Table2> optionalTable = tableRepository2.findById(tableId);
         if (optionalTable.isPresent()) {
-            Table table = optionalTable.get();
-            table.setStatus(3);
-            tableRepository.save(table);
+            Table2 table2 = optionalTable.get();
+            table2.setStatus(3);
+            tableRepository2.save(table2);
         } else {
             // 테이블이 존재하지 않는 경우에 대한 예외 처리
         }
