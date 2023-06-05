@@ -78,8 +78,8 @@ const S1Reservation2 = () => {
   };
   function generateHourOptions() {
     const options = [];
-    const startTime = 9; // 시작 시간 (9시)
-    const endTime = 18; // 종료 시간 (18시)
+    const startTime = 11; // 시작 시간 (9시)
+    const endTime = 20; // 종료 시간 (18시)
 
     for (let hour = startTime; hour <= endTime; hour++) {
       for (let minute = 0; minute <= 59; minute += 60) {

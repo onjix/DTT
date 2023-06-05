@@ -13,6 +13,7 @@ import Login from "./Signup_Login/Login";
 import Signup from "./Signup_Login/Signup";
 import SimpleInfo from "./Service/SimpleInfo";
 import Predict from "./Service/Predict";
+import FutureStore from "./Service/FutureStore";
 
 
 
@@ -33,6 +34,7 @@ root.render(
       <Route path="Signup" element={<Signup />}></Route>
       <Route path="SimpleInfo" element={<SimpleInfo />}></Route>
       <Route path="Predict" element={<Predict />}></Route>
+      <Route path="FutureStore" element={<FutureStore />}></Route>
     </Routes>
   </BrowserRouter>
 );

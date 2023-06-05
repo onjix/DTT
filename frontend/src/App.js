@@ -25,6 +25,7 @@ const App = () => {
   const isShowS2Reservation1 = location.pathname === "/S2Reservation1";
   const isShowS2Reservation2 = location.pathname === "/S2Reservation2";
   const isSimpleInfo = location.pathname === "/SimpleInfo";
+  const isFutureStore = location.pathname === "/FutureStore";
 
   const logoutClickHandler = () => {
     console.log("logout");
@@ -189,7 +190,8 @@ const App = () => {
             !isShowS1Reservation2&&
             !isShowS2Reservation1&&
             !isShowS2Reservation2&&
-          !isSimpleInfo && <MainImage />}
+          !isSimpleInfo &&
+           !isFutureStore && <MainImage />}
         {/* <div className="Icon-box">
           <div className="Icon-container">
             <img className="Icon1" src={mart} onClick={moveShowInterior1} />

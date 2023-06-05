@@ -140,6 +140,11 @@ public class ReservationService {
         System.out.println(predictNum);
         System.out.println(result);
         return result;
-
+    }
+    /**
+     * 현재 날짜와 시간을 비교하고 DB에 저장된 값을 비교하여 맞는 예약 정보만 가져오는 로직
+     */
+    public List<Reservation> checkFutureReservation1(LocalDate date, LocalTime time) {
+      return reservationRepository.findByDateAndTime(date, time);
     }
 }

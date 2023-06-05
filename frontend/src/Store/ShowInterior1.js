@@ -13,13 +13,15 @@ import tableState2_1 from "../images/Signs/available2.glb";
 import tableState2_2 from "../images/Signs/inuse2.glb";
 import tableState2_3 from "../images/Signs/occupied2.glb";
 import tableState2_4 from "../images/Signs/reserved2.glb";
-import sc1 from "../images/Human/BASEmodel1.glb";
-import sc2 from "../images/Human/BASEmodel2.glb";
+import human1 from "../images/Human/Human1-1.glb";
+import human2 from "../images/Human/Human1-2.glb";
+import human3 from "../images/Human/Human1-3.glb";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./ShowInterior.css";
 import App from "../App";
 import Predict from "../Service/Predict";
+import FutureStore from "../Service/FutureStore";
 
 const State1 = () => {
   const [reservations1, setReservations1] = useState([]);
@@ -27,7 +29,8 @@ const State1 = () => {
   const tableInuse1 = useLoader(GLTFLoader, tableState1_2);
   const tableOccupied1 = useLoader(GLTFLoader, tableState1_3);
   const tableReserved1 = useLoader(GLTFLoader, tableState1_4);
-  const sc11 = useLoader(GLTFLoader, sc1);
+  const Human1 = useLoader(GLTFLoader, human1);
+  const Human3 = useLoader(GLTFLoader, human3);
   const [state1, setState1] = useState("");
 
   function useInterval(callback, delay) {
@@ -78,18 +81,18 @@ const State1 = () => {
           "Content-Type": "application/json",
         },
       })
-        .then((response3) => {
-          if (response3.ok) {
-            // 성공적으로 업데이트된 경우
-            console.log("테이블 상태가 업데이트되었습니다.");
-          } else {
-            // 업데이트 실패한 경우
-            console.error("테이블 상태 업데이트에 실패했습니다.");
-          }
-        })
-        .catch((error) => {
-          console.error("API 호출 중 오류가 발생했습니다.", error);
-        });
+          .then((response3) => {
+            if (response3.ok) {
+              // 성공적으로 업데이트된 경우
+              console.log("테이블 상태가 업데이트되었습니다.");
+            } else {
+              // 업데이트 실패한 경우
+              console.error("테이블 상태 업데이트에 실패했습니다.");
+            }
+          })
+          .catch((error) => {
+            console.error("API 호출 중 오류가 발생했습니다.", error);
+          });
     } catch (error) {
       console.log("에러:", error);
     }
@@ -97,60 +100,66 @@ const State1 = () => {
   useInterval(fetchData1, 5000);
   if (state1 === 3) {
     return (
-      <>
-        <primitive
-          object={tableReserved1.scene}
-          scale={4.5}
-          position={[-8, 8.5, 3]}
-          children-0-castShadow
-        />
-      </>
+        <>
+          <primitive
+              object={tableReserved1.scene}
+              scale={4.5}
+              position={[-8, 3, -20]}
+              children-0-castShadow
+          />
+        </>
     );
   } else if (state1 === 2) {
     return (
-      <>
-        <primitive
-          object={tableOccupied1.scene}
-          scale={4.5}
-          position={[-8, -6, -20]}
-          children-0-castShadow
-        />
-        <primitive
-          object={sc11.scene}
-          scale={3}
-          position={[-8, 3, -20]}
-          children-0-castShadow
-        />
-      </>
+        <>
+          <primitive
+              object={tableOccupied1.scene}
+              scale={4.5}
+              position={[-8, 3, -20]}
+              children-0-castShadow
+          />
+          <primitive
+              object={Human1.scene}
+              scale={5}
+              position={[-8, -13, -20]}
+              children-0-castShadow
+          />
+        </>
     );
   } else if (state1 === 1) {
     return (
-      <>
-        <primitive
-          object={tableInuse1.scene}
-          scale={5.5}
-          position={[-8, 3, -20]}
-          children-0-castShadow
-        />
+        <>
+          <primitive
+              object={tableInuse1.scene}
+              scale={5.5}
+              position={[-8, 3, -20]}
+              children-0-castShadow
+          />
 
-        <primitive
-          object={sc11.scene}
-          scale={3}
-          position={[-8, 3, -20]}
-          children-0-castShadow
-        />
-      </>
+          <primitive
+              object={Human1.scene}
+              scale={5}
+              position={[-19, -13, -15]}
+              children-0-castShadow
+          />
+          <primitive
+              object={Human3.scene}
+              scale={5}
+              position={[-19, -13, -25]}
+              children-0-castShadow
+          />
+        </>
     );
   } else {
     return (
-      <>
-        <primitive
-          object={tableAvail1.scene}
-          scale={4.5}
-          position={[-8, 3, -20]}
-          children-0-castShadow
-        />
-      </>
+        <>
+          <primitive
+              object={tableAvail1.scene}
+              scale={4.5}
+              position={[-8, 3, -20]}
+              children-0-castShadow
+          />
+        </>
     );
   }
 };
@@ -161,7 +170,8 @@ const State2 = () => {
   const tableInuse2 = useLoader(GLTFLoader, tableState2_2);
   const tableOccupied2 = useLoader(GLTFLoader, tableState2_3);
   const tableReserved2 = useLoader(GLTFLoader, tableState2_4);
-  const sc22 = useLoader(GLTFLoader, sc2);
+  const Human2 = useLoader(GLTFLoader, human2);
+  // const Human3 = useLoader(GLTFLoader, human3);
   const [state2, setState2] = useState("");
 
   function useInterval(callback, delay) {
@@ -215,61 +225,63 @@ const State2 = () => {
 
   if (state2 === 3) {
     return (
-      <>
-        <primitive
-          object={tableReserved2.scene}
-          scale={4.5}
-          position={[30, 3, -20]}
-          children-0-castShadow
-        />
-      </>
+        <>
+          <primitive
+              object={tableReserved2.scene}
+              scale={4.5}
+              position={[30, 3, -20]}
+              children-0-castShadow
+          />
+        </>
     );
   } else if (state2 === 2) {
     return (
-      <>
-        <primitive
-          object={tableOccupied2.scene}
-          scale={4.5}
-          position={[30, 3, -20]}
-          children-0-castShadow
-        />
+        <>
+          <primitive
+              object={tableOccupied2.scene}
 
-        <primitive
-          object={sc22.scene}
-          scale={2}
-          position={[30, 3, -20]}
-          children-0-castShadow
-        />
-      </>
+
+              scale={4.5}
+              position={[30, 3, -20]}
+              children-0-castShadow
+          />
+
+          <primitive
+              object={Human2.scene}
+              scale={5}
+              position={[19, -13, -25]}
+              children-0-castShadow
+          />
+        </>
     );
   } else if (state2 === 1) {
     return (
-      <>
-        <primitive
-          object={tableInuse2.scene}
-          scale={5.5}
-          position={[30, 3, -20]}
-          children-0-castShadow
-        />
+        <>
+          <primitive
+              object={tableInuse2.scene}
+              scale={5.5}
+              position={[30, 3, -20]}
+              children-0-castShadow
+          />
 
-        <primitive
-          object={sc22.scene}
-          scale={2}
-          position={[30, 3, -20]}
-          children-0-castShadow
-        />
-      </>
+          <primitive
+              object={Human2.scene}
+              scale={5}
+              position={[19, -13, -25]}
+              children-0-castShadow
+          />
+        </>
     );
   } else {
     return (
-      <>
-        <primitive
-          object={tableAvail2.scene}
-          scale={4.5}
-          position={[30, 3, -20]}
-          children-0-castShadow
-        />
-      </>
+        <>
+          <primitive
+              object={tableAvail2.scene}
+              scale={4.5}
+              position={[30, 3, -20]}
+              children-0-castShadow
+          />
+        </>
     );
   }
 };
@@ -285,65 +297,73 @@ const ShowInterior1 = () => {
   const reservationPage2 = () => {
     movePage("/S1Reservation2");
   };
+  const moveFuture = () => {
+    movePage("/FutureStore");
+  };
 
   return (
-    <>
+      <>
       <App />
       <div className="Total-container">
         <div className="TotalInner-container">
           <div className="SContent-container">
             <div className="SInner-container">
               <Canvas
-                style={{
-                  width: "650px",
-                  height: "650px",
-                  position: "center",
-                  margin: "0 auto",
-                }}
-                camera={{ position: [80, 80, 80] }}
-                shadows>
+                  style={{
+                    width: "650px",
+                    height: "650px",
+                    position: "center",
+                    margin: "0 auto",
+                  }}
+                  camera={{ position: [80, 80, 80] }}
+                  shadows>
                 <primitive
-                  object={store.scene}
-                  scale={2}
-                  position={[0, 0, 0]}
-                  children-0-castShadow
+                    object={store.scene}
+                    scale={2}
+                    position={[0, 0, 0]}
+                    children-0-castShadow
                 />
                 <primitive
-                  object={table1.scene}
-                  scale={3}
-                  position={[-8, -6, -20]}
-                  children-0-castShadow
-                  onClick={reservationPage1}
+                    object={table1.scene}
+                    scale={3}
+                    position={[-8, -6, -20]}
+                    children-0-castShadow
+                    onClick={reservationPage1}
                 />
                 {State1()}
 
                 <primitive
-                  object={table2.scene}
-                  scale={3}
-                  position={[30, -6, -20]}
-                  children-0-castShadow
-                  onClick={reservationPage2}
+                    object={table2.scene}
+                    scale={3}
+                    position={[30, -6, -20]}
+                    children-0-castShadow
+                    onClick={reservationPage2}
                 />
                 {State2()}
                 <directionalLight intensity={1} />
                 <ambientLight intensity={1.2} />
                 <spotLight
-                  intensity={0.1}
-                  angle={0.1}
-                  penumbra={1}
-                  castShadow
+                    intensity={0.1}
+                    angle={0.1}
+                    penumbra={1}
+                    castShadow
                 />
                 <OrbitControls target={[0, 1, 0]} />
               </Canvas>
+
             </div>
+
           </div>
           <div className="PredictInner-container">
-            <Predict />
-          </div>
+          <Predict />
         </div>
+          <div onClick={moveFuture}>
+            예약 확인하기
+          </div>
       </div>
-    </>
-  );
+      </div>
+</>
+);
 };
 
 export default ShowInterior1;

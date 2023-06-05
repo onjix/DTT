@@ -73,6 +73,13 @@ public class ReservationController {
         LocalDate standard = LocalDate.parse("2023-05-24");
         return reservationService.getBetweenData1(standard, date, time,tableN);
     }
+    @GetMapping("/reservation/future")
+    public List<Reservation> getFutureData(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                           @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time) {
+        System.out.println(reservationService.checkFutureReservation1(date,time));
+        return reservationService.checkFutureReservation1(date, time);
+    }
+
     //INSERT INTO reservation (date, name, num_of_guests, tableN, time)
     //VALUES ('2023-05-25', '윤형준', 2, 2, '15:00:00');
 

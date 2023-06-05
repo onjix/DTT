@@ -3,6 +3,7 @@ import "./Reservation.css";
 import { useCookies } from "react-cookie";
 import App from "../App";
 import S1ReservationList1 from "./S1ReservationList1";
+import FutureStore from "./FutureStore";
 
 const S1Reservation1 = () => {
   const dateNow = new Date();
