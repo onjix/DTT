@@ -21,8 +21,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="Sensor Connect"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="327dp"
+        tools:layout_editor_absoluteY="350dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_table1" />
+    <Button
+        android:id="@+id/btn_getreserve"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginTop="140dp"
+        android:layout_marginStart="750dp"
+        android:text="갱신"
         android:textColor="@color/black"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="327dp"
@@ -78,7 +93,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_table2" />
 
-    <TextView
+    <EditText
         android:id="@+id/reserve_info_main"
         android:layout_width="match_parent"
         android:layout_height="250dp"

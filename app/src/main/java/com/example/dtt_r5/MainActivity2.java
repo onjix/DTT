@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -36,7 +37,8 @@ public class MainActivity2 extends AppCompatActivity {
 
     private static final int REQUEST_CODE_ORDER1 = 1;
     private static final int REQUEST_CODE_ORDER2 = 2;
-    private Button table1, table2, btn_sc;
+    private Button table1, table2, btn_sc, btn_rd;
+    private EditText reserve_data;
 
     private static final int REQUEST_ENABLE_BT = 10;
     private BluetoothAdapter bluetoothAdapter;
@@ -55,6 +57,12 @@ public class MainActivity2 extends AppCompatActivity {
     private static final String SERVER_URL2 = "http://192.168.55.182:8080/table/2/changeN/1";
     private static final String SERVER_URL3 = "http://192.168.55.182:8080/table/2/changeS/1";
 
+    private final reservation_data reservation_data;
+
+    public MainActivity2(com.example.dtt_r5.reservation_data reservation_data) {
+        this.reservation_data = reservation_data;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,16 @@ public class MainActivity2 extends AppCompatActivity {
         table1 = findViewById(R.id.btn_table1);
         table2 = findViewById(R.id.btn_table2);
         btn_sc = findViewById(R.id.btn_bt);
+        btn_rd = findViewById(R.id.btn_getreserve);
+
+        reserve_data = findViewById(R.id.reserve_info_main);
+
+        btn_rd.setOnClickListener(new View.OnClickListener() { //갱신 클릭시
+            @Override
+            public void onClick(View v) {
+                reservation_data.receiveReservationInfoForStore(1);
+            }
+        });
 
         table1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -444,5 +462,8 @@ public class MainActivity2 extends AppCompatActivity {
             // 서버로부터의 응답 처리
             Toast.makeText(MainActivity2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
         }
+    }
+    public void setreservedata(String responseData){
+        reserve_data.setText(responseData);
     }
 }

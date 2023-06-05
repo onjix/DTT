@@ -22,6 +22,7 @@ public class Order2 extends AppCompatActivity {
     private Button confirm, pay;
     private EditText TotalPrice;
     private EditText pd1, pd2, pd3, pd4, pd5, pd6, pd7, pd8, pd9;
+    private EditText reserve_data;
 
     private int total = 0, store_num=0;
     private int pd1_price=0, pd2_price=0,  pd3_price=0, pd4_price=0, pd5_price=0, pd6_price=0, pd7_price=0, pd8_price=0, pd9_price=0;
@@ -453,5 +454,8 @@ public class Order2 extends AppCompatActivity {
             // 서버로부터의 응답 처리
             Toast.makeText(Order2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
         }
+    }
+    public void setreservedata(String responseData){
+        reserve_data.setText(responseData);
     }
 }
