@@ -11,3 +11,9 @@
 .Predict-title{
     margin-top: 8px;
 }
+.Predict-result {
+    margin-top: 40px;
+    font-size: 18px;
+    color: #4a148c;
+    border-radius: 10px;
+}

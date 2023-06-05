@@ -28,50 +28,50 @@ public class ReservationController {
      *매장 1 예약 정보에 관한 코드
      */
     @PostMapping("/api/reservations")
-    public void saveReservation(@RequestBody Reservation reservation) {
+    public void saveReservation1(@RequestBody Reservation reservation) {
         // 예약 정보를 서비스로 전달하여 저장
         System.out.println(reservation.getTime());
-        reservationService.saveReservation(reservation);
+        reservationService.saveReservation1(reservation);
     }
     @GetMapping("/api/reservations/check")
-    public List<Reservation> checkReservationAvailability(
+    public List<Reservation> checkReservationAvailability1(
             @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
             @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
             @RequestParam int tableN) {
 
-        return reservationService.checkExistingReservations(date, time, tableN);
+        return reservationService.checkExistingReservations1(date, time, tableN);
     }
 
     @GetMapping("/api/reservations")
-    public Iterable<Reservation> getAllReservations() {
+    public Iterable<Reservation> getAllReservations1() {
         // 모든 예약 정보 조회
-        return reservationService.getAllReservations();
+        return reservationService.getAllReservations1();
     }
     @GetMapping("/reservations/date")
-    public List<Reservation> getReservationsByDateAndTableNumber(
+    public List<Reservation> getReservationsByDateAndTableNumber1(
             @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
             @RequestParam("tableN") int tableN) {
-        return reservationService.getReservationsByDateAndTableN(date, tableN);
+        return reservationService.getReservationsByDateAndTableN1(date, tableN);
     }
     @GetMapping("reservations/time")
-    public List<Reservation> getReservationsAfterDateTime() {
+    public List<Reservation> getReservationsAfterDateTime1() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
-        List<Reservation> reservations = reservationService.getReservationsAfterDateTime(currentDate, currentTime);
+        List<Reservation> reservations = reservationService.getReservationsAfterDateTime1(currentDate, currentTime);
         return reservations;
     }
 
     @PutMapping("/reservations/update")
-    public void updateTableStatus() {
-        reservationService.updateTableStatus(); // 예약 정보 업데이트 메서드 호출
+    public void updateTableStatus1() {
+        reservationService.updateTableStatus1(); // 예약 정보 업데이트 메서드 호출
 
     }
     @GetMapping("/reservation/data")
-    public int getBetweenData( @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+    public int getBetweenData1( @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time,
                                int tableN) {
         LocalDate standard = LocalDate.parse("2023-05-24");
-        return reservationService.getBetweenData(standard, date, time,tableN);
+        return reservationService.getBetweenData1(standard, date, time,tableN);
     }
     //INSERT INTO reservation (date, name, num_of_guests, tableN, time)
     //VALUES ('2023-05-25', '윤형준', 2, 2, '15:00:00');

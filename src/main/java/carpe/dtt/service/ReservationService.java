@@ -27,17 +27,17 @@ public class ReservationService {
     /**
      * react에서 form을 이용해 예약하기를 눌러 예약 정보를 db에 저장하는 로직
      */
-    public void saveReservation(Reservation reservation) {
+    public void saveReservation1(Reservation reservation) {
         // 예약 정보를 저장
         reservationRepository.save(reservation);
     }
 
-    public Iterable<Reservation> getAllReservations() {
+    public Iterable<Reservation> getAllReservations1() {
         // 모든 예약 정보 조회
         return reservationRepository.findAll();
     }
 
-    public List<Reservation> getReservationsByDate(LocalDate date) {
+    public List<Reservation> getReservationsByDate1(LocalDate date) {
         System.out.println(date);
         List<Reservation> reservations = reservationRepository.findByDate(date);
         for (Reservation reservation : reservations) {
@@ -54,11 +54,10 @@ public class ReservationService {
     /**
      * 현재 날짜와 시간 이후의 예약 정보를 가져오는 로직
      */
-    public List<Reservation> getReservationsAfterDateTime(LocalDate currentDate, LocalTime currentTime) {
+    public List<Reservation> getReservationsAfterDateTime1(LocalDate currentDate, LocalTime currentTime) {
         List<Reservation> reservationsAfterDate = reservationRepository.findByDateAfter(currentDate);
         List<Reservation> reservationsAfterTime = reservationRepository.findByTimeAfter(currentTime);
         reservationsAfterDate.addAll(reservationsAfterTime);
-
         return reservationsAfterDate;
     }
 
@@ -66,14 +65,14 @@ public class ReservationService {
      * 현재 날짜와 table 넘버를 비교하여 table 넘버가 맞는 예약 정보만 가져오는 로직
      */
 
-    public List<Reservation> getReservationsByDateAndTableN(LocalDate date, int tableN) {
+    public List<Reservation> getReservationsByDateAndTableN1(LocalDate date, int tableN) {
         return reservationRepository.findByDateAndTableN(date, tableN);
     }
 
     /**
      * 현재 날짜와 시간을 비교하고 예약된 데이터의 30분 전에 테이블의 상태를 바꾸는 로직
      */
-    public void updateTableStatus() {
+    public void updateTableStatus1() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 
@@ -94,7 +93,7 @@ public class ReservationService {
     /**
      * 현재 날짜와 시간을 비교하고 DB에 저장된 tableN까지 비교하여 맞는 예약 정보만 가져오는 로직
      */
-    public List<Reservation> checkExistingReservations(LocalDate date, LocalTime time, int tableN) {
+    public List<Reservation> checkExistingReservations1(LocalDate date, LocalTime time, int tableN) {
         List<Reservation> reservations = reservationRepository.findByDateAndTime(date, time);
         List<Reservation> filteredReservations = new ArrayList<>();
         for (Reservation reservation : reservations) {
@@ -108,7 +107,7 @@ public class ReservationService {
     /**
      * 날짜와 시간을 입력하고 입력한 날짜의 예약 률을 예측하는 로직
      */
-    public int getBetweenData(LocalDate standard, LocalDate date,LocalTime time,int tableN) {
+    public int getBetweenData1(LocalDate standard, LocalDate date,LocalTime time,int tableN) {
         List<Reservation> reservations = reservationRepository.findByDateBetween(standard, date);
         System.out.println(date);
         System.out.println(time);

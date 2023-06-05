@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./Reservation.css";
 import { useCookies } from "react-cookie";
 import App from "../App";
-import ReservationList2 from "./ReservationList2";
+import S2ReservationList2 from "./S2ReservationList2";
 
-const Reservation2 = () => {
+const S2Reservation2 = () => {
   const dateNow = new Date();
   const todayDate = dateNow.toISOString().slice(0, 10);
   const [name, setName] = useState("");
@@ -32,7 +32,7 @@ const Reservation2 = () => {
 
     try {
       // 이미 예약된 데이터가 있는지 확인하는 요청
-      const response = await fetch(`/api/reservations/check?date=${date}&time=${time}&tableN=2`, {
+      const response = await fetch(`/2/api/reservations/check?date=${date}&time=${time}&tableN=2`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Reservation2 = () => {
           moveRe();
         } else {
           // 예약 정보 저장 요청
-          const saveResponse = await fetch("/api/reservations", {
+          const saveResponse = await fetch("/2/api/reservations", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -78,8 +78,8 @@ const Reservation2 = () => {
   };
   function generateHourOptions() {
     const options = [];
-    const startTime = 9; // 시작 시간 (9시)
-    const endTime = 18; // 종료 시간 (18시)
+    const startTime = 11; // 시작 시간 (9시)
+    const endTime = 20; // 종료 시간 (18시)
 
     for (let hour = startTime; hour <= endTime; hour++) {
       for (let minute = 0; minute <= 59; minute += 60) {
@@ -87,9 +87,9 @@ const Reservation2 = () => {
         const formattedMinute = minute.toString().padStart(2, "0"); // 분을 2자리 숫자로 포맷팅
         const time = `${formattedHour}:${formattedMinute}`;
         options.push(
-            <option key={time} value={time}>
-              {time}
-            </option>
+          <option key={time} value={time}>
+            {time}
+          </option>
         );
       }
     }
@@ -97,59 +97,59 @@ const Reservation2 = () => {
     return options;
   }
   return (
-      <>
-        <App />
-        <div className="RContent-container">
-          <div className="RInner-container">
-            <div className="reservation-container">
-              <div className="reservation-form-container">
-                <h2 className="reservation-form-heading">Table 2 예약하기</h2>
-                <form className="reservation-form" onSubmit={handleFormSubmit}>
-                  <input
-                      className="reservation-input"
-                      type="text"
-                      placeholder={users}
-                      value={users}
-                      onChange={handleInputChange}
-                      disabled
-                  />
-                  <input
-                      className="reservation-input"
-                      type="date"
-                      value={date}
-                      min={todayDate}
-                      onChange={(e) =>
-                          setDate(
-                              e.target.value >= todayDate ? e.target.value : todayDate
-                          )
-                      }
-                  />
-                  <select
-                      className="reservation-input"
-                      type="time"
-                      value={time}
-                      onChange={(e) => setTime(e.target.value)}>
-                    <option value="">시간 선택</option>
-                    {generateHourOptions()}
-                  </select>
+    <>
+      <App />
+      <div className="RContent-container">
+        <div className="RInner-container">
+          <div className="reservation-container">
+            <div className="reservation-form-container">
+              <h2 className="reservation-form-heading">매장 2 Table 2 예약하기</h2>
+              <form className="reservation-form" onSubmit={handleFormSubmit}>
+                <input
+                  className="reservation-input"
+                  type="text"
+                  placeholder={users}
+                  value={users}
+                  onChange={handleInputChange}
+                  disabled
+                />
+                <input
+                  className="reservation-input"
+                  type="date"
+                  value={date}
+                  min={todayDate}
+                  onChange={(e) =>
+                    setDate(
+                      e.target.value >= todayDate ? e.target.value : todayDate
+                    )
+                  }
+                />
+                <select
+                  className="reservation-input"
+                  type="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}>
+                  <option value="">시간 선택</option>
+                  {generateHourOptions()}
+                </select>
 
-                  <input
-                      className="reservation-input"
-                      type="number"
-                      placeholder="예약 인원"
-                      value={numOfGuests}
-                      onChange={(e) => setNumOfGuests(e.target.value)}
-                  />
-                  <button className="reservation-submit" type="submit">
-                    예약 하기
-                  </button>
-                </form>
-              </div>
-              <ReservationList2 />
+                <input
+                  className="reservation-input"
+                  type="number"
+                  placeholder="예약 인원"
+                  value={numOfGuests}
+                  onChange={(e) => setNumOfGuests(e.target.value)}
+                />
+                <button className="reservation-submit" type="submit">
+                  예약 하기
+                </button>
+              </form>
             </div>
+            <S2ReservationList2 />
           </div>
         </div>
-      </>
+      </div>
+    </>
   );
 };
-export default Reservation2;
+export default S2Reservation2;

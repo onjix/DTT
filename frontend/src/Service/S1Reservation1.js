@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./Reservation.css";
 import { useCookies } from "react-cookie";
 import App from "../App";
-import ReservationList1 from "./ReservationList1";
+import S1ReservationList1 from "./S1ReservationList1";
 
-const Reservation1 = () => {
+const S1Reservation1 = () => {
   const dateNow = new Date();
   const todayDate = dateNow.toISOString().slice(0, 10);
   const [name, setName] = useState("");
@@ -103,7 +103,7 @@ const Reservation1 = () => {
         <div className="RInner-container">
           <div className="reservation-container">
             <div className="reservation-form-container">
-              <h2 className="reservation-form-heading">Table 1 예약하기</h2>
+              <h2 className="reservation-form-heading">매장 1 Table 1 예약하기</h2>
               <form className="reservation-form" onSubmit={handleFormSubmit}>
                 <input
                   className="reservation-input"
@@ -145,11 +145,11 @@ const Reservation1 = () => {
                 </button>
               </form>
             </div>
-            <ReservationList1 />
+            <S1ReservationList1 />
           </div>
         </div>
       </div>
     </>
   );
 };
-export default Reservation1;
+export default S1Reservation1;

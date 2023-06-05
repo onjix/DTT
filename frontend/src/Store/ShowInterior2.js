@@ -53,11 +53,11 @@ const State1 = () => {
 
   const fetchData1 = async () => {
     try {
-      const response1 = await fetch("/table/1/status");
+      const response1 = await fetch("/table/2/1/status");
       const data1 = await response1.json();
       setState1(data1);
 
-      const response2 = await axios.get("/reservations/time");
+      const response2 = await axios.get("/2/reservations/time");
       if (response2.status === 200) {
         const data2 = response2.data;
         setReservations1(data2);
@@ -72,7 +72,7 @@ const State1 = () => {
       } else {
         console.error("Failed to fetch reservations:", response2.status);
       }
-      const response3 = await fetch("/reservations/update", {
+      const response3 = await fetch("/2/reservations/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -187,11 +187,11 @@ const State2 = () => {
 
   const fetchData2 = async () => {
     try {
-      const response1 = await fetch("/table/2/status");
+      const response1 = await fetch("/table/2/2/status");
       const data1 = await response1.json();
       setState2(data1);
 
-      const response2 = await axios.get("/reservations/time");
+      const response2 = await axios.get("/2/reservations/time");
       if (response2.status === 200) {
         const data2 = response2.data;
         setReservations2(data2);
@@ -280,10 +280,10 @@ const ShowInterior2 = () => {
   const table2 = useLoader(GLTFLoader, object3);
   const movePage = useNavigate();
   const reservationPage1 = () => {
-    movePage("/Reservation1");
+    movePage("/S2Reservation1");
   };
   const reservationPage2 = () => {
-    movePage("/Reservation2");
+    movePage("/S2Reservation2");
   };
 
   return (

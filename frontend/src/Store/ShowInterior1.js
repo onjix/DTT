@@ -53,7 +53,7 @@ const State1 = () => {
 
   const fetchData1 = async () => {
     try {
-      const response1 = await fetch("/table/1/status");
+      const response1 = await fetch("/table/1/1/status");
       const data1 = await response1.json();
       setState1(data1);
 
@@ -187,7 +187,7 @@ const State2 = () => {
 
   const fetchData2 = async () => {
     try {
-      const response1 = await fetch("/table/2/status");
+      const response1 = await fetch("/table/1/2/status");
       const data1 = await response1.json();
       setState2(data1);
 
@@ -280,10 +280,10 @@ const ShowInterior1 = () => {
   const table2 = useLoader(GLTFLoader, object3);
   const movePage = useNavigate();
   const reservationPage1 = () => {
-    movePage("/Reservation1");
+    movePage("/S1Reservation1");
   };
   const reservationPage2 = () => {
-    movePage("/Reservation2");
+    movePage("/S1Reservation2");
   };
 
   return (

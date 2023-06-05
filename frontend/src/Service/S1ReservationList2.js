@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 
-const ReservationList1 = () => {
+const S1ReservationList2 = () => {
   const [reservations, setReservations] = useState([]);
   const [selectedDate, setSelectedDate] = useState("");
   const [cookies] = useCookies(["user"]);
@@ -19,7 +19,7 @@ const ReservationList1 = () => {
       }
 
       const response = await fetch(
-        `/reservations/date?date=${selectedDate}&tableN=1`
+        `/reservations/date?date=${selectedDate}&tableN=2`
       );
       if (response.ok) {
         const data = await response.json();
@@ -99,4 +99,4 @@ const ReservationList1 = () => {
     </div>
   );
 };
-export default ReservationList1;
+export default S1ReservationList2;

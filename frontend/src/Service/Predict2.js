@@ -17,7 +17,7 @@ const Predict = () => {
         try {
             // 이미 예약된 데이터가 있는지 확인하는 요청
             const response = await fetch(
-                `/reservation/data?date=${date}&time=${time}&tableN=${table}`,
+                `/2/reservation/data?date=${date}&time=${time}&tableN=${table}`,
                 {
                     method: "GET",
                     headers: {

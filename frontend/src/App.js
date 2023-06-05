@@ -20,8 +20,10 @@ const App = () => {
   const isShowInterior1 = location.pathname === "/ShowInterior1";
   const isShowInterior2 = location.pathname === "/ShowInterior2";
   const isShowMypage = location.pathname === "/MyPage";
-  const isShowReservation1 = location.pathname === "/Reservation1";
-  const isShowReservation2 = location.pathname === "/Reservation2";
+  const isShowS1Reservation1 = location.pathname === "/S1Reservation1";
+  const isShowS1Reservation2 = location.pathname === "/S1Reservation2";
+  const isShowS2Reservation1 = location.pathname === "/S2Reservation1";
+  const isShowS2Reservation2 = location.pathname === "/S2Reservation2";
   const isSimpleInfo = location.pathname === "/SimpleInfo";
 
   const logoutClickHandler = () => {
@@ -183,8 +185,10 @@ const App = () => {
         {!isShowInterior1 &&
           !isShowInterior2 &&
           !isShowMypage &&
-          !isShowReservation1 &&
-            !isShowReservation2&&
+          !isShowS1Reservation1 &&
+            !isShowS1Reservation2&&
+            !isShowS2Reservation1&&
+            !isShowS2Reservation2&&
           !isSimpleInfo && <MainImage />}
         {/* <div className="Icon-box">
           <div className="Icon-container">
