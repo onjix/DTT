@@ -1,4 +1,4 @@
-import mainImage from "../src/images/Building/Room1.glb";
+import mainImage from "../src/images/Building/room.glb";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -21,7 +21,7 @@ const MainImage = () => {
             <div className="Image-container">
                 <Canvas
                     style={{
-                        width: "550px",
+                        width: "450px",
                         height: "450px",
                         position: "center",
                         margin: "0 auto",
@@ -30,10 +30,9 @@ const MainImage = () => {
                     shadows>
                     <primitive
                         object={mainStore.scene}
-                        scale={12}
+                        scale={2}
                         position={[0, 0, 0]}
                         children-0-castShadow
-                        className="mainStore"
                     />
                     <directionalLight intensity={1} />
                     <ambientLight intensity={1.2} />
