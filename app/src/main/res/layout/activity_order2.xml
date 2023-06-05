@@ -12,6 +12,7 @@
         android:id="@+id/tv_orderlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:text="Table 2" />
 
     <LinearLayout
@@ -196,6 +197,7 @@
         android:id="@+id/et_totalprice"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:textColor="@color/white"
         android:ems="10"
         android:text="총합 : 0" />
 

@@ -46,11 +46,23 @@ public class login extends AppCompatActivity {
                 mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(login.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            //로그인 성공
-                            Intent intent = new Intent(login.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                        if(task.isSuccessful()){//로그인 성공
+
+                            if(strEmail.equals("store1@naver.com")){
+                                Intent intent = new Intent(login.this, MainActivity1.class);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                            else if(strEmail.equals("store2@naver.com")){
+                                Intent intent = new Intent(login.this, MainActivity2.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(login.this, "매장 정보를 등록해주세요.", Toast.LENGTH_SHORT).show();
+                            }
+
                         } else{
                             Toast.makeText(login.this, "로그인 실패", Toast.LENGTH_SHORT).show();
                         }

@@ -1,6 +1,5 @@
 package com.example.dtt_r5;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +32,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     private static final int REQUEST_CODE_ORDER1 = 1;
     private static final int REQUEST_CODE_ORDER2 = 2;
@@ -52,12 +51,14 @@ public class MainActivity extends AppCompatActivity {
     private int readBufferPosition;
     private Handler handler = new Handler();
 
-    private static final String SERVER_URL = "http://172.16.15.190:8080/table/changeS/1";
+    private static final String SERVER_URL1 = "http://192.168.55.182:8080/table/2/changeY/1";
+    private static final String SERVER_URL2 = "http://192.168.55.182:8080/table/2/changeN/1";
+    private static final String SERVER_URL3 = "http://192.168.55.182:8080/table/2/changeS/1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main1);
         table1 = findViewById(R.id.btn_table1);
         table2 = findViewById(R.id.btn_table2);
         btn_sc = findViewById(R.id.btn_bt);
@@ -65,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
         table1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Order1.class);
+                Intent intent = new Intent(MainActivity2.this, Order1.class);
+                intent.putExtra("data", 2);
                 startActivityForResult(intent, REQUEST_CODE_ORDER1);
             }
         });
@@ -73,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
         table2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Order2.class);
+                Intent intent = new Intent(MainActivity2.this, Order2.class);
+                intent.putExtra("data", 2);
                 startActivityForResult(intent, REQUEST_CODE_ORDER2);
             }
         });
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
-    int state=2, total=0;
+    int state = 2, total = 0;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -163,6 +166,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectBluetoothDevice() {
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         devices = bluetoothAdapter.getBondedDevices();
         pairedDeviceCount = devices.size();
         if (pairedDeviceCount == 0) {
@@ -197,6 +210,16 @@ public class MainActivity extends AppCompatActivity {
     public void connectDevice(String deviceName) {
         for (BluetoothDevice tempDevice : devices) {
 
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             if (deviceName.equals(tempDevice.getName())) {
                 bluetoothDevice = tempDevice;
                 break;
@@ -209,11 +232,12 @@ public class MainActivity extends AppCompatActivity {
         try {
             bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid);
             bluetoothSocket.connect();
+            Toast.makeText(getApplicationContext(), bluetoothDevice.getName() + "연결되었습니다.", Toast.LENGTH_SHORT).show();
 
             outputStream = bluetoothSocket.getOutputStream();
             inputStream = bluetoothSocket.getInputStream();
-
             beginListenForData();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -231,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 while (!Thread.currentThread().isInterrupted() && !stopWorker) {
                     try {
                         int bytesAvailable = inputStream.available();
+
                         if (bytesAvailable > 0) {
                             byte[] packetBytes = new byte[bytesAvailable];
                             inputStream.read(packetBytes);
@@ -244,16 +269,21 @@ public class MainActivity extends AppCompatActivity {
 
                                     handler.post(new Runnable() {
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(), "현재 센서 데이터: " + data, Toast.LENGTH_SHORT).show();
-
                                             int sensorValue = Integer.parseInt(data.trim());
-                                            //  압력값 100이상시 테이블 색상 변경
-                                            if (sensorValue > 100) {
+
+                                            if (sensorValue > 100 ) {//  압력값 100이상시 테이블 색상 변경
                                                 table1.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.holo_purple)));
-                                                sendDataToServer(3);
+                                                Toast.makeText(getApplicationContext(), "현재 센서 데이터: " + sensorValue, Toast.LENGTH_SHORT).show();
+                                                sendDataToServer(3); //서버로 점유중 데이터 전송
                                             } else {
-                                                //압력 센서 데이터 100 이하일 때 기존 테이블 상태로 변경
-                                                setTable1ButtonColor(state, total);
+                                                if(state==1){
+                                                    sendDataToServer(1);
+                                                    setTable1ButtonColor(state, total);
+                                                } else if(state==2){
+                                                    sendDataToServer(2);
+                                                    setTable1ButtonColor(state, total);
+                                                }
+
                                             }
                                         }
                                     });
@@ -277,29 +307,33 @@ public class MainActivity extends AppCompatActivity {
         String data_t = "1";
 
         // AsyncTask를 사용하여 백그라운드에서 HTTP POST 요청을 보냄
+
+        if (con==1){
+            new SendDataToServerTask1().execute(data_t);
+        }
+        if (con==2){
+            new SendDataToServerTask2().execute(data_t);
+        }
+
         if (con==3){
-            new SendDataToServerTask().execute(data_t);
+            new SendDataToServerTask3().execute(data_t);
         }
     }
-    private class SendDataToServerTask extends AsyncTask<String, Void, String> {
-
+    private class SendDataToServerTask1 extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             String data = params[0];
             String response = null;
-
             try {
-                URL url = new URL(SERVER_URL);
+                URL url = new URL(SERVER_URL1);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setDoOutput(true);
-
                 OutputStream outputStream = connection.getOutputStream();
                 outputStream.write(data.getBytes());
                 outputStream.flush();
                 outputStream.close();
-
                 int responseCode = connection.getResponseCode();
 
                 if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -310,24 +344,105 @@ public class MainActivity extends AppCompatActivity {
                     while ((line = reader.readLine()) != null) {
                         stringBuilder.append(line);
                     }
-
                     reader.close();
                     response = stringBuilder.toString();
                 } else {
                     response = "Error: " + responseCode;
                 }
-
                 connection.disconnect();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return response;
         }
         @Override
         protected void onPostExecute(String response) {
             // 서버로부터의 응답 처리
-            Toast.makeText(MainActivity.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+        }
+    }
+    private class SendDataToServerTask2 extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String data = params[0];
+            String response = null;
+            try {
+                URL url = new URL(SERVER_URL2);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(MainActivity2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+        }
+    }
+    private class SendDataToServerTask3 extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String data = params[0];
+            String response = null;
+            try {
+                URL url = new URL(SERVER_URL3);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(MainActivity2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
         }
     }
 }

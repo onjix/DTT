@@ -4,19 +4,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Order2 extends AppCompatActivity {
     private Button confirm, pay;
     private EditText TotalPrice;
     private EditText pd1, pd2, pd3, pd4, pd5, pd6, pd7, pd8, pd9;
 
-    private int total = 0;
+    private int total = 0, store_num=0;
     private int pd1_price=0, pd2_price=0,  pd3_price=0, pd4_price=0, pd5_price=0, pd6_price=0, pd7_price=0, pd8_price=0, pd9_price=0;
     private int pd1_num=0, pd2_num=0, pd3_num=0, pd4_num=0, pd5_num=0, pd6_num=0, pd7_num=0, pd8_num=0, pd9_num=0;
+
+    private static final String SERVER_URL1_1 = "http://192.168.55.182:8080/table/1/changeY/2";
+    private static final String SERVER_URL1_2 = "http://192.168.55.182:8080/table/1/changeN/2";
+
+    private static final String SERVER_URL2_1 = "http://192.168.55.182:8080/table/2/changeY/2";
+    private static final String SERVER_URL2_2 = "http://192.168.55.182:8080/table/2/changeN/2";
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -26,11 +41,22 @@ public class Order2 extends AppCompatActivity {
         confirm = findViewById(R.id.btn_confirm);
         pay = findViewById(R.id.btn_pay);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            store_num = extras.getInt("data", 0); // "data" 키로 전달된 값 가져오기 (기본값: 0)
+        }
+
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("state", 1);
+                if (store_num==1){
+                    sendDataToServer(1);
+                }
+                else if(store_num==2){
+                    sendDataToServer(3);
+                }
                 resultIntent.putExtra("total", total);
                 setResult(RESULT_OK, resultIntent);
                 finish();
@@ -42,6 +68,12 @@ public class Order2 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("state", 2);
+                if (store_num==1){
+                    sendDataToServer(2);
+                }
+                else if(store_num==2){
+                    sendDataToServer(4);
+                }
                 setResult(RESULT_OK, resultIntent);
                 finish();
             }
@@ -205,5 +237,221 @@ public class Order2 extends AppCompatActivity {
                 TotalPrice.setText("총합 : " + total);
             }
         });
+    }
+    private void sendDataToServer(int con) {
+        // 서버로 전송할 데이터
+        String data = "1";
+
+        // AsyncTask를 사용하여 백그라운드에서 HTTP POST 요청을 보냄
+        if (con==1){
+            new Order2.SendDataToServerTask1().execute(data);
+        }
+        else if (con==2){
+            new Order2.SendDataToServerTask2().execute(data);
+        }
+        else if (con==3){
+            new Order2.SendDataToServerTask3().execute(data);
+        }
+        else if (con==4){
+            new Order2.SendDataToServerTask4().execute(data);
+        }
+    }
+
+    private class SendDataToServerTask1 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String data = params[0];
+            String response = null;
+
+            try {
+                URL url = new URL(SERVER_URL1_1);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(Order2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private class SendDataToServerTask2 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String data = params[0];
+            String response = null;
+
+            try {
+                URL url = new URL(SERVER_URL1_2);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(Order2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+        }
+    }
+    private class SendDataToServerTask3 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String data = params[0];
+            String response = null;
+
+            try {
+                URL url = new URL(SERVER_URL2_1);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(Order2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+        }
+    }
+    private class SendDataToServerTask4 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String data = params[0];
+            String response = null;
+
+            try {
+                URL url = new URL(SERVER_URL2_2);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return response;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(Order2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+        }
     }
 }
