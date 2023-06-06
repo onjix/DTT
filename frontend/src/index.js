@@ -14,6 +14,7 @@ import Signup from "./Signup_Login/Signup";
 import SimpleInfo from "./Service/SimpleInfo";
 import Predict from "./Service/Predict";
 import FutureStore from "./Service/FutureStore";
+import MypageInfo from "./Service/MypageInfo";
 
 
 
@@ -30,6 +31,7 @@ root.render(
       <Route path="S2Reservation1" element={<S2Reservation1 />}></Route>
       <Route path="S2Reservation2" element={<S2Reservation2 />}></Route>
       <Route path="Mypage" element={<Mypage />}></Route>
+      <Route path="MypageInfo" element={<MypageInfo />}></Route>
       <Route path="Login" element={<Login />}></Route>
       <Route path="Signup" element={<Signup />}></Route>
       <Route path="SimpleInfo" element={<SimpleInfo />}></Route>

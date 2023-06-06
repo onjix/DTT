@@ -26,6 +26,7 @@ const App = () => {
   const isShowS2Reservation2 = location.pathname === "/S2Reservation2";
   const isSimpleInfo = location.pathname === "/SimpleInfo";
   const isFutureStore = location.pathname === "/FutureStore";
+  const isMypageInfo = location.pathname === "/MypageInfo";
 
   const logoutClickHandler = () => {
     console.log("logout");
@@ -45,6 +46,11 @@ const App = () => {
   const moveMypage = () => {
     setTimeout(() => {
       movePage("/MyPage");
+    }, 0);
+  };
+  const moveMypageInfo = () => {
+    setTimeout(() => {
+      movePage("/MypageInfo");
     }, 0);
   };
   const moveLogin = () => {
@@ -191,7 +197,8 @@ const App = () => {
             !isShowS2Reservation1&&
             !isShowS2Reservation2&&
           !isSimpleInfo &&
-           !isFutureStore && <MainImage />}
+           !isFutureStore &&
+            !isMypageInfo &&  <MainImage />}
         {/* <div className="Icon-box">
           <div className="Icon-container">
             <img className="Icon1" src={mart} onClick={moveShowInterior1} />

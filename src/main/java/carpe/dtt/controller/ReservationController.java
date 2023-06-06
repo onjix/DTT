@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -57,8 +58,8 @@ public class ReservationController {
     public List<Reservation> getReservationsAfterDateTime1() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
-        List<Reservation> reservations = reservationService.getReservationsAfterDateTime1(currentDate, currentTime);
-        return reservations;
+
+        return reservationService.getReservationsAfterDateTime1(currentDate,currentTime);
     }
 
     @PutMapping("/reservations/update")
@@ -79,6 +80,13 @@ public class ReservationController {
         System.out.println(reservationService.checkFutureReservation1(date,time));
         return reservationService.checkFutureReservation1(date, time);
     }
+    @GetMapping("/reservations/pos")
+    public List<Reservation> sendPosData() {
+        LocalDate currentDate = LocalDate.now();
+        System.out.println(reservationService.getReservationsByDate1(currentDate));
+        return reservationService.getReservationsByDate1(currentDate);
+    }
+
 
     //INSERT INTO reservation (date, name, num_of_guests, tableN, time)
     //VALUES ('2023-05-25', '윤형준', 2, 2, '15:00:00');
@@ -116,7 +124,7 @@ public class ReservationController {
     public List<Reservation2> getReservationsAfterDateTime2() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
-        List<Reservation2> reservations = reservationService2.getReservationsAfterDateTime(currentDate, currentTime);
+        List<Reservation2> reservations = reservationService2.getReservationsAfterDateTime2(currentDate, currentTime);
         return reservations;
     }
 
@@ -132,4 +140,5 @@ public class ReservationController {
         LocalDate standard = LocalDate.parse("2023-05-24");
         return reservationService2.getBetweenData(standard, date, time,tableN);
     }
+
 }

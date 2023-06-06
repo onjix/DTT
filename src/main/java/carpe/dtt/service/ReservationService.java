@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -55,10 +56,18 @@ public class ReservationService {
      * 현재 날짜와 시간 이후의 예약 정보를 가져오는 로직
      */
     public List<Reservation> getReservationsAfterDateTime1(LocalDate currentDate, LocalTime currentTime) {
+        List<Reservation> reservationsAfterTime = new ArrayList<>();
+
         List<Reservation> reservationsAfterDate = reservationRepository.findByDateAfter(currentDate);
-        List<Reservation> reservationsAfterTime = reservationRepository.findByTimeAfter(currentTime);
-        reservationsAfterDate.addAll(reservationsAfterTime);
-        return reservationsAfterDate;
+        for (Reservation reservation : reservationsAfterDate) {
+            // 예약 시간의 날짜와 시간을 함께 비교하여 현재 시간 이후의 예약을 찾음
+            LocalDateTime reservationDateTime = LocalDateTime.of(reservation.getDate(), reservation.getTime());
+            LocalDateTime currentDateTime = LocalDateTime.of(currentDate, currentTime);
+            if (reservationDateTime.isAfter(currentDateTime)) {
+                reservationsAfterTime.add(reservation);
+            }
+        }
+        return reservationsAfterTime;
     }
 
     /**

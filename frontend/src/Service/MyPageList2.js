@@ -11,7 +11,7 @@ const MyPageList = () => {
 
   const fetchReservations = async () => {
     try {
-      const response = await fetch("/reservations/time");
+      const response = await fetch("/2/reservations/time");
       if (response.ok) {
         const data = await response.json();
         setReservations(data);
@@ -26,7 +26,7 @@ const MyPageList = () => {
 
   return (
     <>
-      <h2>매장 1</h2>
+      <h2>매장 2</h2>
       {reservations.map((reservation) =>
         reservation.name === users ? (
           <div className="mypage-container">

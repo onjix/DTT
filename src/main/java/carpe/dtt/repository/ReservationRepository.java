@@ -17,5 +17,7 @@ public interface ReservationRepository extends CrudRepository<Reservation,Long> 
     List<Reservation> findByDateAndTableN(LocalDate date, int tableN);
     List<Reservation> findByDateAndTime(LocalDate date, LocalTime time);
 
+
 }
+
 
