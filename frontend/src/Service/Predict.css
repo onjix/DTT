@@ -1,19 +1,33 @@
-.Predict-container {
+.PredictInner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: 120px;
+    margin-left: 20px;
+    background: linear-gradient(   #9475BC, #4a148c);
+    text-align: center;
+    color: black;
+  }
+  
+  .Predict-container {
     background-color: #ffffff;
     border-bottom: 1px solid #cccccc;
     border-radius: 10px;
     width: 180px;
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: 20px;
     height: 30px;
-}
-.Predict-title{
-    margin-top: 8px;
-}
+  }
+
 .Predict-result {
-    margin-top: 40px;
-    font-size: 18px;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 20px;
     color: #4a148c;
     border-radius: 10px;
+    background-color: #e1bbff;
+}
+.Predict-form{
+    margin-bottom: 10px;
 }
