@@ -81,18 +81,18 @@ const State1 = () => {
           "Content-Type": "application/json",
         },
       })
-          .then((response3) => {
-            if (response3.ok) {
-              // 성공적으로 업데이트된 경우
-              console.log("테이블 상태가 업데이트되었습니다.");
-            } else {
-              // 업데이트 실패한 경우
-              console.error("테이블 상태 업데이트에 실패했습니다.");
-            }
-          })
-          .catch((error) => {
-            console.error("API 호출 중 오류가 발생했습니다.", error);
-          });
+        .then((response3) => {
+          if (response3.ok) {
+            // 성공적으로 업데이트된 경우
+            console.log("테이블 상태가 업데이트되었습니다.");
+          } else {
+            // 업데이트 실패한 경우
+            console.error("테이블 상태 업데이트에 실패했습니다.");
+          }
+        })
+        .catch((error) => {
+          console.error("API 호출 중 오류가 발생했습니다.", error);
+        });
     } catch (error) {
       console.log("에러:", error);
     }
@@ -100,66 +100,66 @@ const State1 = () => {
   useInterval(fetchData1, 5000);
   if (state1 === 3) {
     return (
-        <>
-          <primitive
-              object={tableReserved1.scene}
-              scale={4.5}
-              position={[-8, 3, -20]}
-              children-0-castShadow
-          />
-        </>
+      <>
+        <primitive
+          object={tableReserved1.scene}
+          scale={4.5}
+          position={[-8, 3, -20]}
+          children-0-castShadow
+        />
+      </>
     );
   } else if (state1 === 2) {
     return (
-        <>
-          <primitive
-              object={tableOccupied1.scene}
-              scale={4.5}
-              position={[-8, 3, -20]}
-              children-0-castShadow
-          />
-          <primitive
-              object={Human1.scene}
-              scale={5}
-              position={[-8, -13, -20]}
-              children-0-castShadow
-          />
-        </>
+      <>
+        <primitive
+          object={tableOccupied1.scene}
+          scale={4.5}
+          position={[-8, 3, -20]}
+          children-0-castShadow
+        />
+        <primitive
+          object={Human1.scene}
+          scale={5}
+          position={[-8, -13, -20]}
+          children-0-castShadow
+        />
+      </>
     );
   } else if (state1 === 1) {
     return (
-        <>
-          <primitive
-              object={tableInuse1.scene}
-              scale={5.5}
-              position={[-8, 3, -20]}
-              children-0-castShadow
-          />
+      <>
+        <primitive
+          object={tableInuse1.scene}
+          scale={5.5}
+          position={[-8, 3, -20]}
+          children-0-castShadow
+        />
 
-          <primitive
-              object={Human1.scene}
-              scale={5}
-              position={[-19, -13, -15]}
-              children-0-castShadow
-          />
-          <primitive
-              object={Human3.scene}
-              scale={5}
-              position={[-19, -13, -25]}
-              children-0-castShadow
-          />
-        </>
+        <primitive
+          object={Human1.scene}
+          scale={5}
+          position={[-19, -13, -15]}
+          children-0-castShadow
+        />
+        <primitive
+          object={Human3.scene}
+          scale={5}
+          position={[-19, -13, -25]}
+          children-0-castShadow
+        />
+      </>
     );
   } else {
     return (
-        <>
-          <primitive
-              object={tableAvail1.scene}
-              scale={4.5}
-              position={[-8, 3, -20]}
-              children-0-castShadow
-          />
-        </>
+      <>
+        <primitive
+          object={tableAvail1.scene}
+          scale={4.5}
+          position={[-8, 3, -20]}
+          children-0-castShadow
+        />
+      </>
     );
   }
 };
@@ -225,63 +225,61 @@ const State2 = () => {
 
   if (state2 === 3) {
     return (
-        <>
-          <primitive
-              object={tableReserved2.scene}
-              scale={4.5}
-              position={[30, 3, -20]}
-              children-0-castShadow
-          />
-        </>
+      <>
+        <primitive
+          object={tableReserved2.scene}
+          scale={4.5}
+          position={[30, 3, -20]}
+          children-0-castShadow
+        />
+      </>
     );
   } else if (state2 === 2) {
     return (
-        <>
-          <primitive
-              object={tableOccupied2.scene}
+      <>
+        <primitive
+          object={tableOccupied2.scene}
+          scale={4.5}
+          position={[30, 3, -20]}
+          children-0-castShadow
+        />
 
-
-              scale={4.5}
-              position={[30, 3, -20]}
-              children-0-castShadow
-          />
-
-          <primitive
-              object={Human2.scene}
-              scale={5}
-              position={[19, -13, -25]}
-              children-0-castShadow
-          />
-        </>
+        <primitive
+          object={Human2.scene}
+          scale={5}
+          position={[19, -13, -25]}
+          children-0-castShadow
+        />
+      </>
     );
   } else if (state2 === 1) {
     return (
-        <>
-          <primitive
-              object={tableInuse2.scene}
-              scale={5.5}
-              position={[30, 3, -20]}
-              children-0-castShadow
-          />
+      <>
+        <primitive
+          object={tableInuse2.scene}
+          scale={5.5}
+          position={[30, 3, -20]}
+          children-0-castShadow
+        />
 
-          <primitive
-              object={Human2.scene}
-              scale={5}
-              position={[19, -13, -25]}
-              children-0-castShadow
-          />
-        </>
+        <primitive
+          object={Human2.scene}
+          scale={5}
+          position={[19, -13, -25]}
+          children-0-castShadow
+        />
+      </>
     );
   } else {
     return (
-        <>
-          <primitive
-              object={tableAvail2.scene}
-              scale={4.5}
-              position={[30, 3, -20]}
-              children-0-castShadow
-          />
-        </>
+      <>
+        <primitive
+          object={tableAvail2.scene}
+          scale={4.5}
+          position={[30, 3, -20]}
+          children-0-castShadow
+        />
+      </>
     );
   }
 };
@@ -302,68 +300,66 @@ const ShowInterior1 = () => {
   };
 
   return (
-      <>
+    <>
       <App />
       <div className="Total-container">
         <div className="TotalInner-container">
           <div className="SContent-container">
             <div className="SInner-container">
               <Canvas
-                  style={{
-                    width: "650px",
-                    height: "650px",
-                    position: "center",
-                    margin: "0 auto",
-                  }}
-                  camera={{ position: [80, 80, 80] }}
-                  shadows>
+                style={{
+                  width: "650px",
+                  height: "650px",
+                  position: "center",
+                  margin: "0 auto",
+                }}
+                camera={{ position: [80, 80, 80] }}
+                shadows>
                 <primitive
-                    object={store.scene}
-                    scale={2}
-                    position={[0, 0, 0]}
-                    children-0-castShadow
+                  object={store.scene}
+                  scale={2}
+                  position={[0, 0, 0]}
+                  children-0-castShadow
                 />
                 <primitive
-                    object={table1.scene}
-                    scale={3}
-                    position={[-8, -6, -20]}
-                    children-0-castShadow
-                    onClick={reservationPage1}
+                  object={table1.scene}
+                  scale={3}
+                  position={[-8, -6, -20]}
+                  children-0-castShadow
+                  onClick={reservationPage1}
                 />
                 {State1()}
 
                 <primitive
-                    object={table2.scene}
-                    scale={3}
-                    position={[30, -6, -20]}
-                    children-0-castShadow
-                    onClick={reservationPage2}
+                  object={table2.scene}
+                  scale={3}
+                  position={[30, -6, -20]}
+                  children-0-castShadow
+                  onClick={reservationPage2}
                 />
                 {State2()}
                 <directionalLight intensity={1} />
                 <ambientLight intensity={1.2} />
                 <spotLight
-                    intensity={0.1}
-                    angle={0.1}
-                    penumbra={1}
-                    castShadow
+                  intensity={0.1}
+                  angle={0.1}
+                  penumbra={1}
+                  castShadow
                 />
                 <OrbitControls target={[0, 1, 0]} />
               </Canvas>
-
             </div>
-
           </div>
-          <div className="PredictInner-container">
-          <Predict />
+          <div className="AddInform-container">
+            <div className="ReservationInform-container" onClick={moveFuture}>
+              <h2 className="ReservationInform-title">예약 확인하기</h2>
+            </div>
+            <Predict />
+          </div>
         </div>
-          <div onClick={moveFuture}>
-            예약 확인하기
-          </div>
       </div>
-      </div>
-</>
-);
+    </>
+  );
 };
 
 export default ShowInterior1;
