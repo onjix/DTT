@@ -1,10 +1,3 @@
-* {
-  text-decoration: none;
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-  font-family: 'GmarketSansMedium';
-}
 .MContent-container{
   width: 800px;
   height: 600px;
@@ -26,22 +19,12 @@
 .M-container{
   padding-top: 10px;
 }
-.mypage-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .mypage-table {
-    width: 500px;
-    text-align: center;
-  }
-  
-  .mypage-table th,
-  .mypage-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .mypage-table th {
-    background-color: #f2f2f2;
-  }
+
+.Mypage-container1 {
+  height: 200px;
+
+}
+.Mypage-container2 {
+  height: 200px;
+
+}

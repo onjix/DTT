@@ -1,0 +1,65 @@
+.Info-container{
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: #4a148c;
+    background: linear-gradient(#9475BC, #4a148c);
+    padding: 5px;
+    box-shadow: 0 0 5px #000000;
+}
+.InfoInner-container{
+    width: 750px;
+    height: 550px;
+    margin: auto;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #cccccc;
+    border-radius: 15px;
+}
+
+.InfoParent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 폼 컨테이너 스타일 */
+.InfoForm-container {
+    margin-top: 60px;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* 제목 스타일 */
+.InfoForm-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 입력 필드 스타일 */
+.InfoForm-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* 버튼 스타일 */
+.InfoForm-container button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 버튼 호버 스타일 */
+.InfoForm-container button[type="submit"]:hover {
+    background-color: #45a049;
+}

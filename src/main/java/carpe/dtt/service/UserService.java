@@ -19,6 +19,14 @@ public class UserService {
 
     @Transactional
     public void saveUser(User user) {
+        String id = user.getId();
+
+        // 동일한 ID와 이름을 가진 사용자가 이미 존재하는 경우 회원 가입을 막음
+        if (userRepository.existsById(id)) {
+            throw new IllegalArgumentException("User with the same ID and name already exists");
+        }
+
+        // 회원 가입 로직 진행
         userRepository.save(user);
     }
 
@@ -42,6 +50,10 @@ public class UserService {
         } else {
             throw new IllegalArgumentException("Invalid login ID");
         }
+    }
+    @Transactional
+     public void updateUser(User user) {
+        userRepository.save(user);
     }
 
 }

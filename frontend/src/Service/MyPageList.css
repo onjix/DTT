@@ -1,0 +1,27 @@
+* {
+    text-decoration: none;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    font-family: 'GmarketSansMedium';
+}
+
+.mypage-container {
+    display: flex;
+    justify-content: center;
+}
+
+.mypage-table {
+    width: 500px;
+    text-align: center;
+}
+
+.mypage-table th,
+.mypage-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.mypage-table th {
+    background-color: #f2f2f2;
+}

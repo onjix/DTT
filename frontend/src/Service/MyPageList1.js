@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import "./MyPageList.css";
 
-const MyPageList = () => {
+const MyPageList1 = () => {
   const [reservations, setReservations] = useState([]);
   const [cookies, setCookie] = useCookies(["user"]);
   const users = cookies.user;
@@ -56,4 +57,4 @@ const MyPageList = () => {
   );
 };
 
-export default MyPageList;
+export default MyPageList1;

@@ -8,6 +8,7 @@ const Login = ({}) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies2, setCookie2] = useCookies(["userId"]);
   const movePage = useNavigate();
 
   const moveHome = () => {
@@ -39,6 +40,7 @@ const Login = ({}) => {
         const name = await response.text();
         setName(name);
         setCookie("user", name, { path: "/" });
+        setCookie2("userId", id, { path: "/" });
         console.log("로그인 성공");
         moveHome();
       } else {

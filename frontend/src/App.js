@@ -10,7 +10,8 @@ import DTT from "./icons/DTT1.gif";
 import "./App.css";
 
 const App = () => {
-  const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
+  const [myPageIsOpen1, myPageRef1, myPageHandler1] = useDetectClose(false);
+  const [myPageIsOpen2, myPageRef2, myPageHandler2] = useDetectClose(false);
   const [name, setName] = useState("");
   const [cookies, setCookie] = useCookies(["user"]);
   const users = cookies.user;
@@ -19,7 +20,7 @@ const App = () => {
 
   const isShowInterior1 = location.pathname === "/ShowInterior1";
   const isShowInterior2 = location.pathname === "/ShowInterior2";
-  const isShowMypage = location.pathname === "/MyPage";
+  const isShowMypageReservation = location.pathname === "/MypageReservation";
   const isShowS1Reservation1 = location.pathname === "/S1Reservation1";
   const isShowS1Reservation2 = location.pathname === "/S1Reservation2";
   const isShowS2Reservation1 = location.pathname === "/S2Reservation1";
@@ -51,6 +52,11 @@ const App = () => {
   const moveMypageInfo = () => {
     setTimeout(() => {
       movePage("/MypageInfo");
+    }, 0);
+  };
+  const moveMypageReservation = () => {
+    setTimeout(() => {
+      movePage("/MypageReservation");
     }, 0);
   };
   const moveLogin = () => {
@@ -124,12 +130,12 @@ const App = () => {
                 <div className="DropdownContainer">
                   <div
                     className="DropdownButton"
-                    onClick={myPageHandler}
-                    ref={myPageRef}>
+                    onClick={myPageHandler1}
+                    ref={myPageRef1}>
                     매장선택
                   </div>
-                  <Menu isDropped={myPageIsOpen}>
-                    <Ul>
+                  <Menu1 isDropped1={myPageIsOpen1}>
+                    <Ul1>
                       <li>
                         <div className="LinkWrapper" href="">
                           매장1
@@ -140,11 +146,26 @@ const App = () => {
                           매장2
                         </div>
                       </li>
-                    </Ul>
-                  </Menu>
+                    </Ul1>
+                  </Menu1>
                 </div>
                 <div className="DropdownContainer">
-                  <div className="DropdownButton">마이페이지</div>
+                  <div className="DropdownButton" onClick={myPageHandler2}
+                       ref={myPageRef2}>마이페이지</div>
+                  <Menu2 isDropped2={myPageIsOpen2}>
+                    <Ul2>
+                      <li>
+                        <div className="LinkWrapper" href="">
+                          정보수정
+                        </div>
+                      </li>
+                      <li>
+                        <div className="LinkWrapper" href="">
+                          나의 예약정보
+                        </div>
+                      </li>
+                    </Ul2>
+                  </Menu2>
                 </div>
               </div>
             ) : (
@@ -157,12 +178,12 @@ const App = () => {
                 <div className="DropdownContainer">
                   <div
                     className="DropdownButton"
-                    onClick={myPageHandler}
-                    ref={myPageRef}>
+                    onClick={myPageHandler1}
+                    ref={myPageRef1}>
                     매장선택
                   </div>
-                  <Menu isDropped={myPageIsOpen}>
-                    <Ul>
+                  <Menu1 isDropped1={myPageIsOpen1}>
+                    <Ul1>
                       <li>
                         <div
                           className="LinkWrapper"
@@ -177,13 +198,26 @@ const App = () => {
                           매장2
                         </div>
                       </li>
-                    </Ul>
-                  </Menu>
+                    </Ul1>
+                  </Menu1>
                 </div>
                 <div className="DropdownContainer">
-                  <div className="DropdownButton" onClick={moveMypage}>
-                    마이페이지
-                  </div>
+                  <div className="DropdownButton" onClick={myPageHandler2}
+                       ref={myPageRef2}>마이페이지</div>
+                  <Menu2 isDropped2={myPageIsOpen2}>
+                    <Ul2>
+                      <li>
+                        <div className="LinkWrapper" onClick={moveMypageInfo}>
+                          정보수정
+                        </div>
+                      </li>
+                      <li>
+                        <div className="LinkWrapper" onClick={moveMypageReservation}>
+                          나의 예약정보
+                        </div>
+                      </li>
+                    </Ul2>
+                  </Menu2>
                 </div>
               </div>
             )}
@@ -191,7 +225,7 @@ const App = () => {
         </div>
         {!isShowInterior1 &&
           !isShowInterior2 &&
-          !isShowMypage &&
+          !isShowMypageReservation &&
           !isShowS1Reservation1 &&
             !isShowS1Reservation2&&
             !isShowS2Reservation1&&
@@ -214,7 +248,7 @@ const App = () => {
 
 export default App;
 
-const Menu = styled.div`
+const Menu1 = styled.div`
   background: #d1c4e9;
   position: absolute;
   top: 52px;
@@ -241,8 +275,8 @@ const Menu = styled.div`
     border-top-width: 0;
     border-bottom-color: #d1c4e9;
   }
-  ${({ isDropped }) =>
-    isDropped &&
+  ${({ isDropped1 }) =>
+    isDropped1 &&
     css`
       opacity: 1;
       visibility: visible;
@@ -251,7 +285,62 @@ const Menu = styled.div`
     `};
 `;
 
-const Ul = styled.ul`
+const Ul1 = styled.ul`
+  & > li {
+    margin-bottom: 10px;
+  }
+
+  & > li:first-of-type {
+    margin-top: 10px;
+  }
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Menu2 = styled.div`
+  background: #d1c4e9;
+  position: absolute;
+  top: 52px;
+  left: 50%;
+  width: 110px;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -20px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  z-index: 9;
+
+  &:after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 12px solid transparent;
+    border-top-width: 0;
+    border-bottom-color: #d1c4e9;
+  }
+  ${({ isDropped2 }) =>
+    isDropped2 &&
+    css`
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+      left: 50%;
+    `};
+`;
+
+const Ul2 = styled.ul`
   & > li {
     margin-bottom: 10px;
   }

@@ -8,7 +8,7 @@ import S1Reservation1 from "./Service/S1Reservation1";
 import S1Reservation2 from "./Service/S1Reservation2";
 import S2Reservation1 from "./Service/S2Reservation1";
 import S2Reservation2 from "./Service/S2Reservation2";
-import Mypage from "./Service/Mypage";
+import MypageReservation from "./Service/MypageReservation";
 import Login from "./Signup_Login/Login";
 import Signup from "./Signup_Login/Signup";
 import SimpleInfo from "./Service/SimpleInfo";
@@ -30,7 +30,7 @@ root.render(
       <Route path="S1Reservation2" element={<S1Reservation2 />}></Route>
       <Route path="S2Reservation1" element={<S2Reservation1 />}></Route>
       <Route path="S2Reservation2" element={<S2Reservation2 />}></Route>
-      <Route path="Mypage" element={<Mypage />}></Route>
+      <Route path="MypageReservation" element={<MypageReservation />}></Route>
       <Route path="MypageInfo" element={<MypageInfo />}></Route>
       <Route path="Login" element={<Login />}></Route>
       <Route path="Signup" element={<Signup />}></Route>

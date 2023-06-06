@@ -19,10 +19,14 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<String> signUpUser(@RequestBody User user) {
-        // 회원 가입 서비스 호출
-        userService.saveUser(user);
+        try {
+            // 회원 가입 서비스 호출
+            userService.saveUser(user);
 
-        return ResponseEntity.ok("User registered successfully");
+            return ResponseEntity.ok("User registered successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")
@@ -38,6 +42,13 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
         }
+    }
+    @PostMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        // 회원 가입 서비스 호출
+        userService.updateUser(user);
+
+        return ResponseEntity.ok("User registered successfully");
     }
 
 }
