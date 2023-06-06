@@ -34,6 +34,11 @@ public class TableController {
         tableService.changeDataUseN(id);
         return tableService.getStatusById(id);
     }
+    @PostMapping("/1/changeS/{id}")
+    public Integer changeDatUseS(@PathVariable Long id) {
+        tableService.changeDataUseS(id);
+        return tableService.getStatusById(id);
+    }
 
     /**
      *매장 2 상태 바꾸는 코드

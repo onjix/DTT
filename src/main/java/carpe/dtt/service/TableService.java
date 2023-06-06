@@ -57,6 +57,15 @@ public class TableService {
         tableRepository.save(table);
     }
 
+    @Transactional
+    public void changeDataUseS(Long id) {
+        Table table= tableRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
+        // 데이터 수정 작업 수행
+        table.setStatus(2);
+        tableRepository.save(table);
+    }
+
     public void updateTableStatus(Long tableId) {
         Optional<Table> optionalTable = tableRepository.findById(tableId);
         if (optionalTable.isPresent()) {

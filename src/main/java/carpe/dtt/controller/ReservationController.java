@@ -80,6 +80,7 @@ public class ReservationController {
         System.out.println(reservationService.checkFutureReservation1(date,time));
         return reservationService.checkFutureReservation1(date, time);
     }
+    @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     @GetMapping("/reservations/pos")
     public List<Reservation> sendPosData() {
         LocalDate currentDate = LocalDate.now();
