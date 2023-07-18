@@ -4,6 +4,7 @@ import useDetectClose from "./UseDetectClose";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import MainImage from "./MainImage";
+import { startTransition } from 'react';
 // import mart from "./icons/mart.png";
 // import user from "./icons/user.png";
 import DTT from "./icons/DTT1.gif";
@@ -35,9 +36,9 @@ const App = () => {
     moveApp();
   };
   const moveApp = () => {
-    setTimeout(() => {
+    startTransition(() => {
       movePage("/");
-    }, 0);
+    });
   };
   const moveSimpleInfo = () => {
     setTimeout(() => {
