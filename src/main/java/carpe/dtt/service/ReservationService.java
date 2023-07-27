@@ -55,19 +55,31 @@ public class ReservationService {
     /**
      * 현재 날짜와 시간 이후의 예약 정보를 가져오는 로직
      */
-    public List<Reservation> getReservationsAfterDateTime1(LocalDate currentDate, LocalTime currentTime) {
-        List<Reservation> reservationsAfterTime = new ArrayList<>();
-
+    public List<Reservation> getReservationsAfterDateTime(LocalDate currentDate, LocalTime currentTime) {
+        List<Reservation> reservationsAfterDateTime = new ArrayList<>();
+        List<Reservation> reservationDate=reservationRepository.findByDate(currentDate);
+        System.out.println(reservationDate);
         List<Reservation> reservationsAfterDate = reservationRepository.findByDateAfter(currentDate);
+        System.out.println(reservationsAfterDate);
+        for (Reservation reservation : reservationDate) {
+            // 예약 시간의 날짜와 시간을 함께 비교하여 현재 시간 이후의 예약을 찾음
+            LocalDateTime reservationDateTime = LocalDateTime.of(reservation.getDate(), reservation.getTime());
+            LocalDateTime currentDateTime = LocalDateTime.of(currentDate, currentTime);
+            if (reservationDateTime.isAfter(currentDateTime) || reservationDateTime.isEqual(currentDateTime)) {
+                reservationsAfterDateTime.add(reservation);
+                System.out.println(reservation);
+            }
+        }
         for (Reservation reservation : reservationsAfterDate) {
             // 예약 시간의 날짜와 시간을 함께 비교하여 현재 시간 이후의 예약을 찾음
             LocalDateTime reservationDateTime = LocalDateTime.of(reservation.getDate(), reservation.getTime());
             LocalDateTime currentDateTime = LocalDateTime.of(currentDate, currentTime);
-            if (reservationDateTime.isAfter(currentDateTime)) {
-                reservationsAfterTime.add(reservation);
+            if (reservationDateTime.isAfter(currentDateTime) || reservationDateTime.isEqual(currentDateTime)) {
+                reservationsAfterDateTime.add(reservation);
+                System.out.println(reservation);
             }
         }
-        return reservationsAfterTime;
+        return reservationsAfterDateTime;
     }
 
     /**
@@ -91,6 +103,7 @@ public class ReservationService {
 
             // 예약 시간에서 30분을 뺀 시간 계산
             LocalTime thirtyMinutesBeforeReservationTime = reservationTime.minusMinutes(30);
+            System.out.println(thirtyMinutesBeforeReservationTime);
 
             // 현재 시간과 비교하여 30분 전인 경우에만 처리
             if (currentTime.isAfter(thirtyMinutesBeforeReservationTime)) {

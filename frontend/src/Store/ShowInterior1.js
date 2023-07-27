@@ -97,6 +97,7 @@ const State1 = () => {
       console.log("에러:", error);
     }
   };
+
   useInterval(fetchData1, 5000);
   if (state1 === 3) {
     return (

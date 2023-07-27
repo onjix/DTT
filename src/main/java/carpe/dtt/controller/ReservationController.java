@@ -59,7 +59,7 @@ public class ReservationController {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 
-        return reservationService.getReservationsAfterDateTime1(currentDate,currentTime);
+        return reservationService.getReservationsAfterDateTime(currentDate,currentTime);
     }
 
     @PutMapping("/reservations/update")
@@ -89,8 +89,8 @@ public class ReservationController {
     }
 
 
-    //INSERT INTO reservation (date, name, num_of_guests, tableN, time)
-    //VALUES ('2023-05-25', '윤형준', 2, 2, '15:00:00');
+    //
+
 
     /**
      * 매장 2에 관한 코드
