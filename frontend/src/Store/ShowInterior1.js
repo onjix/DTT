@@ -60,44 +60,43 @@ const State1 = () => {
       const data1 = await response1.json();
       setState1(data1);
 
-      const response2 = await axios.get("/reservations/time");
-      if (response2.status === 200) {
-        const data2 = response2.data;
-        setReservations1(data2);
+      // const response2 = await axios.get("/reservations/time");
+      // if (response2.status === 200) {
+      //   const data2 = response2.data;
+      //   setReservations1(data2);
+      //
+      //   const today = new Date();
+      //   reservations1.forEach((reservation) => {
+      //     if (reservation.date === today) {
+      //       setState1(4);
+      //     }
+      //   });
+      //   console.log(reservations1);
+      // } else {
+      //   console.error("예약 정보를 불러오는데 실패하였습니다:", response2.status);
+      // }
 
-        const today = new Date();
-        reservations1.forEach((reservation) => {
-          if (reservation.date === today) {
-            setState1(4);
-          }
-        });
-        console.log(reservations1);
-      } else {
-        console.error("Failed to fetch reservations:", response2.status);
-      }
       const response3 = await fetch("/reservations/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-      })
-        .then((response3) => {
-          if (response3.ok) {
-            // 성공적으로 업데이트된 경우
-            console.log("테이블 상태가 업데이트되었습니다.");
-          } else {
-            // 업데이트 실패한 경우
-            console.error("테이블 상태 업데이트에 실패했습니다.");
-          }
-        })
-        .catch((error) => {
-          console.error("API 호출 중 오류가 발생했습니다.", error);
-        });
+      });
+
+      if (response3.ok) {
+        // 성공적으로 업데이트된 경우
+        console.log("테이블 상태가 업데이트되었습니다.");
+      } else {
+        // 업데이트 실패한 경우
+        console.error("테이블 상태 업데이트에 실패했습니다.");
+      }
     } catch (error) {
       console.log("에러:", error);
     }
   };
+
   useInterval(fetchData1, 5000);
+
   if (state1 === 3) {
     return (
       <>

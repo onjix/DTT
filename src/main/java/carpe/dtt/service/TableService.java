@@ -66,7 +66,7 @@ public class TableService {
         tableRepository.save(table);
     }
 
-    public void updateTableStatus(Long tableId) {
+    public void updateTableReservationStatus(Long tableId) {
         Optional<Table> optionalTable = tableRepository.findById(tableId);
         if (optionalTable.isPresent()) {
             Table table = optionalTable.get();
@@ -75,6 +75,19 @@ public class TableService {
         } else {
             // 테이블이 존재하지 않는 경우에 대한 예외 처리
         }
+    }
+
+    public Integer getCurrentStatus(Long tableId) {
+        Optional<Table> optionalTable = tableRepository.findById(tableId);
+        return optionalTable.map(Table::getStatus).orElse(null);
+    }
+
+    public void updateTableStatus(Long tableId, Integer newStatus) {
+        Optional<Table> optionalTable = tableRepository.findById(tableId);
+        optionalTable.ifPresent(table -> {
+            table.setStatus(newStatus);
+            tableRepository.save(table);
+        });
     }
 
 }

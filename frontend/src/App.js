@@ -7,7 +7,6 @@ import MainImage from "./MainImage";
 import { startTransition } from 'react';
 // import mart from "./icons/mart.png";
 // import user from "./icons/user.png";
-import DTT from "./icons/DTT1.gif";
 import "./App.css";
 
 const App = () => {
@@ -43,11 +42,6 @@ const App = () => {
   const moveSimpleInfo = () => {
     setTimeout(() => {
       movePage("/SimpleInfo");
-    }, 0);
-  };
-  const moveMypage = () => {
-    setTimeout(() => {
-      movePage("/MyPage");
     }, 0);
   };
   const moveMypageInfo = () => {
@@ -151,8 +145,12 @@ const App = () => {
                   </Menu1>
                 </div>
                 <div className="DropdownContainer">
-                  <div className="DropdownButton" onClick={myPageHandler2}
-                       ref={myPageRef2}>마이페이지</div>
+                  <div
+                    className="DropdownButton"
+                    onClick={myPageHandler2}
+                    ref={myPageRef2}>
+                    마이페이지
+                  </div>
                   <Menu2 isDropped2={myPageIsOpen2}>
                     <Ul2>
                       <li>
@@ -203,8 +201,12 @@ const App = () => {
                   </Menu1>
                 </div>
                 <div className="DropdownContainer">
-                  <div className="DropdownButton" onClick={myPageHandler2}
-                       ref={myPageRef2}>마이페이지</div>
+                  <div
+                    className="DropdownButton"
+                    onClick={myPageHandler2}
+                    ref={myPageRef2}>
+                    마이페이지
+                  </div>
                   <Menu2 isDropped2={myPageIsOpen2}>
                     <Ul2>
                       <li>
@@ -213,7 +215,9 @@ const App = () => {
                         </div>
                       </li>
                       <li>
-                        <div className="LinkWrapper" onClick={moveMypageReservation}>
+                        <div
+                          className="LinkWrapper"
+                          onClick={moveMypageReservation}>
                           나의 예약정보
                         </div>
                       </li>
@@ -224,16 +228,19 @@ const App = () => {
             )}
           </div>
         </div>
+
         {!isShowInterior1 &&
           !isShowInterior2 &&
           !isShowMypageReservation &&
           !isShowS1Reservation1 &&
-            !isShowS1Reservation2&&
-            !isShowS2Reservation1&&
-            !isShowS2Reservation2&&
+          !isShowS1Reservation2 &&
+          !isShowS2Reservation1 &&
+          !isShowS2Reservation2 &&
           !isSimpleInfo &&
-           !isFutureStore &&
-            !isMypageInfo &&  <MainImage />}
+          !isFutureStore &&
+          !isMypageInfo && <MainImage />}
+
+        {/* ##아이콘 사용시 사용할 예정## */}
         {/* <div className="Icon-box">
           <div className="Icon-container">
             <img className="Icon1" src={mart} onClick={moveShowInterior1} />

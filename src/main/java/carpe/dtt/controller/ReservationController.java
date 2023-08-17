@@ -31,7 +31,7 @@ public class ReservationController {
     @PostMapping("/api/reservations")
     public void saveReservation1(@RequestBody Reservation reservation) {
         // 예약 정보를 서비스로 전달하여 저장
-        System.out.println(reservation.getTime());
+//        System.out.println(reservation.getTime());
         reservationService.saveReservation1(reservation);
     }
     @GetMapping("/api/reservations/check")
@@ -59,13 +59,13 @@ public class ReservationController {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 
-        return reservationService.getReservationsAfterDateTime1(currentDate,currentTime);
+        return reservationService.getReservationsAfterDateTime(currentDate,currentTime);
     }
 
     @PutMapping("/reservations/update")
     public void updateTableStatus1() {
         reservationService.updateTableStatus1(); // 예약 정보 업데이트 메서드 호출
-
+        //INSERT INTO reservation (id, date, name, num_of_guests, tablen, time) VALUES (DEFAULT, '2023-08-16', '윤형준', 2, 1, '23:47');
     }
     @GetMapping("/reservation/data")
     public int getBetweenData1( @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
@@ -77,20 +77,19 @@ public class ReservationController {
     @GetMapping("/reservation/future")
     public List<Reservation> getFutureData(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                            @RequestParam("time") @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time) {
-        System.out.println(reservationService.checkFutureReservation1(date,time));
+//        System.out.println(reservationService.checkFutureReservation1(date,time));
         return reservationService.checkFutureReservation1(date, time);
     }
     @CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
     @GetMapping("/reservations/pos")
     public List<Reservation> sendPosData() {
         LocalDate currentDate = LocalDate.now();
-        System.out.println(reservationService.getReservationsByDate1(currentDate));
+//        System.out.println(reservationService.getReservationsByDate1(currentDate));
         return reservationService.getReservationsByDate1(currentDate);
     }
 
 
-    //INSERT INTO reservation (date, name, num_of_guests, tableN, time)
-    //VALUES ('2023-05-25', '윤형준', 2, 2, '15:00:00');
+
 
     /**
      * 매장 2에 관한 코드

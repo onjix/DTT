@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
@@ -16,27 +16,27 @@ import Predict from "./Service/Predict";
 import FutureStore from "./Service/FutureStore";
 import MypageInfo from "./Service/MypageInfo";
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}></Route>
-      <Route path="ShowInterior1" element={<ShowInterior1 />}></Route>
-      <Route path="ShowInterior2" element={<ShowInterior2 />}></Route>
-      <Route path="S1Reservation1" element={<S1Reservation1 />}></Route>
-      <Route path="S1Reservation2" element={<S1Reservation2 />}></Route>
-      <Route path="S2Reservation1" element={<S2Reservation1 />}></Route>
-      <Route path="S2Reservation2" element={<S2Reservation2 />}></Route>
-      <Route path="MypageReservation" element={<MypageReservation />}></Route>
-      <Route path="MypageInfo" element={<MypageInfo />}></Route>
-      <Route path="Login" element={<Login />}></Route>
-      <Route path="Signup" element={<Signup />}></Route>
-      <Route path="SimpleInfo" element={<SimpleInfo />}></Route>
-      <Route path="Predict" element={<Predict />}></Route>
-      <Route path="FutureStore" element={<FutureStore />}></Route>
-    </Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<App />}></Route>
+        <Route path="ShowInterior1" element={<ShowInterior1 />}></Route>
+        <Route path="ShowInterior2" element={<ShowInterior2 />}></Route>
+        <Route path="S1Reservation1" element={<S1Reservation1 />}></Route>
+        <Route path="S1Reservation2" element={<S1Reservation2 />}></Route>
+        <Route path="S2Reservation1" element={<S2Reservation1 />}></Route>
+        <Route path="S2Reservation2" element={<S2Reservation2 />}></Route>
+        <Route path="MypageReservation" element={<MypageReservation />}></Route>
+        <Route path="MypageInfo" element={<MypageInfo />}></Route>
+        <Route path="Login" element={<Login />}></Route>
+        <Route path="Signup" element={<Signup />}></Route>
+        <Route path="SimpleInfo" element={<SimpleInfo />}></Route>
+        <Route path="Predict" element={<Predict />}></Route>
+        <Route path="FutureStore" element={<FutureStore />}></Route>
+      </Routes>
+    </Suspense>
   </BrowserRouter>
 );
