@@ -31,6 +31,4 @@ public class User {
     @Column
     private LocalDate birthDate;
 
-    // 생성자, 게터/세터, 기타 메소드 생략
-
 }

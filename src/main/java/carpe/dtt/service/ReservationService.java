@@ -2,6 +2,7 @@ package carpe.dtt.service;
 
 import carpe.dtt.entity.Reservation;
 import carpe.dtt.repository.ReservationRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class ReservationService {
 
@@ -39,15 +41,15 @@ public class ReservationService {
     }
 
     public List<Reservation> getReservationsByDate1(LocalDate date) {
-        System.out.println(date);
+        log.info("Current Date={}", date);
         List<Reservation> reservations = reservationRepository.findByDate(date);
         for (Reservation reservation : reservations) {
-            System.out.println("ID: " + reservation.getId());
-            System.out.println("Name: " + reservation.getName());
-            System.out.println("Date: " + reservation.getDate());
-            System.out.println("Time: " + reservation.getTime());
-            System.out.println("Number of Guests: " + reservation.getNumOfGuests());
-            System.out.println("--------------------------");
+            log.info("ID: {}", reservation.getId());
+            log.info("Name: {}", reservation.getName());
+            log.info("Date: {}", reservation.getDate());
+            log.info("Time: {}", reservation.getTime());
+            log.info("Number of Guests: {}", reservation.getNumOfGuests());
+            log.info("--------------------------");
         }
         return reservationRepository.findByDate(date);
     }
@@ -58,16 +60,16 @@ public class ReservationService {
     public List<Reservation> getReservationsAfterDateTime(LocalDate currentDate, LocalTime currentTime) {
         List<Reservation> reservationsAfterDateTime = new ArrayList<>();
         List<Reservation> reservationDate=reservationRepository.findByDate(currentDate);
-        System.out.println(reservationDate);
+        log.info("Reservation Date = {}", reservationDate);
         List<Reservation> reservationsAfterDate = reservationRepository.findByDateAfter(currentDate);
-        System.out.println(reservationsAfterDate);
+        log.info("Reservation After Date = {}", reservationsAfterDate);
         for (Reservation reservation : reservationDate) {
             // 예약 시간의 날짜와 시간을 함께 비교하여 현재 시간 이후의 예약을 찾음
             LocalDateTime reservationDateTime = LocalDateTime.of(reservation.getDate(), reservation.getTime());
             LocalDateTime currentDateTime = LocalDateTime.of(currentDate, currentTime);
             if (reservationDateTime.isAfter(currentDateTime) || reservationDateTime.isEqual(currentDateTime)) {
                 reservationsAfterDateTime.add(reservation);
-                System.out.println(reservation);
+                log.info("Reservation ={}",reservation);
             }
         }
         for (Reservation reservation : reservationsAfterDate) {
@@ -76,7 +78,7 @@ public class ReservationService {
             LocalDateTime currentDateTime = LocalDateTime.of(currentDate, currentTime);
             if (reservationDateTime.isAfter(currentDateTime) || reservationDateTime.isEqual(currentDateTime)) {
                 reservationsAfterDateTime.add(reservation);
-                System.out.println(reservation);
+                log.info("Reservation ={}",reservation);
             }
         }
         return reservationsAfterDateTime;
@@ -105,7 +107,7 @@ public class ReservationService {
 
             // 예약 시간에서 30분을 뺀 시간 계산
             LocalTime thirtyMinutesBeforeReservationTime = reservationTime.minusMinutes(30);
-            System.out.println(thirtyMinutesBeforeReservationTime);
+            log.info("예약 시간에서 30분 뺀 시간={}", thirtyMinutesBeforeReservationTime);
 
             // 현재 시간과 비교하여 30분 전인 경우에만 처리
             if (currentTime.isAfter(thirtyMinutesBeforeReservationTime) && currentTime.isBefore(reservationTime)) {
@@ -136,15 +138,9 @@ public class ReservationService {
      */
     public int getBetweenData1(LocalDate standard, LocalDate date,LocalTime time,int tableN) {
         List<Reservation> reservations = reservationRepository.findByDateBetween(standard, date);
-        System.out.println(date);
-        System.out.println(time);
-        long diffDays = ChronoUnit.DAYS.between(standard, date);
-
-        System.out.println(diffDays);
+       long diffDays = ChronoUnit.DAYS.between(standard, date);
         int n = (int) (diffDays / 7);
-        System.out.println(n);
         int count = 0;
-
         for (int i = 1; i <= n; i++) {
             LocalDate oneWeekAgo = date.minusWeeks(i);
             System.out.println(i + " 주 전 날짜: " + oneWeekAgo);
@@ -155,17 +151,15 @@ public class ReservationService {
                         reservation.getTableN()==(tableN)) {
                     count++;
                     System.out.println(count);
-                    System.out.println("같은 날짜에 있는 데이터: " + reservation);
+                    log.info("같은 날짜에 있는 데이터={}", reservation);
                 }
             }
         }
-        System.out.println(count);
-        System.out.println(n);
         double predictNum = (double) count / n;
         double percentage = ((double) count / n) * 100.0;
         int result = (int) percentage;
-        System.out.println(predictNum);
-        System.out.println(result);
+        log.info("예상 숫자 = {}", predictNum);
+        log.info("결과 ={}", result);
         return result;
     }
     /**

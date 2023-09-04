@@ -5,6 +5,7 @@ import carpe.dtt.entity.Table;
 import carpe.dtt.event.EntityChangeEvent;
 import carpe.dtt.repository.TableRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class TableService {
     private final TableRepository tableRepository;
@@ -34,7 +36,7 @@ public class TableService {
             Table table = optionalTable.get();
             // 엔티티 변경 이벤트 발행
             eventPublisher.publishEvent(new EntityChangeEvent(this, id));
-            System.out.println(table.getStatus());
+            log.info("Table Status = {}",table.getStatus());
             return table.getStatus();
         } else {
             throw new RuntimeException("Table not found with id " + id);
