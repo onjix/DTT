@@ -25,10 +25,13 @@ public class TableController {
         return ResponseEntity.ok(status);
     }
     @PostMapping("/1/changeY/{id}")
-    public Integer changeDataUseY(@PathVariable Long id) {
+    public String changeDataUseY(@PathVariable Long id) {
         tableService.changeDataUseY(id);
-        return tableService.getStatusById(id);
+//        return tableService.getStatusById(id);
+        return "redirect:/"; // 원하는 페이지로 리다이렉트
+
     }
+
     @PostMapping("/1/changeN/{id}")
     public Integer changeDatUseN(@PathVariable Long id) {
         tableService.changeDataUseN(id);

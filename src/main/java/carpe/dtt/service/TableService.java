@@ -3,6 +3,7 @@ package carpe.dtt.service;
 import carpe.dtt.entity.Reservation;
 import carpe.dtt.entity.Table;
 import carpe.dtt.event.EntityChangeEvent;
+import carpe.dtt.event.TableSavedEvent;
 import carpe.dtt.repository.TableRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -43,12 +44,15 @@ public class TableService {
         }
     }
     @Transactional
-    public void changeDataUseY(Long id) {
+    public Table changeDataUseY(Long id) {
         Table table= tableRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
         // 데이터 수정 작업 수행
         table.setStatus(1);
-        tableRepository.save(table);
+        Table savetable = tableRepository.save(table);
+        eventPublisher.publishEvent(new TableSavedEvent(this, savetable));
+        return savetable;
+
     }
     @Transactional
     public void changeDataUseN(Long id) {

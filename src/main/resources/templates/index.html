@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SSE Example</title>
+</head>
+<body>
+<div id="data-container">
+    <p>Data: <span th:text="${data}">Loading...</span></p>
+</div>
+
+<script th:inline="javascript">
+    // SSE 연결을 설정하는 JavaScript 코드
+    const eventSource = new EventSource('/sse/listen');
+
+    eventSource.onmessage = function(event) {
+        // 이벤트가 발생하면 데이터를 업데이트
+        document.getElementById('data-container').innerHTML = '<p>Data: ' + event.data + '</p>';
+    };
+</script>
+</body>
+</html>
