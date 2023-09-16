@@ -367,27 +367,43 @@
 import React, { useEffect, useState } from 'react';
 
 function ShowInterior1() {
-  const [data, setData] = useState('Loading...');
-
-  useEffect(() => {
-    const eventSource = new EventSource('/sse/listen');
+    // const {data, setData} = useState();
+    // const eventSource = new EventSource('sse/listen');
+    // console.log(eventSource);
+    // eventSource.onopen = function() {
+    //     console.log('connect');
+    // }
+    // eventSource.onmessage = (event) => {
+    //     console.log('hi');
+    //     console.log(event.data);
+    // }
+    // console.log(eventSource);
+    // return (
+    //     <div id="data-container">
+    //         <p>data: </p>
+    //         <p>{data}</p>
+    //     </div>
+    // );
+    const eventSource = new EventSource("/sse/listen");
+    const [data, setData] = useState('');
+    eventSource.onopen = function() {
+        console.log("connect");
+    }
 
     eventSource.onmessage = (event) => {
-      // 이벤트가 발생하면 데이터를 업데이트
-      setData('Data: ' + event.data);
-      console.log(event.data);
+        console.log("Received event:", event.data);
+        setData(event.data);
     };
 
-    return () => {
-      eventSource.close();
+    eventSource.onerror = (error) => {
+        console.error("EventSource failed:", error);
     };
-  }, []);
 
-  return (
-      <div id="data-container">
-        <p>{data}</p>
-      </div>
-  );
+    return (
+        <div>
+            <p>data: {data}</p>
+        </div>
+    );
 }
 
 export default ShowInterior1;

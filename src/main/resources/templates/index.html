@@ -14,6 +14,7 @@
 
     eventSource.onmessage = function(event) {
         // 이벤트가 발생하면 데이터를 업데이트
+        console.log(event.data);
         document.getElementById('data-container').innerHTML = '<p>Data: ' + event.data + '</p>';
     };
 </script>
