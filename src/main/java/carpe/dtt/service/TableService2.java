@@ -3,6 +3,8 @@ package carpe.dtt.service;
 import carpe.dtt.entity.Table;
 import carpe.dtt.entity.Table2;
 import carpe.dtt.event.EntityChangeEvent;
+import carpe.dtt.event.TableSavedEvent;
+import carpe.dtt.event.TableSavedEvent2;
 import carpe.dtt.repository.TableRepository2;
 import jakarta.transaction.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
@@ -38,20 +40,24 @@ public class TableService2 {
         }
     }
     @Transactional
-    public void changeDataUseY(Long id) {
+    public Table2 changeDataUseY(Long id) {
         Table2 table2= tableRepository2.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
         // 데이터 수정 작업 수행
         table2.setStatus(1);
-        tableRepository2.save(table2);
+        Table2 savetable = tableRepository2.save(table2);
+        eventPublisher.publishEvent(new TableSavedEvent2(this, savetable));
+        return savetable;
     }
     @Transactional
-    public void changeDataUseN(Long id) {
+    public Table2 changeDataUseN(Long id) {
         Table2 table2= tableRepository2.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid data Id:" + id));
         // 데이터 수정 작업 수행
         table2.setStatus(0);
-        tableRepository2.save(table2);
+        Table2 savetable = tableRepository2.save(table2);
+        eventPublisher.publishEvent(new TableSavedEvent2(this, savetable));
+        return savetable;
     }
 
     public void updateTableStatus(Long tableId) {
