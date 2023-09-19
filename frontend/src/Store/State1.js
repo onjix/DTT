@@ -17,85 +17,82 @@ export const State1 = (props) => {
     const Human1 = useLoader(GLTFLoader, human1);
     const Human3 = useLoader(GLTFLoader, human3);
     const [state1, setState] = useState('');
-    const eventSource = new EventSource("/sse/listen");
-    useEffect(() => {
+    console.log("data1: "+props.state);
 
-        eventSource.onopen = function() {
-            console.log("connect");
-        }
-
-        eventSource.onmessage = (event) => {
-            console.log("Received event:", event.data);
-            setState(event.data);
-        }
-        // 컴포넌트가 언마운트될 때 EventSource를 닫습니다.
-        return () => {
-            eventSource.close();
-        };
-    }, []);
-
-    if (state1 === '3') {
+    if (props.state === '3') {
         return (
             <>
                 <primitive
                     object={tableReserved1.scene}
                     scale={4.5}
                     position={[-8, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
             </>
         );
-    } else if (state1 === '2') {
+    } else if (props.state === '2') {
         return (
             <>
                 <primitive
                     object={tableOccupied1.scene}
                     scale={4.5}
                     position={[-8, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
                 <primitive
                     object={Human1.scene}
                     scale={5}
                     position={[-8, -13, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
             </>
         );
-    } else if (state1 === '1') {
+    } else if (props.state === '1') {
         return (
             <>
                 <primitive
                     object={tableInuse1.scene}
                     scale={5.5}
                     position={[-8, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
 
                 <primitive
                     object={Human1.scene}
                     scale={5}
                     position={[-19, -13, -15]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
                 <primitive
                     object={Human3.scene}
                     scale={5}
                     position={[-19, -13, -25]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
             </>
         );
-    } else {
+    } else if(props.state === '0') {
         return (
             <>
                 <primitive
                     object={tableAvail1.scene}
                     scale={4.5}
                     position={[-8, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
             </>
         );
     }
+    else {
+            return (
+                <>
+                    <primitive
+                        object={tableAvail1.scene}
+                        scale={4.5}
+                        position={[-8, 3, -20]}
+                        // children-0-castShadow
+                    />
+                </>
+            );
+        }
 };

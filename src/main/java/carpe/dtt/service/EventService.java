@@ -28,7 +28,7 @@ public class EventService {
         // 데이터베이스 변경 이벤트를 비동기적으로 처리
         CompletableFuture.runAsync(() -> {
             // 이벤트를 보내는 코드
-            sseController.sendEvent(savedItem.getStatus());
+            sseController.sendEvent(savedItem);
         });
     }
 }

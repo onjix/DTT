@@ -25,12 +25,13 @@ import FutureStore from "../Service/FutureStore";
 import {State1} from "./State1"
 import {State2} from "./State2"
 
-
 const ShowInterior1 = () => {
   const store = useLoader(GLTFLoader, object1);
   const table1 = useLoader(GLTFLoader, object2);
   const table2 = useLoader(GLTFLoader, object3);
   const movePage = useNavigate();
+  const [state1, setState1] = useState('0');
+  const [state2, setState2] = useState('0');
   const reservationPage1 = () => {
     movePage("/S1Reservation1");
   };
@@ -40,25 +41,37 @@ const ShowInterior1 = () => {
   const moveFuture = () => {
       movePage("/FutureStore");
   };
+  // const fetchData2 = async () => {
+  //   const response2 = await fetch("/table/1/2/status");
+  //   const data2 = await response2.json();
+  //   console.log(data2.type);
+  //   setState2(data2);
+  // }
+  const eventSource = new EventSource("/sse/listen");
+  useEffect(() => {
 
-    // const [data, setData] = useState('');
-    //
-    // useEffect(() => {
-    //     const eventSource = new EventSource("/sse/listen");
-    //
-    //     eventSource.onopen = function() {
-    //         console.log("connect");
-    //     }
-    //
-    //     eventSource.onmessage = (event) => {
-    //         console.log("Received event:", event.data);
-    //         setData(event.data);
-    //     }
-    //     // 컴포넌트가 언마운트될 때 EventSource를 닫습니다.
-    //     return () => {
-    //         eventSource.close();
-    //     };
-    // }, []);
+    eventSource.onmessage = (event) => {
+      console.log("hi");
+      const eventD = JSON.parse(event.data);
+      const id = eventD.id.toString()
+      const status = eventD.status.toString()
+      console.log("Received event:", id);
+      if(id === '1') {
+        setState1(status);
+      } else if(id === '2') {
+        setState2(status);
+      }
+      else {
+        console.log("not id")
+      }
+    }
+
+
+    // 컴포넌트가 언마운트될 때 EventSource를 닫습니다.
+    return () => {
+      eventSource.close();
+    };
+  }, []);
 
   return (
     <>
@@ -80,32 +93,32 @@ const ShowInterior1 = () => {
                   object={store.scene}
                   scale={2}
                   position={[0, 0, 0]}
-                  children-0-castShadow
+                  // children-0-castShadow
                 />
                 <primitive
                   object={table1.scene}
                   scale={3}
                   position={[-8, -6, -20]}
-                  children-0-castShadow
+                  // children-0-castShadow
                   onClick={reservationPage1}
                 />
-                {State1()}
+                <State1 state={state1}/>
 
                 <primitive
                   object={table2.scene}
                   scale={3}
                   position={[30, -6, -20]}
-                  children-0-castShadow
+                  // children-0-castShadow
                   onClick={reservationPage2}
                 />
-                {State2()}
+                <State2 state={state2}/>
                 <directionalLight intensity={1} />
                 <ambientLight intensity={1.2} />
                 <spotLight
                   intensity={0.1}
                   angle={0.1}
                   penumbra={1}
-                  castShadow
+                  // children-0-castShadow
                 />
                 <OrbitControls target={[0, 1, 0]} />
               </Canvas>

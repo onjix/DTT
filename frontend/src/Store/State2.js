@@ -7,7 +7,7 @@ import tableState2_3 from "../images/Signs/occupied2.glb";
 import tableState2_4 from "../images/Signs/reserved2.glb";
 import human2 from "../images/Human/Human1-2.glb";
 
-export const State2 = () => {
+export const State2 = (props) => {
     const [reservations2, setReservations2] = useState([]);
     const tableAvail2 = useLoader(GLTFLoader, tableState2_1);
     const tableInuse2 = useLoader(GLTFLoader, tableState2_2);
@@ -16,23 +16,7 @@ export const State2 = () => {
     const Human2 = useLoader(GLTFLoader, human2);
     // const Human3 = useLoader(GLTFLoader, human3);
     const [state2, setState2] = useState('');
-    const eventSource = new EventSource("/sse/listen");
-
-    useEffect(() => {
-
-        eventSource.onopen = function() {
-            console.log("connect");
-        }
-
-        eventSource.onmessage = (event) => {
-            console.log("Received event:", event.data);
-            setState2(event.data);
-        }
-        // 컴포넌트가 언마운트될 때 EventSource를 닫습니다.
-        return () => {
-            eventSource.close();
-        };
-    }, []);
+    console.log("data2: " + props.state);
 
 
     // const fetchData2 = async () => {
@@ -62,50 +46,61 @@ export const State2 = () => {
     // };
 
 
-    if (state2 === '3') {
+    if (props.state === '3') {
         return (
             <>
                 <primitive
                     object={tableReserved2.scene}
                     scale={4.5}
                     position={[30, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
             </>
         );
-    } else if (state2 === '2') {
+    } else if (props.state === '2') {
         return (
             <>
                 <primitive
                     object={tableOccupied2.scene}
                     scale={4.5}
                     position={[30, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
 
                 <primitive
                     object={Human2.scene}
                     scale={5}
                     position={[19, -13, -25]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
             </>
         );
-    } else if (state2 === '1') {
+    } else if (props.state === '1') {
         return (
             <>
                 <primitive
                     object={tableInuse2.scene}
                     scale={5.5}
                     position={[30, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
 
                 <primitive
                     object={Human2.scene}
                     scale={5}
                     position={[19, -13, -25]}
-                    children-0-castShadow
+                    // children-0-castShadow
+                />
+            </>
+        );
+    } else if(props.state === '0'){
+        return (
+            <>
+                <primitive
+                    object={tableAvail2.scene}
+                    scale={4.5}
+                    position={[30, 3, -20]}
+                    // children-0-castShadow
                 />
             </>
         );
@@ -116,7 +111,7 @@ export const State2 = () => {
                     object={tableAvail2.scene}
                     scale={4.5}
                     position={[30, 3, -20]}
-                    children-0-castShadow
+                    // children-0-castShadow
                 />
             </>
         );
