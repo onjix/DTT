@@ -8,6 +8,7 @@ import { startTransition } from 'react';
 // import mart from "./icons/mart.png";
 // import user from "./icons/user.png";
 import "./App.css";
+import {MainTest} from "./MainTest";
 
 const App = () => {
   const [myPageIsOpen1, myPageRef1, myPageHandler1] = useDetectClose(false);
@@ -28,6 +29,7 @@ const App = () => {
   const isSimpleInfo = location.pathname === "/SimpleInfo";
   const isFutureStore = location.pathname === "/FutureStore";
   const isMypageInfo = location.pathname === "/MypageInfo";
+  const isMainTest = location.pathname === "/MainTest";
 
   const logoutClickHandler = () => {
     console.log("logout");
@@ -72,6 +74,11 @@ const App = () => {
   const moveShowInterior2 = () => {
     setTimeout(() => {
       movePage("/ShowInterior2");
+    }, 0);
+  };
+  const moveMainTest = () => {
+    setTimeout(() => {
+      movePage("/MainTest");
     }, 0);
   };
 
@@ -223,6 +230,9 @@ const App = () => {
                       </li>
                     </Ul2>
                   </Menu2>
+                </div>
+                <div onClick={moveMainTest}>
+                  테스트페이지
                 </div>
               </div>
             )}

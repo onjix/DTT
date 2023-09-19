@@ -15,6 +15,7 @@ import SimpleInfo from "./Service/SimpleInfo";
 import Predict from "./Service/Predict";
 import FutureStore from "./Service/FutureStore";
 import MypageInfo from "./Service/MypageInfo";
+import MainTest from "./MainTest"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -36,6 +37,7 @@ root.render(
         <Route path="SimpleInfo" element={<SimpleInfo />}></Route>
         <Route path="Predict" element={<Predict />}></Route>
         <Route path="FutureStore" element={<FutureStore />}></Route>
+        <Route path="MainTest" element={<MainTest />}></Route>
       </Routes>
     </Suspense>
   </BrowserRouter>
