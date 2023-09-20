@@ -1,47 +1,78 @@
-* {
-  text-decoration: none;
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-  font-family: 'GmarketSansMedium';
-}
-.Content-container {
-    margin: auto;
-    margin-top: 15px;
-    background-color: #4a148c;
-    background: linear-gradient(#9475BC, #4a148c);
+/** {*/
+/*  text-decoration: none;*/
+/*  box-sizing: inherit;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  font-family: 'GmarketSansMedium';*/
+/*}*/
+/*.Content-container {*/
+/*    margin: auto;*/
+/*    margin-top: 15px;*/
+/*    background-color: #4a148c;*/
+/*    background: linear-gradient(#9475BC, #4a148c);*/
+/*    padding: 20px;*/
+/*    box-shadow: 0 0 5px #000000;*/
+/*    width: 800px;*/
+/*    height: 600px;*/
+/*  }*/
+/*  */
+/*  .Inner-header-container {*/
+/*    margin-top: 15px;*/
+/*    background-color: #ffffff;*/
+/*    padding: 10px;*/
+/*    border-bottom: 1px solid #cccccc;*/
+/*    border-radius: 15px;*/
+/*  }*/
+/*  */
+/*  .Inner-header {*/
+/*    font-size: 20px;*/
+/*    font-weight: bold;*/
+/*    color: #333333;*/
+/*  }*/
+/*  */
+/*  .Inner-explain-container {*/
+/*    margin-top: 10px;*/
+/*  }*/
+/*  */
+/*  .Inner-explain {*/
+/*    font-size: 14px;*/
+/*    color: #ffffff;*/
+/*  }*/
+/*  .Image-container{*/
+/*    margin:auto;*/
+/*    margin-top: 15px;*/
+/*    background-color: #ffffff;*/
+/*    border-bottom: 1px solid #cccccc;*/
+/*    border-radius: 15px;*/
+/*  }*/
+/* MainImage.css */
+
+.AboutUs {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     padding: 20px;
-    box-shadow: 0 0 5px #000000;
-    width: 800px;
-    height: 600px;
+    background-color: #f5f5f5; /* 배경색 변경 */
+    color: #333; /* 텍스트 색상 변경 */
+    font-family: Arial, sans-serif;
+}
+
+.VImage {
+    width: 450px;
+    height: 450px;
+    position: relative;
+    margin: 0 auto;
+    border: 1px solid #ccc; /* 이미지 주위에 테두리 추가 */
+    border-radius: 10px; /* 테두리를 둥글게 만듭니다. */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
   }
-  
-  .Inner-header-container {
-    margin-top: 15px;
-    background-color: #ffffff;
-    padding: 10px;
-    border-bottom: 1px solid #cccccc;
-    border-radius: 15px;
-  }
-  
-  .Inner-header {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333333;
-  }
-  
-  .Inner-explain-container {
-    margin-top: 10px;
-  }
-  
-  .Inner-explain {
-    font-size: 14px;
-    color: #ffffff;
-  }
-  .Image-container{
-    margin:auto;
-    margin-top: 15px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #cccccc;
-    border-radius: 15px;
-  }
+
+.explainText {
+    flex: 1;
+    padding: 20px;
+}
+
+.Inner-explain {
+    font-size: 18px;
+    line-height: 1.4;
+}

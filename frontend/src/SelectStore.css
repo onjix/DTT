@@ -1,0 +1,61 @@
+
+/* Style for the top section */
+.top-section {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+/* Style for the text in the top section */
+.top-section-text {
+    font-size: 50px; /* 원하는 크기로 조정하세요 */
+    margin-right: 15px;
+    margin-left: 20px;
+}
+
+/* Style for the middle section */
+.middle-section {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 30px;
+}
+
+/* Style for the input field */
+.input-field {
+    font-size: 70px;
+    width: 300px;
+    height: 60px;
+    background-color: white;
+    padding: 10px;
+    margin-right: 100px;
+}
+
+/* Style for the select dropdown */
+.select-dropdown {
+    width: 400px; /* 변경된 너비 */
+    height: 60px; /* 변경된 높이 */
+    font-size: 30px;
+    background-color: white;
+}
+
+/* 추가된 스타일 */
+.store-info {
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: center;
+
+}
+
+.store-info h2 {
+    font-size: 35px;
+}
+
+.store-info p {
+    margin: 8px 0;
+}
+.store-info button {
+    margin-top: 20px; /* 버튼 위 여백 조정 */
+}
