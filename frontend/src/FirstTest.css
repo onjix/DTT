@@ -1,59 +1,76 @@
 /* FirstTest.css */
-.background-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+.SelectIcon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usage,
+.store-selection,
+.reservation-history,
+.usage-method {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white; /* 텍스트 색상 설정 */
+    padding: 70px;
 }
 
-.background-container::before {
-    content: "";
-    background-image: url('./images/BackgroungImages/bImage1.jpg');
-    background-size: cover;
-    background-position: center;
+/* Styling for the icons */
+.usage svg,
+.store-selection svg,
+.reservation-history svg,
+.usage-method svg {
+    width: 150px; /* Increase the icon size as needed */
+    height: 150px;
+    margin-bottom: 10px; /* Increase spacing between icon and text */
+}
+
+/* Styling for the text */
+.usage,
+.store-selection,
+.reservation-history,
+.usage-method {
+    font-size: 20px; /* Increase the text size as needed */
+}
+
+.SelectIcon:hover {
+    cursor: pointer; /* 호버 시 커서를 손가락 모양으로 변경합니다 */
+    opacity: 0.8; /* 호버 시 투명도를 조정하세요 */
+}
+
+/* Adjust photo size based on screen width */
+.photos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    background-color: black;
+}
+
+.photoBox {
+
+    width: 33.4%; /* Use 100% width for responsiveness */
+    height: 370px; /* Automatically adjust height to maintain aspect ratio */
+    overflow: hidden; /* Hide any overflow beyond the photo box */
+}
+
+.photoBox img {
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    filter: blur(1px); /* 흐림 정도를 조절할 수 있습니다. */
-    z-index: -1;
-}
-.background-container p {
-    font-size: 100px;
-}
-.Title1 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 20px; /* Adjust as needed to control the spacing from the top and left edges */
-}
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(50%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.Title span:nth-of-type(1) {
-    animation-delay: 150ms;
+    object-fit: fill; /* Maintain aspect ratio and cover the container */
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
 }
 
-.Title span:nth-of-type(2) {
-    animation-delay: 300ms;
+/* Media query for adjusting photo size at specific screen widths */
+@media (max-width: 768px) {
+    .photoBox {
+        max-width: 400px; /* Adjust the maximum width for smaller screens */
+    }
 }
 
-.Title span:nth-of-type(3) {
-    animation-delay: 450ms;
-}
-.Title.show {
-    animation-name: fadeIn;
+@media (max-width: 480px) {
+    .photoBox {
+        max-width: 300px; /* Adjust the maximum width for even smaller screens */
+    }
 }

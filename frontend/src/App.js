@@ -7,6 +7,7 @@ import "./App.css"
 import {useCookies} from "react-cookie";
 import React, {startTransition} from "react";
 import {useNavigate} from "react-router-dom";
+import FirstTest from "./FirstTest";
 
 
 const App = () => {
@@ -97,8 +98,8 @@ const App = () => {
                     )}
                 </div>
             </div>
-            <div onClick={moveFirstTest}>FirstTest</div>
-            <div onClick={moveSelectStore}>SelectStore</div>
+            {/*<div onClick={moveFirstTest}>FirstTest</div>*/}
+            {/*<div onClick={moveSelectStore}>SelectStore</div>*/}
         </>
     );
 }

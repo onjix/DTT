@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { Select, MenuItem, Button } from "@mui/material";
 import "./SelectStore.css";
 import App from "./App";
+import {useNavigate} from "react-router-dom";
 
 function SelectStore() {
     const [selectedStore, setSelectedStore] = useState("");
-
+    const movePage = useNavigate();
     const handleStoreChange = (event) => {
         setSelectedStore(event.target.value);
     };
 
     const handlePlayDtt = () => {
-
+        setTimeout(() => {
+            movePage("/ShowInterior1");
+        }, 0);
     };
 
     return (

@@ -26,7 +26,9 @@ root.render(
   <BrowserRouter>
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/" element={<App />}></Route>
+        <Route path="/" element={<FirstTest />}></Route>
+        <Route path="App" element={<App />}></Route>
+        {/*<Route path="/" element={<App />}></Route>*/}
         <Route path="ShowInterior1" element={<ShowInterior1 />}></Route>
         <Route path="ShowInterior2" element={<ShowInterior2 />}></Route>
         <Route path="S1Reservation1" element={<S1Reservation1 />}></Route>
@@ -42,7 +44,7 @@ root.render(
         <Route path="FutureStore" element={<FutureStore />}></Route>
         <Route path="MainTest" element={<MainTest />}></Route>
         <Route path="MainImage" element={<MainImage />}></Route>
-        <Route path="FirstTest" element={<FirstTest />}></Route>
+        {/*<Route path="FirstTest" element={<FirstTest />}></Route>*/}
         <Route path="SelectStore" element={<SelectStore />}></Route>
 
 
