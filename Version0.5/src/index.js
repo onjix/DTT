@@ -8,13 +8,13 @@ import S1Reservation1 from "./Service/S1Reservation1";
 import S1Reservation2 from "./Service/S1Reservation2";
 import S2Reservation1 from "./Service/S2Reservation1";
 import S2Reservation2 from "./Service/S2Reservation2";
-import MypageReservation from "./Service/MypageReservation";
+import MypageReservation from "../../front/src/components/MypageReservation";
 import Login from "./Signup_Login/Login";
 import Signup from "./Signup_Login/Signup";
-import SimpleInfo from "./Service/SimpleInfo";
+import SimpleInfo from "../../front/src/components/SimpleInfo";
 import Predict from "./Service/Predict";
 import FutureStore from "./Service/FutureStore";
-import MypageInfo from "./Service/MypageInfo";
+import MypageInfo from "../../front/src/components/MypageInfo";
 import MainTest from "./MainTest"
 import MainImage from "./MainImage";
 import FirstTest from "./FirstTest";
@@ -46,10 +46,6 @@ root.render(
         <Route path="MainImage" element={<MainImage />}></Route>
         {/*<Route path="FirstTest" element={<FirstTest />}></Route>*/}
         <Route path="SelectStore" element={<SelectStore />}></Route>
-
-
-
-
       </Routes>
     </Suspense>
   </BrowserRouter>
