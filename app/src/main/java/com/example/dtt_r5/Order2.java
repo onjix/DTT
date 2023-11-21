@@ -238,8 +238,81 @@ public class Order2 extends AppCompatActivity {
                 TotalPrice.setText("총합 : " + total);
             }
         });
+    }private void sendDataToServer(int con) {
+        // 서버로 전송할 데이터
+        String data = "1";
+
+        // AsyncTask를 사용하여 백그라운드에서 HTTP POST 요청을 보냄
+        new Order2.SendDataToServerTask().execute(con, data);
     }
-    private void sendDataToServer(int con) {
+
+    private class SendDataToServerTask extends AsyncTask<Object, Void, String> {
+        @Override
+        protected String doInBackground(Object... params) {
+            // 매개변수로 전달된 con 값을 가져옴
+            int con = (int) params[0];
+            // 매개변수로 전달된 데이터를 가져옴
+            String data = (String) params[1];
+            String response = null;
+
+            try {
+                URL url;
+                // con 값에 따라 서버 URL 설정
+                if (con == 1) {
+                    url = new URL(SERVER_URL1_1);
+                } else if (con == 2) {
+                    url = new URL(SERVER_URL1_2);
+                } else if (con == 3) {
+                    url = new URL(SERVER_URL2_1);
+                } else if (con == 4) {
+                    url = new URL(SERVER_URL2_2);
+                } else {
+                    // 지원하지 않는 con 값 처리 (예외 처리)
+                    return "Unsupported con value";
+                }
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(Order2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
+        }
+    }
+    /*private void sendDataToServer(int con) {
         // 서버로 전송할 데이터
         String data = "1";
 
@@ -454,7 +527,7 @@ public class Order2 extends AppCompatActivity {
             // 서버로부터의 응답 처리
             Toast.makeText(Order2.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
     public void setreservedata(String responseData){
         reserve_data.setText(responseData);
     }

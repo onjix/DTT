@@ -57,11 +57,11 @@ public class MainActivity1 extends AppCompatActivity {
     private static final String SERVER_URL2 = "http://192.168.55.182:8080/table/1/changeN/1";
     private static final String SERVER_URL3 = "http://192.168.55.182:8080/table/1/changeS/1";
 
-    private final reservation_data reservation_data;
+    //private final reservation_data reservation_data;
 
-    public MainActivity1(com.example.dtt_r5.reservation_data reservation_data) {
+    /*public MainActivity1(com.example.dtt_r5.reservation_data reservation_data) {
         this.reservation_data = reservation_data;
-    }
+    }*/
 
 
     @Override
@@ -74,14 +74,14 @@ public class MainActivity1 extends AppCompatActivity {
         table2 = findViewById(R.id.btn_table2);
         btn_sc = findViewById(R.id.btn_bt);
         btn_rd = findViewById(R.id.btn_getreserve);
-        reserve_data = findViewById(R.id.reserve_info_main);
+        //reserve_data = findViewById(R.id.reserve_info_main);
 
-        btn_rd.setOnClickListener(new View.OnClickListener() { //갱신 클릭시
+        /*btn_rd.setOnClickListener(new View.OnClickListener() { //갱신 클릭시
             @Override
             public void onClick(View v) {
                 reservation_data.receiveReservationInfoForStore(1);
             }
-        });
+        });*/
 
         table1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,18 +130,6 @@ public class MainActivity1 extends AppCompatActivity {
             }
         });
 
-        /*bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null) {
-            Toast.makeText(getApplicationContext(), "블루투스를 지원하지 않는 기기입니다.", Toast.LENGTH_SHORT).show();
-        } else {
-            if (bluetoothAdapter.isEnabled()) {
-                selectBluetoothDevice();
-            } else {
-                Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-
-                startActivityForResult(intent, REQUEST_ENABLE_BT);
-            }
-        }*/
     }
 
     int state = 2, total = 0;
@@ -326,9 +314,11 @@ public class MainActivity1 extends AppCompatActivity {
         // 서버로 전송할 데이터
         String data_t = "1";
 
+        new SendDataToServerTask().execute(con, data_t);
+
         // AsyncTask를 사용하여 백그라운드에서 HTTP POST 요청을 보냄
 
-        if (con==1){
+        /*if (con==1){
             new SendDataToServerTask1().execute(data_t);
         }
         if (con==2){
@@ -337,9 +327,68 @@ public class MainActivity1 extends AppCompatActivity {
 
         if (con==3){
             new SendDataToServerTask3().execute(data_t);
+        }*/
+    }
+
+    private class SendDataToServerTask extends AsyncTask<Object, Void, String> {
+        @Override
+        protected String doInBackground(Object... params) {
+            int con = (int) params[0];
+            String data = (String) params[1];
+            String response = null;
+
+            try {
+                URL url;
+                // con 값에 따라 서버 URL 설정
+                if (con == 1) {
+                    url = new URL(SERVER_URL1);
+                } else if (con == 2) {
+                    url = new URL(SERVER_URL2);
+                } else if (con == 3) {
+                    url = new URL(SERVER_URL3);
+                } else {
+                    // 지원하지 않는 con 값 처리 (예외 처리)
+                    return "Unsupported con value";
+                }
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setDoOutput(true);
+                OutputStream outputStream = connection.getOutputStream();
+                outputStream.write(data.getBytes());
+                outputStream.flush();
+                outputStream.close();
+                int responseCode = connection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    reader.close();
+                    response = stringBuilder.toString();
+                } else {
+                    response = "Error: " + responseCode;
+                }
+                connection.disconnect();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            // 서버로부터의 응답 처리
+            Toast.makeText(MainActivity1.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
         }
     }
-    private class SendDataToServerTask1 extends AsyncTask<String, Void, String> {
+
+    /*private class SendDataToServerTask1 extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             String data = params[0];
@@ -464,7 +513,7 @@ public class MainActivity1 extends AppCompatActivity {
             // 서버로부터의 응답 처리
             Toast.makeText(MainActivity1.this, "서버 응답: " + response, Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
     public void setreservedata(String responseData){
         reserve_data.setText(responseData);
     }
